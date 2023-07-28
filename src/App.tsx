@@ -9,4 +9,5 @@ export const App: FC = () => {
       <footer>Footer</footer>
     </>
   );
-}
+};
+
