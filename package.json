@@ -1,5 +1,6 @@
 {
   "name": "product_catalog_frontend",
+  "homepage": "https://html-hooliganz.github.io/product_catalog_frontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
