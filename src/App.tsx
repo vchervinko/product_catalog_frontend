@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.scss';
 import { Layout } from './components/Layout';
 import AccessoriesPage from './pages/AccessoriesPage';
 import MainPage from './pages/MainPage';
