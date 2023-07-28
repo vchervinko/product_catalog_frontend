@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import './App.scss';
 
-const App: FC = () => {
+export const App: FC = () => {
   return (
     <>
       <header>Header</header>
@@ -9,6 +9,4 @@ const App: FC = () => {
       <footer>Footer</footer>
     </>
   );
-};
-
-export default App;
+}
