@@ -4,5 +4,19 @@
   "semi": true,
   "jsxSingleQuote": false,
   "bracketSpacing": true,
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "overrides": [
+    {
+      "files": "*.json",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
