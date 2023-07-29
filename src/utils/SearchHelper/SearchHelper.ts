@@ -1,4 +1,6 @@
-import { SearchParams } from '../../types/SearchParams';
+export interface SearchParams {
+  [key: string]: string | string[] | null;
+}
 
 export function getSearchWith(
   currentParams: URLSearchParams,
