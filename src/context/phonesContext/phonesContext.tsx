@@ -1,10 +1,7 @@
 import { createContext } from 'react';
+import { PhonesContextProps } from './props';
 
-export interface PhonesContextProps {
-  total: number;
-}
-
-export const PhonesContext = createContext({
+export const PhonesContext = createContext<PhonesContextProps>({
   total: 0,
   limit: 0,
 });
