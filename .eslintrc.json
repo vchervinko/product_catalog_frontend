@@ -24,7 +24,6 @@
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "max-len": ["error", { "code": 140 }],
     "no-self-assign": ["error", { "props": true }],
     "no-var": "error",
     "no-empty-function": "error",
@@ -47,6 +46,17 @@
     "computed-property-spacing": ["error", "never"],
     "func-call-spacing": ["error", "never"],
     "jsx-quotes": ["warn", "prefer-double"],
+    "max-len": [
+      "error",
+      {
+        "code": 80,
+        "ignorePattern": "^import\\s.+\\sfrom\\s.+;$"
+      }
+    ],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" }
+    ],
     "key-spacing": [
       "warn",
       {
