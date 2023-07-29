@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { PhonesContextProps } from './props';
+import { PhonesContextProps } from './Props';
 
 export const PhonesContext = createContext<PhonesContextProps>({
   total: 0,

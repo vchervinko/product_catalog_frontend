@@ -1,6 +1,6 @@
 import { FC, ReactNode, memo } from 'react';
-import { PhonesContext } from './phonesContext';
-import { PhonesContextProps } from './props';
+import { PhonesContext } from './PhonesContext';
+import { PhonesContextProps } from './Props';
 
 interface PhonesContextProviderProps {
   children: ReactNode;

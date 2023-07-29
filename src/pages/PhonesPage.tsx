@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { PhonesContextProvider } from '../context/phonesContext/phonesContextProvider';
+import { PhonesContextProvider } from '../context/phonesContext/PhonesContextProvider';
 
 const PhonesPage: FC = () => {
   return (
