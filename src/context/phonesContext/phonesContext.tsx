@@ -1,9 +1,10 @@
 import { createContext } from 'react';
 
 export interface PhonesContextProps {
-  countPhones: number;
+  total: number;
 }
 
 export const PhonesContext = createContext({
-  countPhones: 0,
+  total: 0,
+  limit: 0,
 });

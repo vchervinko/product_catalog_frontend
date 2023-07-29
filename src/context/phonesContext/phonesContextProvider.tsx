@@ -6,7 +6,8 @@ interface PhonesContextProviderProps {
 }
 
 const value = {
-  countPhones: 15,
+  total: 15,
+  limit: 2,
 };
 
 // eslint-disable-next-line react/display-name
