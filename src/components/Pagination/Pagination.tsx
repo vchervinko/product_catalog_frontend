@@ -28,16 +28,17 @@ export const Pagination: FC<PaginationProps> = ({ isDisabled = false }) => {
   return (
     <section
       className={classNames('pagination', {
-        disabled: isDisabled,
+        'pagination--disabled': isDisabled,
       })}>
       <div
-        className="pagination__link-container
-         pagination__link-container--mr">
+        className="pagination__icon-container
+         pagination__icon-container--mr">
         <SearchLink
           params={{ page: `${isFirstPage ? currentPage : currentPage - 1}` }}
-          className={classNames('link-icon', {
-            'link-icon--arrow-left': !isFirstPage,
-            'link-icon--arrow-left-disabled': isFirstPage,
+          className={classNames('icon', {
+            'icon--arrow-left': !isFirstPage,
+            'icon--arrow-left-disabled': isFirstPage,
+            disable: isFirstPage,
           })}></SearchLink>
       </div>
 
@@ -46,8 +47,8 @@ export const Pagination: FC<PaginationProps> = ({ isDisabled = false }) => {
           <li key={number}>
             <SearchLink
               params={{ page: number.toString() }}
-              className={classNames('link-text', {
-                'link-text--selected': currentPage === number,
+              className={classNames('pagination__number', {
+                'pagination__number--selected': currentPage === number,
               })}>
               {number}
             </SearchLink>
@@ -56,13 +57,14 @@ export const Pagination: FC<PaginationProps> = ({ isDisabled = false }) => {
       </ul>
 
       <div
-        className="pagination__link-container
-        pagination__link-container--ml">
+        className="pagination__icon-container
+        pagination__icon-container--ml">
         <SearchLink
           params={{ page: `${isLastPage ? currentPage : currentPage + 1}` }}
-          className={classNames('link-icon', {
-            'link-icon--arrow-right': !isLastPage,
-            'link-icon--arrow-right-disabled': isLastPage,
+          className={classNames('icon', {
+            'icon--arrow-right': !isLastPage,
+            'icon--arrow-right-disabled': isLastPage,
+            disable: isLastPage,
           })}></SearchLink>
       </div>
     </section>

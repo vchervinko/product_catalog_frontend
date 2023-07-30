@@ -2,24 +2,7 @@
 
 $button-link-size: 32px;
 
-.pagination__link-container {
-  width: $button-link-size;
-
-  &--mr {
-    margin-right: 16px;
-  }
-
-  &--ml {
-    margin-left: 16px;
-  }
-}
-
-@mixin square-button-link-with-icon() {
-  width: 100%;
-  padding-top: 100%;
-}
-
-.link-icon {
+.icon {
   width: 100%;
   padding-top: 100%;
   display: block;
@@ -30,12 +13,12 @@ $button-link-size: 32px;
 
   transition: border 0.3s;
 
+  &:not(.disable):hover {
+    border-color: $primary-color;
+  }
+
   &--arrow-right {
     background-image: url("../../assets/icons/arrow-right-default.svg");
-
-    &:hover {
-      border-color: $primary-color;
-    }
   }
 
   &--arrow-right-disabled {
@@ -45,40 +28,19 @@ $button-link-size: 32px;
   &--arrow-left {
     background-image: url("../../assets/icons/arrow-right-default.svg");
     transform: rotate(180deg);
-
-    &:hover {
-      border-color: $primary-color;
-    }
   }
 
   &--arrow-left-disabled {
     background-image: url("../../assets/icons/arrow-right-disable.svg");
     transform: rotate(180deg);
   }
-}
 
-.link-text {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border: 1px solid $elements-color;
-
-  font-weight: 500;
-  font-size: 14px;
-
-  transition: border 0.3s;
-
-  &:hover {
-    border-color: $primary-color;
+  &--like {
+    background-image: url("../../assets/icons/icon-like.svg");
   }
 
-  &--selected {
-    border-color: $primary-color;
-    background-color: $primary-color;
-    color: $white-color;
+  &--like-filled {
+    background-image: url("../../assets/icons/icon-like-filled.svg");
   }
 }
 
@@ -90,17 +52,46 @@ $button-link-size: 32px;
     gap: 8px;
   }
 
-  &--mr {
-    margin-right: 16px;
+  &__number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid $elements-color;
+
+    font-weight: 500;
+    font-size: 14px;
+
+    transition: border 0.3s;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &--selected {
+      border-color: $primary-color;
+      background-color: $primary-color;
+      color: $white-color;
+    }
   }
 
-  &--right {
-    margin-left: 16px;
-  }
-}
+  &__icon-container {
+    width: $button-link-size;
 
-.disabled {
-  pointer-events: none;
+    &--mr {
+      margin-right: 16px;
+    }
+
+    &--ml {
+      margin-left: 16px;
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+  }
 }
 
 a {
