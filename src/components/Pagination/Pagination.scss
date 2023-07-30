@@ -19,7 +19,7 @@ $button-link-size: 32px;
   transition: border 0.3s;
 
   &--arrow-right {
-    background-image: url("./src/components/Pagination/slider-right-default.png");
+    background-image: url("../../assets/icons/arrow-right-default.svg");
 
     &:hover {
       border-color: $primary-color;
@@ -27,11 +27,11 @@ $button-link-size: 32px;
   }
 
   &--arrow-right-disabled {
-    background-image: url("./src/components/Pagination/slider-right-disabled.png");
+    background-image: url("../../assets/icons/arrow-right-disable.svg");
   }
 
   &--arrow-left {
-    background-image: url("./src/components/Pagination/slider-right-default.png");
+    background-image: url("../../assets/icons/arrow-right-default.svg");
     transform: rotate(180deg);
 
     &:hover {
@@ -40,7 +40,7 @@ $button-link-size: 32px;
   }
 
   &--arrow-left-disabled {
-    background-image: url("./src/components/Pagination/slider-right-disabled.png");
+    background-image: url("../../assets/icons/arrow-right-disable.svg");
     transform: rotate(180deg);
   }
 }
