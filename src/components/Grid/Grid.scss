@@ -1,17 +1,17 @@
-@import "../../styles/_utils";
+@import "../../styles/utils/mixins";
 
 .Grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 16px;
 
-  @include onDesktop {
-    grid-template-columns: repeat(24, 1fr);
-    column-gap: 24px;
-  }
-
   @include onTablet {
     grid-template-columns: repeat(12, 1fr);
     column-gap: 16px;
+  }
+
+  @include onDesktop {
+    grid-template-columns: repeat(24, 1fr);
+    column-gap: 24px;
   }
 }

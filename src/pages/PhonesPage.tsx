@@ -1,7 +1,7 @@
 import { FC } from 'react';
+import { Grid } from '../components/Grid/Grid';
+import { TestProduct } from '../components/TestProduct/TestProduct';
 import { PhonesContextProvider } from '../context/PhonesContext/PhonesContextProvider';
-import Grid from '../components/Grid/Grid';
-import TestProduct from '../components/TestProduct/TestProduct';
 
 const PhonesPage: FC = () => {
   const productCount = 24;

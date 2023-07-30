@@ -5,8 +5,6 @@ interface Props {
   children: ReactNode;
 }
 
-const Grid: FC<Props> = ({ children }) => {
-  return <div className="Grid">{children}</div>;
-};
-
-export default Grid;
+export const Grid: FC<Props> = ({ children }) => (
+  <div className="Grid">{children}</div>
+);
