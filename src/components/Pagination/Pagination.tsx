@@ -30,12 +30,16 @@ export const Pagination: FC<PaginationProps> = ({ isDisabled = false }) => {
       className={classNames('pagination', {
         disabled: isDisabled,
       })}>
-      <SearchLink
-        params={{ page: `${isFirstPage ? currentPage : currentPage - 1}` }}
-        className={classNames('link-icon', 'pagination--left', {
-          'link-icon--arrow-left': !isFirstPage,
-          'link-icon--arrow-left-disabled': isFirstPage,
-        })}></SearchLink>
+      <div
+        className="pagination__link-container
+         pagination__link-container--mr">
+        <SearchLink
+          params={{ page: `${isFirstPage ? currentPage : currentPage - 1}` }}
+          className={classNames('link-icon', {
+            'link-icon--arrow-left': !isFirstPage,
+            'link-icon--arrow-left-disabled': isFirstPage,
+          })}></SearchLink>
+      </div>
 
       <ul className="pagination__numbers">
         {numbers.map((number) => (
@@ -51,12 +55,16 @@ export const Pagination: FC<PaginationProps> = ({ isDisabled = false }) => {
         ))}
       </ul>
 
-      <SearchLink
-        params={{ page: `${isLastPage ? currentPage : currentPage + 1}` }}
-        className={classNames('link-icon', 'pagination--right', {
-          'link-icon--arrow-right': !isLastPage,
-          'link-icon--arrow-right-disabled': isLastPage,
-        })}></SearchLink>
+      <div
+        className="pagination__link-container
+        pagination__link-container--ml">
+        <SearchLink
+          params={{ page: `${isLastPage ? currentPage : currentPage + 1}` }}
+          className={classNames('link-icon', {
+            'link-icon--arrow-right': !isLastPage,
+            'link-icon--arrow-right-disabled': isLastPage,
+          })}></SearchLink>
+      </div>
     </section>
   );
 };
