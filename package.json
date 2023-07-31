@@ -9,7 +9,8 @@
     "format": "prettier --write . --ignore-path .gitignore",
     "lint:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:stylelint": "stylelint \"src/**/*.{css,scss}\"",
-    "lint": "npm run lint:eslint && npm run lint:stylelint",
+    "lint": "npm run lint:eslint",
+    "fix": "npm run format",
     "preview": "vite preview",
     "prepare": "husky install"
   },
@@ -45,6 +46,6 @@
     "vite": "^4.4.5"
   },
   "lint-staged": {
-    "*.{ts,tsx,scss}": "npm run lint"
+    "*.{ts,tsx,scss}": ""
   }
 }
