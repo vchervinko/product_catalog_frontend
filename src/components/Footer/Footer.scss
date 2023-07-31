@@ -34,15 +34,9 @@
     }
   }
 
-  &__item {
-    display: flex;
-    align-items: center;
-    list-style: none;
-  }
-
   &__link {
     @extend %uppercase;
-
+    display: block;
     color: $gray-secondary;
     transition: color $default-transition;
 
@@ -53,18 +47,10 @@
 
   &__button {
     @extend %small-text;
-
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
-    text-decoration: none;
-    padding: 0;
-    align-self: stretch;
-    background-color: $white-color;
-    border: none;
-    width: auto;
-
     color: $gray-secondary;
     transition: color $default-transition;
 
