@@ -1,7 +1,12 @@
 import { FC } from 'react';
+import { Container } from '../components/Container';
 
 const MainPage: FC = () => (
-  <main>Main Page</main>
+  <Container>
+    <main>
+      <h1>Main page</h1>
+    </main>
+  </Container>
 );
 
 export default MainPage;

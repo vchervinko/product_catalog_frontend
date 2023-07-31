@@ -1,14 +1,17 @@
 import { FC } from 'react';
+import { Container } from '../components/Container';
 import { Pagination } from '../components/Pagination';
 import { PhonesContextProvider } from '../contexts/PhonesContext/PhonesContextProvider';
 
 const PhonesPage: FC = () => (
   <PhonesContextProvider>
-    <main>
-      Phones Page
+    <Container>
+      <main>
+        Mobile phones
 
-      <Pagination />
-    </main>
+        <Pagination />
+      </main>
+    </Container>
   </PhonesContextProvider>
 );
 
