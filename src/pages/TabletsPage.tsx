@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Container } from '../components/Container';
 
 const TabletsPage: FC = () => (
-  <Container>
-    <main>
+  <main>
+    <Container>
       Tablets Page
-    </main>
-  </Container>
+    </Container>
+  </main>
 );
 
 export default TabletsPage;

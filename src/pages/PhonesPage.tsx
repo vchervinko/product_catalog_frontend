@@ -5,13 +5,13 @@ import { PhonesContextProvider } from '../contexts/PhonesContext/PhonesContextPr
 
 const PhonesPage: FC = () => (
   <PhonesContextProvider>
-    <Container>
-      <main>
+    <main>
+      <Container>
         Mobile phones
 
         <Pagination />
-      </main>
-    </Container>
+      </Container>
+    </main>
   </PhonesContextProvider>
 );
 

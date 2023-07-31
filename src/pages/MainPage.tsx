@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Container } from '../components/Container';
 
 const MainPage: FC = () => (
-  <Container>
-    <main>
+  <main>
+    <Container>
       <h1>Main page</h1>
-    </main>
-  </Container>
+    </Container>
+  </main>
 );
 
 export default MainPage;

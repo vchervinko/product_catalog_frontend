@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Container } from '../components/Container';
 
 const AccessoriesPage: FC = () => (
-  <Container>
-    <main>
+  <main>
+    <Container>
       <h1>Accessories</h1>
-    </main>
-  </Container>
+    </Container>
+  </main>
 );
 
 export default AccessoriesPage;
