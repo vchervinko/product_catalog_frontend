@@ -3,7 +3,7 @@ import { Grid } from '../components/Grid/Grid';
 import { TestProduct } from '../components/TestProduct/TestProduct';
 
 const MainPage: FC = () => {
-  const productCount = 24;
+  const productCount = 12;
 
   return (
     <main>

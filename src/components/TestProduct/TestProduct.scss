@@ -1,4 +1,7 @@
+@import "../../styles/utils/mixins";
+
 .Box {
+  height: 480px;
   padding: 10px;
   font-weight: 700;
   text-align: center;
@@ -6,4 +9,15 @@
   border-radius: 4px;
   background-color: #47b0b0;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  grid-column: span 3;
+
+  @include onTablet {
+    height: 512px;
+    grid-column: span 5;
+  }
+
+  @include onDesktop {
+    height: 506px;
+    grid-column: span 6;
+  }
 }
