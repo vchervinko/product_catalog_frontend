@@ -1,17 +1,14 @@
+@import "placeholders";
+
 * {
   box-sizing: border-box;
 }
 
 html {
+  @extend %body-text;
   scroll-behavior: smooth;
 }
 
 body {
   overflow-x: hidden;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
 }

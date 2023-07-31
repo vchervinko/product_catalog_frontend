@@ -1,4 +1,6 @@
-%h1-mobile {
+@import "mixins";
+
+%h1 {
   font-family: Mont-Bold, "Helvetica Neue", sans-serif;
   font-size: 32px;
   font-style: normal;
@@ -16,7 +18,7 @@
   }
 }
 
-%h2-mobile {
+%h2 {
   font-family: Mont-Bold, "Helvetica Neue", sans-serif;
   font-size: 22px;
   font-style: normal;
@@ -33,7 +35,7 @@
   }
 }
 
-%h3-mobile {
+%h3 {
   font-family: Mont-SemiBold, "Helvetica Neue", sans-serif;
   font-size: 20px;
   font-style: normal;
@@ -49,7 +51,7 @@
   }
 }
 
-%h4-mobile {
+%h4 {
   font-family: Mont-SemiBold, "Helvetica Neue", sans-serif;
   font-size: 16px;
   font-style: normal;
