@@ -1,4 +1,4 @@
-@import '../../styles/utils/mixins';
+@import "../../styles/utils/mixins";
 
 .header {
   display: flex;
@@ -9,7 +9,7 @@
   background-color: #fff;
   border-top: 1px solid #e2e6e9;
   border-bottom: 1px solid #e2e6e9;
-  font-family: "Mont",sans-serif;
+  font-family: "Mont", sans-serif;
 
   @include onDesktop {
     height: 64px;
@@ -36,7 +36,7 @@
     align-items: center;
     width: 48px;
     height: 100%;
-    box-shadow: -1px 0px 0px #e2e6e9;
+    box-shadow: -1px 0 0 #e2e6e9;
 
     @include onTablet {
       display: none;
@@ -51,11 +51,11 @@
     height: 16px;
 
     &--closed {
-      background-image: url('/src/assets/images/icons/Menu.svg');
+      background-image: url("/src/assets/images/icons/Menu.svg");
     }
 
     &--opened {
-      background-image: url('/src/assets/images/icons/Close.svg');
+      background-image: url("/src/assets/images/icons/Close.svg");
     }
   }
 
@@ -115,7 +115,7 @@
     height: 100%;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       height: 3px;
@@ -141,11 +141,11 @@
     height: 16px;
 
     &--Favourites {
-      background-image: url('/src/assets/images/icons/Favourites.svg');
+      background-image: url("/src/assets/images/icons/Favourites.svg");
     }
 
     &--Cart {
-      background-image: url('/src/assets/images/icons/Cart.svg');
+      background-image: url("/src/assets/images/icons/Cart.svg");
     }
   }
 }

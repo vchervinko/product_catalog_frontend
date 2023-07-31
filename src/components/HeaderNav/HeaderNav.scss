@@ -1,4 +1,4 @@
-@import '../../styles/utils/mixins';
+@import "../../styles/utils/mixins";
 
 .nav {
   @include onTablet {
@@ -9,7 +9,6 @@
   &__list {
     display: flex;
     flex-direction: column;
-    height: 100%;
     align-items: center;
     height: 100%;
 
@@ -50,7 +49,7 @@
     transition: color 0.3s ease;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       height: 3px;

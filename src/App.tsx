@@ -13,12 +13,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <NotFoundRedirect />,
     children: [
-      {
-        path: 'not-found',
-        element: <NotFound />,
-      },
       {
         index: true,
         element: <MainPage />,
@@ -34,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: 'accessories',
         element: <AccessoriesPage />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },
