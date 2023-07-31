@@ -33,6 +33,7 @@
     "dot-notation": "error",
     "default-case": "warn",
     "curly": "error",
+    "eol-last": ["error", "always"],
     "init-declarations": ["warn", "always"],
     "no-invalid-this": "error",
     "no-lonely-if": "warn",
