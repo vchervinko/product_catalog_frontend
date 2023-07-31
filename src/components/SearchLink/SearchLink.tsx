@@ -1,9 +1,6 @@
 import { FC } from 'react';
 import { Link, LinkProps, useSearchParams } from 'react-router-dom';
-import {
-  SearchParams,
-  getSearchWith,
-} from '../../utils/SearchHelper/SearchHelper';
+import { SearchParams, getSearchWith } from '../../utils/SearchHelper';
 
 interface Props extends Omit<LinkProps, 'to'> {
   params: SearchParams;

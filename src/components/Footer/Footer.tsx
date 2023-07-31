@@ -1,61 +1,51 @@
 import { FC } from 'react';
-import Logo from '../../assets/NiceGadgetsLogo.svg';
-import SliderButton from '../../assets/SliderButtonDefault.svg';
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/icons/NiceGadgetsLogo.svg';
+import SliderButton from '../../assets/icons/SliderButtonDefault.svg';
+import { ScrollToTop } from '../../utils/ScrollToTop';
+import { links } from '../../utils/constants/links';
+
 import '../../styles/logo.scss';
 import './Footer.scss';
 
-const links = [
-  { name: 'github', link: 'https://github.com/' },
-  { name: 'contacts', link: 'https://' },
-  { name: 'rights', link: 'http://' },
-];
+export const Footer: FC = () => (
+  <footer className="Footer">
+    <div className="container">
+      <div className="Footer__content">
+        <Link to="/" className="logo">
+          <img
+            className="logo__image logo--Footer"
+            src={Logo}
+            alt="Nice Gadgets logo"
+          />
+        </Link>
 
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
+        <ul className="Footer__list">
+          {links.map(({ name, link }) => (
+            <li key={name} className="Footer__item">
+              <Link className="Footer__link" to={link}>
+                {name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-export const Footer: FC = () => {
-  return (
-    <footer className="Footer">
-      <div className="container">
-        <div className="Footer__content">
-          <Link to="/" className="logo">
+        <Link
+          className="Footer__button"
+          to={window.location.pathname}
+          onClick={ScrollToTop}
+        >
+          Back to top
+
+          <div className="Footer__button__border">
             <img
-              src={Logo}
-              alt="Nice Gadgets logo"
-              className="logo__image logo--Footer"
+              src={SliderButton}
+              alt="back to top"
+              className="Footer__button__image"
             />
-          </Link>
-
-          <ul className="Footer__list">
-            {links.map(({ name, link }) => (
-              <li key={name} className="Footer__item">
-                <Link to={link} className="Footer__link">
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            to={window.location.pathname}
-            onClick={scrollToTop}
-            className="Footer__button">
-            Back to top
-            <div className="Footer__button__border">
-              <img
-                src={SliderButton}
-                alt="back to top"
-                className="Footer__button__image"
-              />
-            </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
-    </footer>
-  );
-};
+    </div>
+  </footer>
+);
