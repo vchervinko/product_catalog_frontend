@@ -12,6 +12,6 @@
 
   @include onDesktop {
     grid-template-columns: repeat(24, 1fr);
-    column-gap: 24px;
+    column-gap: 16px;
   }
 }
