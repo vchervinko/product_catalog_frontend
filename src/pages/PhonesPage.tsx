@@ -2,20 +2,15 @@ import { FC } from 'react';
 import { Grid } from '../components/Grid/Grid';
 import { TestProduct } from '../components/TestProduct/TestProduct';
 import { PhonesContextProvider } from '../context/PhonesContext/PhonesContextProvider';
+import { Pagination } from '../components/Pagination';
 
 const PhonesPage: FC = () => {
   const productCount = 24;
 
   return (
     <PhonesContextProvider>
-      <section>
-        PHONES
-        <Grid>
-          {Array.from({ length: productCount }).map((_, index) => (
-            <TestProduct key={index} />
-          ))}
-        </Grid>
-      </section>
+      <main>Phones Page</main>
+      <Pagination />
     </PhonesContextProvider>
   );
 };
