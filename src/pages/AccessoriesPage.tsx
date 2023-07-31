@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-const AccessoriesPage: FC = () => {
-  return <main>Accessories Page</main>;
-};
+const AccessoriesPage: FC = () => (
+  <main>Accessories Page</main>
+);
 
 export default AccessoriesPage;

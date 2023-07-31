@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-const TabletsPage: FC = () => {
-  return <main>Tablets Page</main>;
-};
+const TabletsPage: FC = () => (
+  <main>Tablets Page</main>
+);
 
 export default TabletsPage;
