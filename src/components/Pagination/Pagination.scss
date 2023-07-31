@@ -1,4 +1,4 @@
-@import "../../styles/utils/_variables.scss";
+@import "../../styles/utils/_variables";
 
 $button-link-size: 32px;
 
@@ -7,14 +7,14 @@ $button-link-size: 32px;
   padding-top: 100%;
   display: block;
 
-  border: 1px solid $elements-color;
+  border: 1px solid $gray-icons-placeholders;
   background-repeat: no-repeat;
   background-position: center;
 
   transition: border 0.3s;
 
   &:not(.disable):hover {
-    border-color: $primary-color;
+    border-color: $gray-primary;
   }
 
   &--arrow-right {
@@ -59,7 +59,7 @@ $button-link-size: 32px;
     justify-content: center;
     align-items: center;
 
-    border: 1px solid $elements-color;
+    border: 1px solid $gray-icons-placeholders;
 
     font-weight: 500;
     font-size: 14px;
@@ -67,12 +67,12 @@ $button-link-size: 32px;
     transition: border 0.3s;
 
     &:hover {
-      border-color: $primary-color;
+      border-color: $gray-primary;
     }
 
     &--selected {
-      border-color: $primary-color;
-      background-color: $primary-color;
+      border-color: $gray-primary;
+      background-color: $gray-primary;
       color: $white-color;
     }
   }

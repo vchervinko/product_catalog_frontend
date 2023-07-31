@@ -1,8 +1,10 @@
 @import "../../styles/utils/mixins";
+@import "../../styles/utils/_variables";
+@import "../../styles/utils/_placeholders";
 
 .Footer {
-  background-color: #fff;
-  box-shadow: 0 -1px 0 0 #e2e6e9;
+  background-color: $white-color;
+  box-shadow: 0 -1px 0 0 $gray-elements;
 
   &__content {
     display: flex;
@@ -15,14 +17,7 @@
       justify-content: space-between;
       padding: 32px;
       gap: 0;
-    }
-
-    @include onDesktop {
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 32px;
       margin: auto;
-      gap: 0;
       max-width: 1200px;
     }
   }
@@ -36,13 +31,10 @@
     @include onTablet {
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
     }
 
     @include onDesktop {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
       width: 400px;
     }
   }
@@ -54,23 +46,20 @@
   }
 
   &__link {
-    color: #89939a;
+    @extend %uppercase;
 
-    font-family: Mont-Bold, "Helvetica Neue", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 800;
-    letter-spacing: 0.48px;
-    text-transform: uppercase;
+    color: $gray-secondary;
     text-decoration: none;
     transition: color 0.3s;
 
     &:hover {
-      color: black;
+      color: $gray-primary;
     }
   }
 
   &__button {
+    @extend %small-text;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,20 +67,15 @@
     text-decoration: none;
     padding: 0;
     align-self: stretch;
-    background-color: #fff;
+    background-color: $white-color;
     border: none;
     width: auto;
 
-    color: #89939a;
-    text-align: right;
-    font-family: Mont-Regular, "Helvetica Neue", sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: normal;
+    color: $gray-secondary;
     transition: color 0.3s;
 
     &:hover {
-      color: black;
+      color: $gray-primary;
     }
 
     &__image {
@@ -104,11 +88,11 @@
       justify-content: center;
       height: 32px;
       width: 32px;
-      border: 1px solid #89939a;
+      border: 1px solid $gray-secondary;
       transition: border 0.3s;
 
       &:hover {
-        border: 1px solid black;
+        border: 1px solid $gray-primary;
       }
     }
   }
