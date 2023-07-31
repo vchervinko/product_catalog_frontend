@@ -1,4 +1,6 @@
-@import '../../styles/utils/mixins';
+@import "../../styles/utils/mixins";
+@import "../../styles/utils/_variables";
+@import "../../styles/utils/_placeholders";
 
 .nav {
   @include onTablet {
@@ -11,7 +13,6 @@
     flex-direction: column;
     height: 100%;
     align-items: center;
-    height: 100%;
 
     @include onTablet {
       flex-direction: row;
@@ -36,21 +37,19 @@
   }
 
   &__link {
+    @extend %uppercase;
+
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px 0;
     height: 100%;
-    color: #89939a;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
+    color: $gray-secondary;
     transition: color 0.3s ease;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       height: 3px;
@@ -59,14 +58,14 @@
     }
 
     &--active {
-      color: #313237;
+      color: $gray-primary;
       &::after {
-        background: #313237;
+        background: $gray-primary;
       }
     }
 
     &:hover {
-      color: #313237;
+      color: $gray-primary;
     }
   }
 }
