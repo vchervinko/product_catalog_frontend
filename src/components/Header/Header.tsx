@@ -1,12 +1,13 @@
 import cn from 'classnames';
 import { useState, FC } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../assets/images/icons/Logo.svg';
+import { Link, useLocation } from 'react-router-dom';
+import logo from '../../assets/icons/Logo.svg';
 import { HeaderNav } from '../HeaderNav/HeaderNav';
 import './Header.scss';
 
 export const Header: FC = () => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
+  const location = useLocation();
 
   const handleMenuToggle = () => {
     setIsMenuOpened((prevState) => !prevState);
@@ -46,12 +47,15 @@ export const Header: FC = () => {
               />
             </button>
           </div>
-          
+
           <div className="header__icons">
             <div className="icon-block">
               <Link
                 title="Favourites"
-                className="icon-block__link icon-block__link--active"
+                className={cn('icon-block__link', {
+                  'icon-block__link--active': location.pathname
+                  === '/favourites',
+                })}
                 to="favourites"
               >
                 <div className="icon-block__icon icon-block__icon--Favourites">
@@ -61,7 +65,9 @@ export const Header: FC = () => {
             <div className="icon-block">
               <Link
                 title="Cart"
-                className="icon-block__link"
+                className={cn('icon-block__link', {
+                  'icon-block__link--active': location.pathname === '/cart',
+                })}
                 to="cart"
               >
                 <div className="icon-block__icon icon-block__icon--Cart">

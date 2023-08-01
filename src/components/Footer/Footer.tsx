@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/images/icons/Logo.svg';
+import Logo from '../../assets/icons/Logo.svg';
 import SliderButton from '../../assets/icons/arrow-up-default.svg';
 import { ScrollToTop } from '../../utils/ScrollToTop';
 import { links } from '../../utils/constants/links';
@@ -32,7 +32,7 @@ export const Footer: FC = () => (
 
         <Link
           className="Footer__button"
-          to={window.location.pathname}
+          to=""
           onClick={ScrollToTop}
         >
           Back to top

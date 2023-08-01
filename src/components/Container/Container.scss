@@ -1,7 +1,13 @@
+@import "../../styles/utils/mixins";
+
 .Container {
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
   overflow: hidden;
+
+  @include onTablet {
+    padding: 0 24px;
+  }
 }
