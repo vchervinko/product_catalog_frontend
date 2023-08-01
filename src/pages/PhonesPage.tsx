@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Container } from '../components/Container';
 import { Pagination } from '../components/Pagination';
 import { PhonesContextProvider } from '../contexts/PhonesContext/PhonesContextProvider';
+import { ProductCard } from '../components/ProductCard';
 
 const PhonesPage: FC = () => (
   <PhonesContextProvider>
@@ -9,6 +10,7 @@ const PhonesPage: FC = () => (
       <Container>
         Mobile phones
 
+        <ProductCard product={{id: 5}}/>
         <Pagination />
       </Container>
     </main>

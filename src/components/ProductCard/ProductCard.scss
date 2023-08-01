@@ -1,0 +1,153 @@
+@import "../../styles/utils/variables";
+
+$card-size: 272px;
+$like-button-size: 40px;
+
+.card {
+  width: $card-size;
+  padding: 32px;
+  border: 1px solid $elements-color;
+
+  &__image {
+    width: 100%;
+    display: flex;
+    margin: 0 auto 24px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+
+    color: $primary-color;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+  }
+
+  &__prices {
+    display: flex;
+    margin-bottom: 8px;
+
+    font-size: 22px;
+  }
+
+  &__current-price {
+    margin-right: 8px;
+
+    font-weight: 700;
+    line-height: 140%;
+  }
+
+  &__prev-price {
+    color: $secondary-color;
+    font-weight: 500;
+    text-decoration: line-through;
+    line-height: normal;
+  }
+
+  &__divide-line {
+    margin-bottom: 8px;
+
+    color: $elements-color;
+  }
+
+  &__list-specifications {
+    padding: 8px 0;
+    margin-bottom: 8px;
+  }
+
+  &__item-specification {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__item-specification:last-child {
+    margin-bottom: 0;
+  }
+
+  &__item-title-specification {
+    color: $secondary-color;
+  }
+
+  &__item-value-specification {
+    color: $primary-color;
+  }
+
+  &__actions {
+    display: flex;
+  }
+
+  &__actions-add-button {
+    flex: 1 0 0;
+    margin-right: 8px;
+    height: 40px;
+
+    background-color: $primary-color;
+    color: $white-color;
+    border: 1px solid transparent;
+
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
+    }
+
+    &--selected {
+      color: $green-color;
+      border-color: $elements-color;
+      background-color: $white-color;
+      pointer-events: none;
+    }
+  }
+
+  &__icon-container {
+    width: $like-button-size;
+  }
+}
+
+.icon {
+  width: 100%;
+  padding-top: 100%;
+  display: block;
+
+  border: 1px solid $elements-color;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transition: border 0.3s;
+
+  &--arrow-right {
+    background-image: url("../../assets/icons/arrow-right-default.svg");
+  }
+
+  &--arrow-right-disabled {
+    background-image: url("../../assets/icons/arrow-right-disable.svg");
+  }
+
+  &--arrow-left {
+    background-image: url("../../assets/icons/arrow-right-default.svg");
+    transform: rotate(180deg);
+  }
+
+  &--arrow-left-disabled {
+    background-image: url("../../assets/icons/arrow-right-disable.svg");
+    transform: rotate(180deg);
+  }
+
+  &--like {
+    background-image: url("../../assets/icons/icon-like.svg");
+  }
+
+  &--like-filled {
+    background-image: url("../../assets/icons/icon-like-filled.svg");
+  }
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
