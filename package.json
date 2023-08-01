@@ -10,7 +10,6 @@
     "lint:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:stylelint": "stylelint \"src/**/*.{css,scss}\"",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
-    "lint": "npm run lint:eslint",
     "fix": "npm run format",
     "preview": "vite preview",
     "prepare": "husky install"
