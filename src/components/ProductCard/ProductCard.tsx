@@ -1,97 +1,139 @@
-import classNames from 'classnames';
 import { FC, memo } from 'react';
-import { usePhonesContext } from '../../contexts/PhonesContext/usePhonesContext';
+import { useNavigate } from 'react-router';
+import cardImage from '../../assets/images/category-phones.png';
+import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { Product } from '../../types/Product';
 import { findItemById } from '../../utils/collectionsHelper/findItemById';
+import { Icon } from '../Icon';
 import './ProductCard.scss';
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
-export const ProductCard: FC<ProductCardProps> = memo(({ product }) => {
+// TODO: replace this mock with real data
+const product = {
+  'id': 120,
+  'category': 'phones',
+  'itemId': 'apple-iphone-13-pro-max-1tb-graphite',
+  'name': 'Apple iPhone 13 Pro Max 1TB Graphite',
+  'fullPrice': 1740,
+  'price': 1520,
+  'screen': '6.1\' OLED',
+  'capacity': '1TB',
+  'color': 'graphite',
+  'ram': '6GB',
+  'year': 2022,
+  'image': 'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
+};
+
+export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
+  const { id, name, fullPrice, price, screen, capacity, ram } = product;
+
   const {
-    addProductToCart,
-    toggleLikeProduct,
     cart,
     likedProducts,
-  } = usePhonesContext();
+    addProductToCart,
+    toggleLikeProduct,
+  } = useProductsContext();
 
-  const { id } = product;
+  const navigate = useNavigate();
 
   const addToCart = () => {
     addProductToCart(product);
+  };
+
+  const navigateToCart = () => {
+    navigate('/cart');
   };
 
   const likeProduct = () => {
     toggleLikeProduct(product);
   };
 
-  const isCartExist = !!findItemById(cart, id);
-  const isLiked = !!findItemById(likedProducts, id);
+  const hasItemInCart = Boolean(findItemById(cart, id));
+  const isLiked = Boolean(findItemById(likedProducts, id));
+
+  const likeButtonIcon = isLiked ? 'like-filled' : 'like';
 
   return (
-    <article className="card">
+    <article className="Card">
       <img
-        src="/src/components/ProductCard/akai.jpg"
-        alt="product"
-        className="card__image"
+        className="Card__image"
+        src={cardImage}
+        alt={name}
       />
 
-      <h3 className="card__title">
-        Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
+      <h3 className="Card__title">
+        {name}
       </h3>
 
-      <section className="card__prices">
-        <h2 className="card__current-price">
-          $799
+      <section className="Card__prices">
+        <h2 className="Card__current-price">
+          {price}
         </h2>
 
-        <h2 className="card__prev-price">
-          $899
+        <h2 className="Card__previous-price">
+          {fullPrice}
         </h2>
       </section>
 
-      <hr className="card__divide-line"></hr>
+      <hr className="Card__divide-line"></hr>
 
-      <ul className="card__list-specifications">
-        <li className="card__item-specification">
-          <p className="card__item-title-specification">screen</p>
-          <p className="card__item-value-specification">size</p>
+      <ul className="Card__list-specifications">
+        <li className="Card__item-specification">
+          <p className="Card__item-title-specification">
+            Screen
+          </p>
+
+          <span className="Card__item-value-specification">
+            {screen}
+          </span>
         </li>
 
-        <li className="card__item-specification">
-          <p className="card__item-title-specification">screen</p>
-          <p className="card__item-value-specification">size</p>
+        <li className="Card__item-specification">
+          <p className="Card__item-title-specification">
+            Capacity
+          </p>
+
+          <span className="Card__item-value-specification">
+            {capacity}
+          </span>
         </li>
 
-        <li className="card__item-specification">
-          <p className="card__item-title-specification">screen</p>
-          <p className="card__item-value-specification">size</p>
+        <li className="Card__item-specification">
+          <p className="Card__item-title-specification">
+            RAM
+          </p>
+
+          <span className="Card__item-value-specification">
+            {ram}
+          </span>
         </li>
       </ul>
 
-      <section className="card__actions">
-        <button
-          className={classNames('card__actions-add-button', {
-            'card__actions-add-button--selected': isCartExist
-          })}
-          onClick={addToCart}
-        >
-          {isCartExist ? 'Added' : 'Add to cart'}
+      <section className="Card__actions">
+        {hasItemInCart
+          ? (
+            <button
+              className="Card__actions-button Card__actions-button--added"
+              onClick={navigateToCart}
+            >
+              Added to cart
+            </button>
+          )
+          : (
+            <button
+              className="Card__actions-button Card__actions-button--add"
+              onClick={addToCart}
+            >
+              Add to cart
+            </button>
+          )}
+
+        <button onClick={likeProduct}>
+          <Icon size={40} type={likeButtonIcon} />
         </button>
-
-        <div className="card__icon-container">
-          <button
-            className={classNames('icon', {
-              'icon--like': !isLiked,
-              'icon--like-filled': isLiked
-            })}
-            onClick={likeProduct}
-          >
-
-          </button>
-        </div>
 
       </section>
     </article>

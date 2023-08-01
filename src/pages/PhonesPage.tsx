@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Container } from '../components/Container';
 import { Pagination } from '../components/Pagination';
-import { PhonesContextProvider } from '../contexts/PhonesContext/PhonesContextProvider';
 import { ProductCard } from '../components/ProductCard';
+import { ProductsContextProvider } from '../contexts/ProductsContext/ProductsContextProvider';
 
 const PhonesPage: FC = () => (
-  <PhonesContextProvider>
+  <ProductsContextProvider>
     <main>
       <Container>
         Mobile phones
@@ -14,7 +14,7 @@ const PhonesPage: FC = () => (
         <Pagination />
       </Container>
     </main>
-  </PhonesContextProvider>
+  </ProductsContextProvider>
 );
 
 export default PhonesPage;

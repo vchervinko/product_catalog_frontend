@@ -5,16 +5,16 @@ export interface Props {
   total: number,
   limit: number,
   cart: Product[]
-  addProductToCart: (product: Product) => void,
   likedProducts: Product[],
+  addProductToCart: (product: Product) => void,
   toggleLikeProduct: (product: Product) => void,
 }
 
-export const PhonesContext = createContext<Props>({
+export const ProductsContext = createContext<Props>({
   total: 0,
   limit: 0,
   cart: [],
-  addProductToCart: () => {/* empty */},
   likedProducts: [],
+  addProductToCart: () => {/* empty */},
   toggleLikeProduct: () => { /* empty */ },
 });
