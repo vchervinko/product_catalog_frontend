@@ -1,8 +1,9 @@
 import cn from 'classnames';
-import { useState, FC } from 'react';
+
+import { FC, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../../assets/icons/Logo.svg';
 import { HeaderNav } from '../HeaderNav/HeaderNav';
+import { Logo } from '../Logo';
 import './Header.scss';
 
 export const Header: FC = () => {
@@ -19,13 +20,7 @@ export const Header: FC = () => {
         <header className="header page__header">
           <div className="header__links">
             <div className="header__logo">
-              <Link title="Nice Gadgets - Home Page" className="logo" to="/">
-                <img
-                  src={logo}
-                  className="logo__image"
-                  alt="NiceGadgets logo"
-                />
-              </Link>
+              <Logo height={28} />
             </div>
             <div className="header__nav">
               <HeaderNav />

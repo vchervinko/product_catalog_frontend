@@ -6,7 +6,7 @@ interface Props {
 }
 
 const value: PhoneContextProps = {
-  total: 15,
+  total: 8,
   limit: 2,
 };
 

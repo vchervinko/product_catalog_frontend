@@ -1,72 +1,64 @@
-import { FC, useEffect, useState } from 'react';
-import './Pagination.scss';
 import classNames from 'classnames';
+import { FC, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { usePhonesContext } from '../../context/PhonesContext/usePhonesContext';
+import { usePhonesContext } from '../../contexts/PhonesContext/usePhonesContext';
+import { getNumbers } from '../../helpers/getNumbers';
+import { Icon, IconType } from '../Icon';
 import { SearchLink } from '../SearchLink';
-import { getNumbers } from './helper/getNumbers';
+import './Pagination.scss';
 
-type PaginationProps = {
-  isDisabled?: boolean;
-};
+interface Page {
+  page: number;
+  type: IconType;
+}
 
-export const Pagination: FC<PaginationProps> = ({ isDisabled = false }) => {
-  const [numbers, setNumbers] = useState<number[]>([]);
+export const Pagination: FC = () => {
+  const [pages, setPages] = useState<number[]>([]);
 
-  const [search] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { total, limit } = usePhonesContext();
 
-  const currentPage = Number(search.get('page') || 1);
+  const currentPage = Number(searchParams.get('page')) || 1;
 
   useEffect(() => {
-    setNumbers(getNumbers(total, limit));
+    setPages(getNumbers(total, limit));
   }, [total, limit]);
 
   const isFirstPage = currentPage <= 1;
-  const isLastPage = currentPage >= numbers.length;
+  const isLastPage = currentPage >= pages.length;
+
+  const previousPage: Page = isFirstPage
+    ? { page: currentPage, type: 'arrow-left-disabled' }
+    : { page: currentPage - 1, type: 'arrow-left' };
+
+  const nextPage: Page = isLastPage
+    ? { page: currentPage, type: 'arrow-right-disabled' }
+    : { page: currentPage + 1, type: 'arrow-right' };
 
   return (
-    <section
-      className={classNames('pagination', {
-        'pagination--disabled': isDisabled,
-      })}>
-      <div
-        className="pagination__icon-container
-         pagination__icon-container--mr">
-        <SearchLink
-          params={{ page: `${isFirstPage ? currentPage : currentPage - 1}` }}
-          className={classNames('icon', {
-            'icon--arrow-left': !isFirstPage,
-            'icon--arrow-left-disabled': isFirstPage,
-            disable: isFirstPage,
-          })}></SearchLink>
-      </div>
+    <section className="Pagination">
+      <SearchLink params={{ page: `${previousPage.page}`}}>
+        <Icon size={32} type={previousPage.type} />
+      </SearchLink>
 
-      <ul className="pagination__numbers">
-        {numbers.map((number) => (
-          <li key={number}>
+      <ul className="Pagination__list">
+        {pages.map((page) => (
+          <li key={page}>
             <SearchLink
-              params={{ page: number.toString() }}
-              className={classNames('pagination__number', {
-                'pagination__number--selected': currentPage === number,
-              })}>
-              {number}
+              className={classNames('Pagination__item', {
+                'Pagination__item--selected': page === currentPage,
+              })}
+              params={{ page: `${page}` }}
+            >
+              {page}
             </SearchLink>
           </li>
         ))}
       </ul>
 
-      <div
-        className="pagination__icon-container
-        pagination__icon-container--ml">
-        <SearchLink
-          params={{ page: `${isLastPage ? currentPage : currentPage + 1}` }}
-          className={classNames('icon', {
-            'icon--arrow-right': !isLastPage,
-            'icon--arrow-right-disabled': isLastPage,
-            disable: isLastPage,
-          })}></SearchLink>
-      </div>
+      <SearchLink params={{ page: `${nextPage.page}` }}>
+        <Icon size={32} type={nextPage.type} />
+      </SearchLink>
     </section>
   );
 };
