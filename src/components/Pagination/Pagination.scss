@@ -1,100 +1,33 @@
-@import "../../styles/utils/_variables.scss";
+@import "../../styles/utils/variables";
+@import "../../styles/utils/placeholders";
 
-$button-link-size: 32px;
-
-.icon {
-  width: 100%;
-  padding-top: 100%;
-  display: block;
-
-  border: 1px solid $elements-color;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  transition: border 0.3s;
-
-  &:not(.disable):hover {
-    border-color: $primary-color;
-  }
-
-  &--arrow-right {
-    background-image: url("../../assets/icons/arrow-right-default.svg");
-  }
-
-  &--arrow-right-disabled {
-    background-image: url("../../assets/icons/arrow-right-disable.svg");
-  }
-
-  &--arrow-left {
-    background-image: url("../../assets/icons/arrow-right-default.svg");
-    transform: rotate(180deg);
-  }
-
-  &--arrow-left-disabled {
-    background-image: url("../../assets/icons/arrow-right-disable.svg");
-    transform: rotate(180deg);
-  }
-
-  &--like {
-    background-image: url("../../assets/icons/icon-like.svg");
-  }
-
-  &--like-filled {
-    background-image: url("../../assets/icons/icon-like-filled.svg");
-  }
-}
-
-.pagination {
+.Pagination {
   display: flex;
+  gap: 16px;
 
-  &__numbers {
+  &__list {
     display: flex;
     gap: 8px;
   }
 
-  &__number {
+  &__item {
+    @extend %buttons;
     width: 32px;
     height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border: 1px solid $elements-color;
-
-    font-weight: 500;
-    font-size: 14px;
-
-    transition: border 0.3s;
+    border: 1px solid $gray-icons-placeholders;
+    transition: border $default-transition;
 
     &:hover {
-      border-color: $primary-color;
+      border-color: $gray-primary;
     }
 
     &--selected {
-      border-color: $primary-color;
-      background-color: $primary-color;
       color: $white-color;
+      background-color: $gray-primary;
+      border-color: $gray-primary;
     }
   }
-
-  &__icon-container {
-    width: $button-link-size;
-
-    &--mr {
-      margin-right: 16px;
-    }
-
-    &--ml {
-      margin-left: 16px;
-    }
-  }
-
-  &--disabled {
-    pointer-events: none;
-  }
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }

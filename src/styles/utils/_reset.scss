@@ -18,6 +18,7 @@ a,
 abbr,
 acronym,
 address,
+button,
 big,
 cite,
 code,
@@ -128,5 +129,12 @@ table {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
 }

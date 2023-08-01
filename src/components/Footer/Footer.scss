@@ -1,29 +1,20 @@
+@import "../../styles/utils/variables";
 @import "../../styles/utils/mixins";
+@import "../../styles/utils/placeholders";
 
 .Footer {
-  background-color: #fff;
-  box-shadow: 0 -1px 0 0 #e2e6e9;
+  background-color: $white-color;
+  box-shadow: 0 -1px 0 0 $gray-elements;
 
   &__content {
+    padding-block: 32px;
     display: flex;
     flex-direction: column;
     gap: 32px;
-    padding: 32px 16px;
 
     @include onTablet {
       flex-direction: row;
       justify-content: space-between;
-      padding: 32px;
-      gap: 0;
-    }
-
-    @include onDesktop {
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 32px;
-      margin: auto;
-      gap: 0;
-      max-width: 1200px;
     }
   }
 
@@ -31,85 +22,40 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 0;
 
     @include onTablet {
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
     }
 
     @include onDesktop {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      width: 400px;
+      min-width: 400px;
     }
   }
 
-  &__item {
-    display: flex;
-    align-items: center;
-    list-style: none;
-  }
-
   &__link {
-    color: #89939a;
-
-    font-family: Mont-Bold, "Helvetica Neue", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 800;
-    letter-spacing: 0.48px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: color 0.3s;
+    @extend %uppercase;
+    display: block;
+    color: $gray-secondary;
+    transition: color $default-transition;
 
     &:hover {
-      color: black;
+      color: $gray-primary;
     }
   }
 
   &__button {
+    @extend %small-text;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
-    text-decoration: none;
-    padding: 0;
-    align-self: stretch;
-    background-color: #fff;
-    border: none;
-    width: auto;
-
-    color: #89939a;
-    text-align: right;
-    font-family: Mont-Regular, "Helvetica Neue", sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: normal;
-    transition: color 0.3s;
+    color: $gray-secondary;
+    transition: color $default-transition;
 
     &:hover {
-      color: black;
-    }
-
-    &__image {
-      display: block;
-    }
-
-    &__border {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 32px;
-      width: 32px;
-      border: 1px solid #89939a;
-      transition: border 0.3s;
-
-      &:hover {
-        border: 1px solid black;
-      }
+      color: $gray-primary;
     }
   }
 }

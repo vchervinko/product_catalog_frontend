@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import { useState, FC, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/icons/Logo.svg';
 import { HeaderNav } from '../HeaderNav/HeaderNav';
+import { Logo } from '../Logo';
 import './Header.scss';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 
@@ -18,7 +18,7 @@ export const Header: FC = () => {
   );
 
   return (
-    <>
+        <>
       <header className="header">
         <div className="header__links">
           <div className="header__logo">
