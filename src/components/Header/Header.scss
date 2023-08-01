@@ -51,11 +51,11 @@
     height: 16px;
 
     &--closed {
-      background-image: url('/src/assets/images/icons/Menu.svg');
-    }
-
-    &--opened {
       background-image: url('/src/assets/images/icons/Close.svg');
+    }
+    
+    &--opened {
+      background-image: url('/src/assets/images/icons/Menu.svg');
     }
   }
 

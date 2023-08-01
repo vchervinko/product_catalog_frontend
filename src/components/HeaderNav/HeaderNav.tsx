@@ -1,24 +1,15 @@
-import cn from 'classnames';
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
-import { navItems } from '../../utils/constants/navItems';
 import './HeaderNav.scss';
+import { HeaderNavItem } from './HeaderNavItem';
 
-export const HeaderNav: FC = () => (
+interface Props {
+  setIsMenuOpened: (arg: boolean) => void;
+}
+
+export const HeaderNav: FC<Props> = ({ setIsMenuOpened }) => (
   <nav className="nav">
     <ul className="nav__list">
-      {navItems.map(({ id, path, title }) => (
-        <li key={id} className="nav__item">
-          <NavLink
-            to={path}
-            className={({ isActive }) => cn('nav__link', {
-              'nav__link--active': isActive
-            })}
-          >
-            {title}
-          </NavLink>
-        </li>
-      ))}
+      <HeaderNavItem setIsMenuOpened={setIsMenuOpened} />
     </ul>
   </nav>
 );
