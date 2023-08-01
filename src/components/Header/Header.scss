@@ -49,13 +49,14 @@
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
+    transition: background-image 0.3s ease;
 
     &--closed {
-      background-image: url("/src/assets/icons/Menu.svg");
-    }
-
-    &--opened {
       background-image: url("/src/assets/icons/Close.svg");
+    }
+    
+    &--opened {
+      background-image: url("/src/assets/icons/Menu.svg");
     }
   }
 
