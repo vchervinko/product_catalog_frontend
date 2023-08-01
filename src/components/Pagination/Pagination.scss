@@ -12,15 +12,12 @@
 
   &__item {
     @extend %buttons;
-
     width: 32px;
     height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-
     border: 1px solid $gray-icons-placeholders;
-
     transition: border $default-transition;
 
     &:hover {
