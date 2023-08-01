@@ -4,9 +4,9 @@ import { Layout } from './components/Layout';
 import './index.scss';
 import AccessoriesPage from './pages/AccessoriesPage';
 import MainPage from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PhonesPage from './pages/PhonesPage';
 import TabletsPage from './pages/TabletsPage';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const router = createBrowserRouter([
   {

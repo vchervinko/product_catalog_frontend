@@ -1,13 +1,15 @@
 import { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import cardImage from '../../assets/images/category-phones.png';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { BASE_URL } from '../../helpers/fetchClient';
+import { findItemById } from '../../helpers/findItemById';
 import { Product } from '../../types/Product';
-import { findItemById } from '../../utils/collectionsHelper/findItemById';
 import { Icon } from '../Icon';
 import './ProductCard.scss';
 
-interface ProductCardProps {
+interface Props {
   product: Product;
 }
 
@@ -27,9 +29,7 @@ const product = {
   'image': 'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
 };
 
-export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
-  const { id, name, fullPrice, price, screen, capacity, ram } = product;
-
+export const ProductCard: FC<Props> = memo((/* { product } */) => {
   const {
     cart,
     likedProducts,
@@ -51,30 +51,32 @@ export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
     toggleLikeProduct(product);
   };
 
-  const hasItemInCart = Boolean(findItemById(cart, id));
-  const isLiked = Boolean(findItemById(likedProducts, id));
+  const hasItemInCart = Boolean(findItemById(cart, product.id));
+  const isLiked = Boolean(findItemById(likedProducts, product.id));
 
   const likeButtonIcon = isLiked ? 'like-filled' : 'like';
 
   return (
     <article className="Card">
-      <img
-        className="Card__image"
-        src={cardImage}
-        alt={name}
-      />
+      <Link to={`/${product.category}/${product.itemId}`}>
+        <img
+          className="Card__image"
+          src={cardImage || `${BASE_URL}/${product.image}`} //! delete cardImage
+          alt={product.name}
+        />
 
-      <h3 className="Card__title">
-        {name}
-      </h3>
+        <h3 className="Card__title">
+          {product.name}
+        </h3>
+      </Link>
 
       <section className="Card__prices">
         <h2 className="Card__current-price">
-          {price}
+          {product.price}
         </h2>
 
         <h2 className="Card__previous-price">
-          {fullPrice}
+          {product.fullPrice}
         </h2>
       </section>
 
@@ -87,7 +89,7 @@ export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
           </p>
 
           <span className="Card__item-value-specification">
-            {screen}
+            {product.screen}
           </span>
         </li>
 
@@ -97,7 +99,7 @@ export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
           </p>
 
           <span className="Card__item-value-specification">
-            {capacity}
+            {product.capacity}
           </span>
         </li>
 
@@ -107,7 +109,7 @@ export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
           </p>
 
           <span className="Card__item-value-specification">
-            {ram}
+            {product.ram}
           </span>
         </li>
       </ul>
@@ -134,7 +136,6 @@ export const ProductCard: FC<ProductCardProps> = memo((/* { product } */) => {
         <button onClick={likeProduct}>
           <Icon size={40} type={likeButtonIcon} />
         </button>
-
       </section>
     </article>
   );

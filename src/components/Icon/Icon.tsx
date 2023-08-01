@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import './Icon.scss';
 
-export type IconType = 'like' | 'like-filled'
+export type IconType = 'plus' | 'minus'
+  | 'like' | 'like-filled'
   | 'arrow-up' | 'arrow-up-disabled'
   | 'arrow-left' | 'arrow-left-disabled'
   | 'arrow-right' | 'arrow-right-disabled';
 
 interface Props {
   size: number;
-  type: IconType ;
+  type: IconType;
 }
 
 export const Icon: FC<Props> = ({ size, type }) => (

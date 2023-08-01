@@ -1,84 +1,109 @@
-import cn from 'classnames';
-import { useState, FC, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { HeaderNav } from '../HeaderNav/HeaderNav';
-import { Logo } from '../Logo';
-import './Header.scss';
+import classNames from 'classnames';
+import { FC, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import '../../styles/icon.scss';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
+import { Logo } from '../Logo';
+import { Navigation } from '../Navigation/Navigation';
+import './Header.scss';
 
 export const Header: FC = () => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
-  const handleMenuToggle = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      event.preventDefault();
-      setIsMenuOpened((prevState) => !prevState);
-    },
-    [],
-  );
+  const { likedProductsCount, cartProductsCount } = useProductsContext();
+
+  const toggleMenu = (status?: boolean) => {
+    if (status) {
+      setIsMenuOpened(status);
+
+      return;
+    }
+
+    setIsMenuOpened((currentState) => !currentState);
+  };
+
+  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.75rem' } : {};
+  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.75rem' } : {};
 
   return (
-        <>
-      <header className="header">
-        <div className="header__links">
-          <div className="header__logo">
-            <Link title="Nice Gadgets - Home Page" className="logo" to="/">
-              <img
-                src={logo}
-                className="logo__image"
-                alt="NiceGadgets logo"
-              />
-            </Link>
+    <>
+      <header className="Header">
+        <div className="Header__branding">
+          <div className="Header__logo">
+            <Logo height={28} />
           </div>
-          <div className="header__nav">
-            <HeaderNav
-              setIsMenuOpened={setIsMenuOpened}
-            />
+
+          <div className="Header__nav">
+            <Navigation />
           </div>
         </div>
 
-        <div className="header__menu">
+        <div className="Header__menu">
           <button
-            title="Menu"
+            className="Header__toggler"
             type="button"
-            className="header__menu-opener"
-            onClick={handleMenuToggle}
+            onClick={() => toggleMenu()}
           >
             <div
-              className={cn('header__menu-icon', {
-                'header__menu-icon--closed': !isMenuOpened,
-                'header__menu-icon--opened': isMenuOpened,
+              className={classNames('Header__menu-icon', {
+                'Header__menu-icon--closed': !isMenuOpened,
+                'Header__menu-icon--opened': isMenuOpened,
               })}
             />
           </button>
         </div>
 
-        <div className="header__icons">
-          <div className="icon-block">
-            <Link
-              title="Favourites"
-              className="icon-block__link icon-block__link--active"
+        <div className="Header__icons">
+          <div className="icon">
+            <NavLink
+              className={({ isActive }) => classNames('icon__link', {
+                'icon__link--active': isActive,
+              })}
               to="favourites"
             >
-              <div className="icon-block__icon icon-block__icon--Favourites">
+              <div className="icon__image icon__image--Favourites">
+                {likedProductsCount > 0 && (
+                  <div className="icon__counter">
+                    <span
+                      className="icon__counter-text"
+                      style={likedFontSize}
+                    >
+                      {likedProductsCount}
+                    </span>
+                  </div>
+                )}
               </div>
-            </Link>
+            </NavLink>
           </div>
-          <div className="icon-block">
-            <Link
-              title="Cart"
-              className="icon-block__link"
+
+          <div className="icon">
+            <NavLink
+              className={({ isActive }) => classNames('icon__link', {
+                'icon__link--active': isActive,
+              })}
               to="cart"
             >
-              <div className="icon-block__icon icon-block__icon--Cart">
+              <div className="icon__image icon__image--Cart">
+                {cartProductsCount > 0 && (
+                  <div className="icon__counter">
+                    <span
+                      className="icon__counter-text"
+                      style={cartFontSize}
+                    >
+                      {cartProductsCount}
+                    </span>
+                  </div>
+                )}
               </div>
-            </Link>
+            </NavLink>
           </div>
         </div>
       </header>
+
       <BurgerMenu
-        setIsMenuOpened={setIsMenuOpened}
         isMenuOpened={isMenuOpened}
+        toggleMenu={toggleMenu}
       />
     </>
   );

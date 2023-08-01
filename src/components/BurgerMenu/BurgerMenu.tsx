@@ -1,42 +1,72 @@
-import { Link } from 'react-router-dom';
-import { HeaderNav } from '../HeaderNav';
-import cn from 'classnames';
-import './BurgerMenu.scss';
+import classNames from 'classnames';
 import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import '../../styles/icon.scss';
+import { Navigation } from '../Navigation';
+import './BurgerMenu.scss';
 
 interface Props {
   isMenuOpened: boolean;
-  setIsMenuOpened: (arg: boolean) => void;
+  toggleMenu: (status?: boolean) => void;
 }
 
-export const BurgerMenu: FC<Props> = ({ setIsMenuOpened, isMenuOpened }) => (
-  <div className={cn('burger-menu', { 'burger-menu--open': isMenuOpened })}>
-    <HeaderNav
-      setIsMenuOpened={setIsMenuOpened}
-    />
-    <div className="burger-menu__icons">
-      <div className="icon-block">
-        <Link
-          title="Favourites"
-          className="icon-block__link"
-          to="favourites"
-          onClick={() => setIsMenuOpened(false)}
-        >
-          <div className="icon-block__icon icon-block__icon--Favourites">
-          </div>
-        </Link>
-      </div>
-      <div className="icon-block">
-        <Link
-          title="Cart"
-          className="icon-block__link"
-          to="cart"
-          onClick={() => setIsMenuOpened(false)}
-        >
-          <div className="icon-block__icon icon-block__icon--Cart">
-          </div>
-        </Link>
+export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
+  const { likedProductsCount, cartProductsCount } = useProductsContext();
+
+  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.75rem' } : {};
+  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.75rem' } : {};
+
+  return (
+    <div
+      className={classNames('BurgerMenu', {
+        'BurgerMenu--opened': isMenuOpened
+      })}
+    >
+      <Navigation toggleMenu={toggleMenu} />
+      <div className="BurgerMenu__icons">
+        <div className="icon">
+          <NavLink
+            className="icon__link"
+            to="favourites"
+            onClick={() => toggleMenu(false)}
+          >
+            <div className="icon__image icon__image--Favourites">
+              {likedProductsCount > 0 && (
+                <div className="icon__counter">
+                  <span
+                    className="icon__counter-text"
+                    style={likedFontSize}
+                  >
+                    {likedProductsCount}
+                  </span>
+                </div>
+              )}
+            </div>
+          </NavLink>
+        </div>
+
+        <div className="icon">
+          <NavLink
+            className="icon__link"
+            to="cart"
+            onClick={() => toggleMenu(false)}
+          >
+            <div className="icon__image icon__image--Cart">
+              {cartProductsCount > 0 && (
+                <div className="icon__counter">
+                  <span
+                    className="icon__counter-text"
+                    style={cartFontSize}
+                  >
+                    {cartProductsCount}
+                  </span>
+                </div>
+              )}
+            </div>
+          </NavLink>
+        </div>
       </div>
     </div>
-  </div >
-);
+  );
+};
