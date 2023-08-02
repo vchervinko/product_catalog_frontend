@@ -1,11 +1,10 @@
-@import '../../styles/utils/placeholders';
-@import '../../styles/utils/mixins';
+@import "../../styles/utils/placeholders";
+@import "../../styles/utils/mixins";
 
 .PageLayout {
-
   padding: 25px 0 65px;
 
-  @include onDesktop  {
+  @include onDesktop {
     padding-bottom: 80px;
   }
 
@@ -16,7 +15,6 @@
       margin-bottom: 40px;
     }
   }
-
 
   &__title {
     @extend %h1;

@@ -1,18 +1,15 @@
-import './ProductCatalog.scss';
-import { ProductCard } from '../ProductCard';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { ProductCard } from '../ProductCard';
+import './ProductCatalog.scss';
 
 export const ProductCatalog = () => {
-
   const { products } = useProductsContext();
-  console.log(products);
 
   return (
     <section className="ProductCatalog">
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </section>
-
   );
 };

@@ -1,10 +1,10 @@
-@import '../../styles/utils/mixins';
+@import "../../styles/utils/mixins";
 
 .ProductCatalog {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 40px;
   column-gap: 16px;
+  row-gap: 40px;
 
   @include onTablet {
     grid-template-columns: repeat(2, 1fr);
@@ -17,6 +17,4 @@
   @include onDesktop {
     grid-template-columns: repeat(4, 1fr);
   }
-
 }
-
