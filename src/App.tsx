@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import './index.scss';
 import AccessoriesPage from './pages/AccessoriesPage';
@@ -16,6 +16,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MainPage />,
+      },
+      {
+        path: 'home',
+        element: <Navigate to="/" replace />,
       },
       {
         path: 'phones',

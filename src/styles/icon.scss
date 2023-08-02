@@ -44,9 +44,8 @@
   }
 
   &__image {
+    @include square($header-icon-size);
     position: relative;
-    width: 16px;
-    height: 16px;
     display: flex;
     background-size: contain;
     background-position: center;
@@ -62,12 +61,11 @@
   }
 
   &__counter {
+    @include square($header-icon-size);
     @extend %small-text;
     position: absolute;
     top: -50%;
     right: -50%;
-    width: 16px;
-    height: 16px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
-import { ProductsContextProvider } from '../contexts/ProductsContext/ProductsContextProvider';
 import { PageLayout } from '../components/PageLayout';
 import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
 import { Product } from '../types/Product';
 
+//TODO: replace this with a call to the API
 const products: Product[] = [
   { id: 1},
   { id: 2},
@@ -20,16 +20,11 @@ const PhonesPage: FC = () => {
   const { setProducts } = useProductsContext();
 
   useEffect(() => {
-    console.log(products);
     setProducts(products);
   }, []);
 
   return (
-    <ProductsContextProvider>
-      <main>
-        <PageLayout title="Mobile phones"/>
-      </main>
-    </ProductsContextProvider>
+    <PageLayout title="Mobile phones"/>
   );
 };
 

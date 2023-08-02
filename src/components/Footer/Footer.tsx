@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { scrollToTopDefault } from '../../helpers/ScrollToTop.tsx';
 import { externalLinks } from '../../helpers/constants/externalLinks.ts';
-import { scrollToTop } from '../../helpers/scrollToTop.ts';
 import { Container } from '../Container/Container.tsx';
 import { Icon } from '../Icon/Icon.tsx';
 import { Logo } from '../Logo';
@@ -23,7 +23,7 @@ export const Footer: FC = () => (
           ))}
         </ul>
 
-        <button className="Footer__button" onClick={scrollToTop}>
+        <button className="Footer__button" onClick={scrollToTopDefault}>
           Back to top
 
           <Icon size={32} type="arrow-up" />

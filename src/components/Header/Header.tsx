@@ -23,8 +23,8 @@ export const Header: FC = () => {
     setIsMenuOpened((currentState) => !currentState);
   };
 
-  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.75rem' } : {};
-  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.75rem' } : {};
+  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.60rem' } : {};
+  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.60rem' } : {};
 
   return (
     <>
@@ -69,7 +69,7 @@ export const Header: FC = () => {
                       className="icon__counter-text"
                       style={likedFontSize}
                     >
-                      {likedProductsCount}
+                      {likedProductsCount < 100 ? likedProductsCount : '99+'}
                     </span>
                   </div>
                 )}
@@ -91,7 +91,7 @@ export const Header: FC = () => {
                       className="icon__counter-text"
                       style={cartFontSize}
                     >
-                      {cartProductsCount}
+                      {cartProductsCount < 100 ? cartProductsCount : '99+'}
                     </span>
                   </div>
                 )}

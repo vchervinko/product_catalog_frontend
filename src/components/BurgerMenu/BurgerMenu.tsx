@@ -18,7 +18,7 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
   const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.75rem' } : {};
 
   return (
-    <div
+    <nav
       className={classNames('BurgerMenu', {
         'BurgerMenu--opened': isMenuOpened
       })}
@@ -67,6 +67,6 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
           </NavLink>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
