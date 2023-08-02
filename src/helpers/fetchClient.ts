@@ -1,8 +1,8 @@
-const BASE_URL = 'https://apple-catalog-api.onrender.com';
+export const BASE_URL = 'https://apple-catalog-api.onrender.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
-export function request<T>(
+function request<T>(
   url: string,
   method: RequestMethod = 'GET',
   data: unknown = null,

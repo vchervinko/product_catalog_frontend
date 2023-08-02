@@ -1,0 +1,124 @@
+@import "../../styles/utils/variables";
+@import "../../styles/utils/mixins";
+@import "../../styles/utils/placeholders";
+
+.Card {
+  padding: 32px;
+  width: 212px;
+  border: 1px solid $gray-elements;
+  transition: box-shadow $default-transition ease-in-out;
+
+  &:hover {
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  @include onTablet {
+    width: 237px;
+  }
+
+  @include onDesktop {
+    width: 272px;
+  }
+
+  &__image {
+    margin: 0 auto 24px;
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+    object-position: center;
+
+    @include onTablet {
+      height: 196px;
+    }
+  }
+
+  &__title {
+    @extend %body-text;
+    margin-bottom: 8px;
+    color: $gray-primary;
+  }
+
+  &__prices {
+    @extend %h3;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+  }
+
+  &__current-price {
+    &::before {
+      content: "$";
+    }
+  }
+
+  &__previous-price {
+    font-family: Mont-Regular, "Helvetica Neue", sans-serif; // Overriding
+    color: $gray-secondary;
+    text-decoration: line-through;
+
+    &::before {
+      content: "$";
+    }
+  }
+
+  &__divide-line {
+    margin-bottom: 8px;
+    color: $gray-elements;
+  }
+
+  &__list-specifications {
+    margin-bottom: 8px;
+    padding-block: 8px;
+  }
+
+  &__item-specification {
+    @extend %small-text;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item-specification:last-child {
+    margin-bottom: 0;
+  }
+
+  &__item-title-specification {
+    color: $gray-secondary;
+  }
+
+  &__item-value-specification {
+    color: $gray-primary;
+  }
+
+  &__actions {
+    display: flex;
+  }
+
+  &__actions-button {
+    margin-right: 8px;
+    height: 40px;
+    flex: 1 0 0;
+    border: 1px solid transparent;
+    transition: box-shadow $default-transition ease-in-out;
+    cursor: pointer;
+
+    &--add {
+      color: $white-color;
+      background-color: $gray-primary;
+
+      &:hover {
+        box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
+      }
+    }
+
+    &--added {
+      color: $green-color;
+      background-color: $white-color;
+      border-color: $gray-elements;
+
+      &:hover {
+        box-shadow: inset 1px 1px 3px 0 rgba(23, 32, 49, 0.4);
+      }
+    }
+  }
+}

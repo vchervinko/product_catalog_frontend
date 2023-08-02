@@ -1,18 +1,17 @@
 import { FC } from 'react';
 import { Container } from '../components/Container';
 import { Pagination } from '../components/Pagination';
-import { PhonesContextProvider } from '../contexts/PhonesContext/PhonesContextProvider';
+import { ProductCard } from '../components/ProductCard';
 
 const PhonesPage: FC = () => (
-  <PhonesContextProvider>
-    <main>
-      <Container>
-        Mobile phones
+  <main>
+    <Container>
+      Mobile phones
 
-        <Pagination />
-      </Container>
-    </main>
-  </PhonesContextProvider>
+      <ProductCard product={{id: 5}}/>
+      <Pagination />
+    </Container>
+  </main>
 );
 
 export default PhonesPage;

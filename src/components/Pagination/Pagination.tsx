@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { usePhonesContext } from '../../contexts/PhonesContext/usePhonesContext';
+import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { getNumbers } from '../../helpers/getNumbers';
 import { Icon, IconType } from '../Icon';
 import { SearchLink } from '../SearchLink';
@@ -16,7 +16,7 @@ export const Pagination: FC = () => {
   const [pages, setPages] = useState<number[]>([]);
 
   const [searchParams] = useSearchParams();
-  const { total, limit } = usePhonesContext();
+  const { total, limit } = useProductsContext();
 
   const currentPage = Number(searchParams.get('page')) || 1;
 

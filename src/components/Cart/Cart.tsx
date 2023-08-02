@@ -1,25 +1,24 @@
 import { FC, useState } from 'react';
 import './Cart.scss';
 import { Icon } from '../Icon';
-import { Phone, Product } from '../types/Product';
-import zatychka from '../../assets/img/phones/apple-iphone-13-mini/midnight/00.webp';
-
-// eslint-disable-next-line max-len
-const phonesInCart: Phone[] = [{'id': '1', 'category': 'phones', 'phoneId': 'apple-iphone-7-32gb-black', 'itemId': 'apple-iphone-7-32gb-black', 'name': 'Apple iPhone 7 32GB Black', 'fullPrice': 400, 'price': 375, 'screen': '4.7\' IPS', 'capacity': '32GB', 'color': 'black', 'ram': '2GB', 'year': 2016, 'image': 'img/phones/apple-iphone-7/black/00.jpg'}, {'id': '2', 'category': 'phones', 'phoneId': 'apple-iphone-7-plus-32gb-black', 'itemId': 'apple-iphone-7-plus-32gb-black', 'name': 'Apple iPhone 7 Plus 32GB Black', 'fullPrice': 540, 'price': 500, 'screen': '5.5\' IPS', 'capacity': '32GB', 'color': 'black', 'ram': '3GB', 'year': 2016, 'image': 'img/phones/apple-iphone-7-plus/black/00.jpg'}, {'id': '3', 'category': 'phones', 'phoneId': 'apple-iphone-8-64gb-gold', 'itemId': 'apple-iphone-8-64gb-gold', 'name': 'Apple iPhone 8 64GB Gold', 'fullPrice': 600, 'price': 550, 'screen': '4.7\' IPS', 'capacity': '64GB', 'color': 'gold', 'ram': '2GB', 'year': 2017, 'image': 'img/phones/apple-iphone-8/gold/00.jpg'}, {'id': '58', 'category': 'phones', 'phoneId': 'apple-iphone-11-pro-max-256gb-silver', 'itemId': 'apple-iphone-11-pro-max-256gb-silver', 'name': 'Apple iPhone 11 Pro Max 256GB Silver', 'fullPrice': 1776, 'price': 1680, 'screen': '6.5\' OLED', 'capacity': '256GB', 'color': 'silver', 'ram': '4GB', 'year': 2019, 'image': 'img/phones/apple-iphone-11-pro-max/silver/00.jpg'}, {'id': '59', 'category': 'phones', 'phoneId': 'apple-iphone-11-pro-max-512gb-midnightgreen', 'itemId': 'apple-iphone-11-pro-max-512gb-midnightgreen', 'name': 'Apple iPhone 11 Pro Max 512GB Midnightgreen', 'fullPrice': 2020, 'price': 1930, 'screen': '6.5\' OLED', 'capacity': '512GB', 'color': 'midnightgreen', 'ram': '4GB', 'year': 2019, 'image': 'img/phones/apple-iphone-11-pro-max/midnightgreen/00.jpg'}, {'id': '60', 'category': 'phones', 'phoneId': 'apple-iphone-xr-128gb-yellow', 'itemId': 'apple-iphone-xr-128gb-yellow', 'name': 'Apple iPhone XR 128GB Yellow', 'fullPrice': 880, 'price': 815, 'screen': '6.1\' IPS', 'capacity': '128GB', 'color': 'yellow', 'ram': '3GB', 'year': 2018, 'image': 'img/phones/apple-iphone-xr/yellow/00.jpg'}];
+import { Product } from '../../types/Product';
+import { BASE_URL } from '../../helpers/fetchClient';
+import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 
 interface CartProps {
   products: Product[];
 }
 
-export const Cart: FC<CartProps> = ({ products = phonesInCart }) => {
+export const Cart: FC<CartProps> = () => {
   const [cartItems, setCartItems] = useState<{ [id: string]: number }>({});
+  const { cart, deleteProductFromCart } = useProductsContext();
 
-  const changeQuantity = (phoneId: string, increment: number) => {
+  const changeQuantity = (id: string, increment: number) => {
     setCartItems((prevItems) => {
-      const currentQuantity = prevItems[phoneId] || 1;
+      const currentQuantity = prevItems[id] || 1;
       const newQuantity = Math.max(currentQuantity + increment, 1);
 
-      return { ...prevItems, [phoneId]: newQuantity };
+      return { ...prevItems, [id]: newQuantity };
     });
   };
 
@@ -33,12 +32,12 @@ export const Cart: FC<CartProps> = ({ products = phonesInCart }) => {
     window.history.back();
   };
 
-  const totalPrice = products.reduce(
+  const totalPrice = cart.reduce(
     (acc, product) => acc + calculateItemPrice(product),
     0
   );
 
-  const totalItems = products.reduce(
+  const totalItems = cart.reduce(
     (acc, product) => acc + (cartItems[product.id] || 1),
     0
   );
@@ -54,7 +53,7 @@ export const Cart: FC<CartProps> = ({ products = phonesInCart }) => {
 
       <div className="cart__content">
         <div className="cart__itemsList">
-          {products.map((product) => {
+          {cart.map((product) => {
             const quantity = cartItems[product.id] || 1;
 
             return (
@@ -62,12 +61,13 @@ export const Cart: FC<CartProps> = ({ products = phonesInCart }) => {
                 <div className="cart__row">
                   <button
                     className="cart__closeButton"
+                    onClick={() => deleteProductFromCart(product)}
                   ></button>
 
                   <picture>
                     <img
-                      src={zatychka}
-                      alt="zatychka"
+                      src={`${BASE_URL}/${product.image}`}
+                      alt={product.name}
                       className="cart__image"
                     />
                   </picture>
@@ -77,13 +77,17 @@ export const Cart: FC<CartProps> = ({ products = phonesInCart }) => {
 
                 <div className="cart__row">
                   <div className="cart__quantitySelector">
-                    <button onClick={() => changeQuantity(product.id, -1)}>
+                    <button onClick={() =>
+                      changeQuantity(String(product.id), -1)
+                    }>
                       <Icon size={32} type="minus" />
                     </button>
 
                     <span className="cart__quantity">{quantity}</span>
 
-                    <button onClick={() => changeQuantity(product.id, 1)}>
+                    <button onClick={() =>
+                      changeQuantity(String(product.id), 1)
+                    }>
                       <Icon size={32} type="plus" />
                     </button>
                   </div>
