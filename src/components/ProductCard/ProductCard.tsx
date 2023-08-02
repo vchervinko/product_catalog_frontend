@@ -1,7 +1,6 @@
 import { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import cardImage from '../../assets/images/category-phones.png';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { BASE_URL } from '../../helpers/fetchClient';
 import { findItemById } from '../../helpers/findItemById';
@@ -13,23 +12,7 @@ interface Props {
   product: Product;
 }
 
-// TODO: replace this mock with real data
-const product = {
-  'id': 120,
-  'category': 'phones',
-  'itemId': 'apple-iphone-13-pro-max-1tb-graphite',
-  'name': 'Apple iPhone 13 Pro Max 1TB Graphite',
-  'fullPrice': 1740,
-  'price': 1520,
-  'screen': '6.1\' OLED',
-  'capacity': '1TB',
-  'color': 'graphite',
-  'ram': '6GB',
-  'year': 2022,
-  'image': 'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
-};
-
-export const ProductCard: FC<Props> = memo((/* { product } */) => {
+export const ProductCard: FC<Props> = memo(({ product }) => {
   const {
     cart,
     likedProducts,
@@ -58,10 +41,10 @@ export const ProductCard: FC<Props> = memo((/* { product } */) => {
 
   return (
     <article className="Card">
-      <Link to={`/${product.category}/${product.itemId}`}>
+      <Link to={`${product.id}`}>
         <img
           className="Card__image"
-          src={cardImage || `${BASE_URL}/${product.image}`} //! delete cardImage
+          src={`${BASE_URL}/${product.image}`}
           alt={product.name}
         />
 

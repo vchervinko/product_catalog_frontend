@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { PageLayout } from '../components/PageLayout';
 
 const AccessoriesPage: FC = () => (
-  <main>Accessories</main>
+  <PageLayout title="Accessories" />
 );
 
 export default AccessoriesPage;

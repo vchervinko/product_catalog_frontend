@@ -4,7 +4,9 @@ import { Product } from '../../types/Product';
 export interface Props {
   total: number,
   limit: number,
-  cart: Product[]
+  products: Product[],
+  setProducts: (products: Product[]) => void,
+  cart: Product[],
   likedProducts: Product[],
   cartProductsCount: number,
   likedProductsCount: number,
@@ -16,6 +18,8 @@ export interface Props {
 export const ProductsContext = createContext<Props>({
   total: 0,
   limit: 0,
+  products: [],
+  setProducts: () => {/* empty */},
   likedProductsCount: 0,
   cartProductsCount: 0,
   cart: [],

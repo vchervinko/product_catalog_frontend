@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
 import { Navigation } from '../Navigation';
 import './BurgerMenu.scss';
@@ -14,11 +15,11 @@ interface Props {
 export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
   const { likedProductsCount, cartProductsCount } = useProductsContext();
 
-  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.75rem' } : {};
-  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.75rem' } : {};
+  const likedFontSize = getFontSize(likedProductsCount);
+  const cartFontSize = getFontSize(cartProductsCount);
 
   return (
-    <div
+    <nav
       className={classNames('BurgerMenu', {
         'BurgerMenu--opened': isMenuOpened
       })}
@@ -67,6 +68,6 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
           </NavLink>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };

@@ -13,6 +13,10 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  flex: 1 0 0; //! stretch to fill the remaining space
+}
+
 #root {
   display: flex;
   flex-direction: column;
