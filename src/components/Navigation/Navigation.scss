@@ -1,71 +1,65 @@
+@import "../../styles/utils/variables";
 @import "../../styles/utils/mixins";
-@import "../../styles/utils/_variables";
-@import "../../styles/utils/_placeholders";
+@import "../../styles/utils/placeholders";
 
-.nav {
+.Navigation {
+  height: 100%;
+  display: block;
+
   @include onTablet {
-    display: block;
-    height: 100%;
+    display: flex;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    height: 100%;
     align-items: center;
+    gap: 16px;
 
     @include onTablet {
       flex-direction: row;
+      gap: 32px;
+    }
+
+    @include onDesktop {
+      gap: 64px;
     }
   }
 
   &__item {
     height: 100%;
-
-    &:not(:last-child) {
-      margin-bottom: 16px;
-
-      @include onTablet {
-        margin-right: 32px;
-        margin-bottom: 0;
-      }
-
-      @include onDesktop {
-        margin-right: 64px;
-      }
-    }
   }
 
   &__link {
     @extend %uppercase;
-
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 0;
+    padding-block: 8px;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: $gray-secondary;
-    transition: color 0.3s ease;
+    transition: color $default-transition ease-in-out;
+
+    &:hover {
+      color: $gray-primary;
+    }
 
     &::after {
       content: "";
       position: absolute;
       bottom: 0;
-      height: 3px;
       width: 100%;
-      transition: background-color 0.3s ease;
+      height: 3px;
+      transition: background-color $default-transition ease-in-out;
     }
 
     &--active {
       color: $gray-primary;
+
       &::after {
         background: $gray-primary;
       }
-    }
-
-    &:hover {
-      color: $gray-primary;
     }
   }
 }

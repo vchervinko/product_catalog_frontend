@@ -1,6 +1,7 @@
-import { FC, ReactNode, memo, useCallback, useMemo, useState } from 'react';
+import { FC, ReactNode, memo, useCallback, useMemo } from 'react';
+import { findItemById } from '../../helpers/findItemById';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import { Product } from '../../types/Product';
-import { findItemById } from '../../utils/collectionsHelper/findItemById';
 import { Props as ProductContextProps, ProductsContext } from './ProductsContext';
 
 interface Props {
@@ -8,39 +9,44 @@ interface Props {
 }
 
 export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
-  const [cart, setCart] = useState<Product[]>([]);
-  const [likedProducts, setLikedProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
-  console.log(products);
+  const [cart, setCart] = useLocalStorage<Product[]>('cart', []);
+  const [likedProducts, setLikedProducts] = useLocalStorage<Product[]>(
+    'liked',
+    [],
+  );
 
   const addProductToCart = useCallback((product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart((currentCart: Product[]) => [...currentCart, product]);
   }, [cart]);
 
   const toggleLikeProduct = useCallback((product: Product) => {
-    setLikedProducts((prevLikedProducts) => {
-      const foundedProduct = findItemById(prevLikedProducts, product.id);
+    setLikedProducts((currentProducts: Product[]) => {
+      const foundProduct = findItemById(currentProducts, product.id);
 
-      if (foundedProduct) {
-        return prevLikedProducts
-          .filter(likedProduct => likedProduct.id !== product.id);
+      if (foundProduct) {
+        return currentProducts.filter(likedProduct => (
+          likedProduct.id !== product.id
+        ));
       }
 
-      return [...prevLikedProducts, product];
+      return [...currentProducts, product];
     });
   }, [likedProducts]);
 
   const value: ProductContextProps = useMemo(() => ({
-    total: 15,
-    limit: 2,
+    total: 64,
+    limit: 16,
     cart,
+    likedProducts,
     products,
     setProducts,
+    cartProductsCount: cart.length,
+    likedProductsCount: likedProducts.length,
     addProductToCart,
-    likedProducts,
     toggleLikeProduct,
 
-  }), [cart, likedProducts, products]);
+  }), [products, cart, likedProducts]);
 
   return (
     <ProductsContext.Provider value={value}>

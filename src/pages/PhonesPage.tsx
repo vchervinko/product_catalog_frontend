@@ -18,12 +18,11 @@ const products: Product[] = [
 
 const PhonesPage: FC = () => {
   const { setProducts } = useProductsContext();
-  setProducts(products);
-  console.log(products);
-  // useEffect(() => {
-  //   console.log(products);
-  //   setProducts(products);
-  // }, []);
+
+  useEffect(() => {
+    console.log(products);
+    setProducts(products);
+  }, []);
 
   return (
     <ProductsContextProvider>
