@@ -1,24 +1,24 @@
 import { FC, useState } from 'react';
 import './Cart.scss';
 import { Icon } from '../Icon';
-import { Product } from '../../types/Product';
 import { BASE_URL } from '../../helpers/fetchClient';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { useNavigate } from 'react-router';
+import { Product } from '../../types/Product';
 
-interface CartProps {
-  products: Product[];
-}
-
-export const Cart: FC<CartProps> = () => {
+export const Cart: FC = () => {
   const [cartItems, setCartItems] = useState<{ [id: string]: number }>({});
+
   const { cart, deleteProductFromCart } = useProductsContext();
 
-  const changeQuantity = (id: string, increment: number) => {
-    setCartItems((prevItems) => {
-      const currentQuantity = prevItems[id] || 1;
+  const navigate = useNavigate();
+
+  const decrementQuantity = (id: string, increment: number) => {
+    setCartItems((currentItems) => {
+      const currentQuantity = currentItems[id] || 1;
       const newQuantity = Math.max(currentQuantity + increment, 1);
 
-      return { ...prevItems, [id]: newQuantity };
+      return { ...currentItems, [id]: newQuantity };
     });
   };
 
@@ -28,75 +28,78 @@ export const Cart: FC<CartProps> = () => {
     return product.price * quantity;
   };
 
-  const handleGoBack = () => {
-    window.history.back();
+  const goBack = () => {
+    navigate(-1);
   };
 
   const totalPrice = cart.reduce(
-    (acc, product) => acc + calculateItemPrice(product),
-    0
+    (total, product) => total + calculateItemPrice(product), 0
   );
 
   const totalItems = cart.reduce(
-    (acc, product) => acc + (cartItems[product.id] || 1),
+    (total, product) => total + (cartItems[product.id] || 1),
     0
   );
 
   return (
-    <section className="cart">
-      <button onClick={handleGoBack} className="cart__button">
-        <div className="cart__goBackButton" />
+    <section className="Cart">
+      <button
+        className="Cart__button"
+        onClick={goBack}
+      >
+        <div className="Cart__go-back-button" />
         Back
       </button>
 
-      <p className="cart__title">Cart</p>
+      <h2 className="Cart__title">Cart</h2>
 
-      <div className="cart__content">
+      <div className="Cart__content">
         {cart.length === 0 ? (
-          <p className="cart__emptyMessage">Cart is empty now</p>
+          <h2 className="Cart__empty-message">
+            Cart is empty now
+          </h2>
         ) : (
-          <div className="cart__itemsList">
+          <div className="Cart__list">
             {cart.map((product) => {
               const quantity = cartItems[product.id] || 1;
+              const itemPrice = calculateItemPrice(product);
 
               return (
-                <div className="cart__item" key={product.id}>
-                  <div className="cart__row">
+                <div className="Cart__item" key={product.id}>
+                  <div className="Cart__row">
                     <button
-                      className="cart__closeButton"
+                      className="Cart__close-button"
                       onClick={() => deleteProductFromCart(product)}
-                    ></button>
+                    />
 
-                    <picture>
-                      <img
-                        src={`${BASE_URL}/${product.image}`}
-                        alt={product.name}
-                        className="cart__image"
-                      />
-                    </picture>
+                    <img
+                      src={`${BASE_URL}/${product.image}`}
+                      alt={product.name}
+                      className="Cart__image"
+                    />
 
-                    <p className="cart__description">{product.name}</p>
+                    <p className="Cart__description">{product.name}</p>
                   </div>
 
-                  <div className="cart__row">
-                    <div className="cart__quantitySelector">
+                  <div className="Cart__row">
+                    <div className="Cart__quantity-selector">
                       <button onClick={() =>
-                        changeQuantity(String(product.id), -1)
+                        decrementQuantity(String(product.id), -1)
                       }>
                         <Icon size={32} type="minus" />
                       </button>
 
-                      <span className="cart__quantity">{quantity}</span>
+                      <span className="Cart__quantity">{quantity}</span>
 
                       <button onClick={() =>
-                        changeQuantity(String(product.id), 1)
+                        decrementQuantity(String(product.id), 1)
                       }>
                         <Icon size={32} type="plus" />
                       </button>
                     </div>
 
-                    <p className="cart__price">
-                      ${calculateItemPrice(product)}
+                    <p className="Cart__price">
+                      {itemPrice}
                     </p>
                   </div>
                 </div>
@@ -106,16 +109,16 @@ export const Cart: FC<CartProps> = () => {
         )}
 
         {cart.length > 0 && (
-          <div className="cart__checkout">
-            <p className="cart__checkoutPrice">
+          <div className="Cart__checkout">
+            <p className="Cart__total-price">
               ${totalPrice}
             </p>
 
-            <p className="cart__total">
+            <p className="Cart__total">
               Total for {totalItems} items
             </p>
 
-            <button className="cart__checkoutButton">
+            <button className="Cart__checkout-button">
               Checkout
             </button>
           </div>

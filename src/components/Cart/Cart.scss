@@ -2,7 +2,7 @@
 @import "../../styles/utils/variables";
 @import "../../styles/utils/mixins";
 
-.cart {
+.Cart {
   padding-block: 24px;
 
   &__content {
@@ -19,28 +19,26 @@
 
   &__button {
     @extend %small-text;
-
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 24px;
-
     color: $gray-secondary;
     transition: color 0.3s;
-
-    @include onTablet {
-      margin-bottom: 16px;
-    }
 
     &:hover {
       color: $gray-primary;
     }
+
+    @include onTablet {
+      margin-bottom: 16px;
+    }
   }
 
-  &__goBackButton {
-    background-image: url(../../assets/icons/arrow-left-default.svg);
-    height: 16px;
+  &__go-back-button {
     width: 16px;
+    height: 16px;
+    background-image: url(../../assets/icons/arrow-left-default.svg);
   }
 
   &__title {
@@ -48,7 +46,7 @@
     margin-bottom: 32px;
   }
 
-  &__itemsList {
+  &__list {
     flex: 1;
     margin-bottom: 32px;
   }
@@ -89,7 +87,7 @@
     }
   }
 
-  &__closeButton {
+  &__close-button {
     background-image: url(../../assets/icons/Close.svg);
     height: 16px;
     width: 16px;
@@ -120,13 +118,18 @@
     line-height: 32px;
   }
 
-  &__quantitySelector {
+  &__quantity-selector {
     display: flex;
     justify-content: space-between;
   }
 
   &__price {
     @extend %h3;
+    width: 100%;
+
+    &::before {
+      content: "$";
+    }
 
     @include onTablet {
       width: 80px;
@@ -135,7 +138,6 @@
 
   &__checkout {
     @extend %body-text;
-
     margin-bottom: 32px;
     padding: 24px;
     width: auto;
@@ -144,10 +146,10 @@
     background: $white-color;
   }
 
-  &__checkoutPrice {
+  &__total-price {
     @extend %h2;
-    line-height: 41px;
     font-size: 32px;
+    line-height: 41px;
     text-align: center;
   }
 
@@ -159,9 +161,8 @@
     border-bottom: 1px solid $gray-elements;
   }
 
-  &__checkoutButton {
+  &__checkout-button {
     @extend %buttons;
-
     display: flex;
     height: 48px;
     width: 100%;
@@ -172,14 +173,14 @@
     background-color: $gray-primary;
     color: $white-color;
 
-    transition: box-shadow 0.3s;
+    transition: box-shadow $default-transition;
 
     &:hover {
       box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
     }
   }
 
-  &__emptyMessage {
+  &__empty-message {
     @extend %h2;
     color: $gray-secondary;
   }
