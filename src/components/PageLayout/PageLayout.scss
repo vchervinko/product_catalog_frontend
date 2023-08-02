@@ -1,0 +1,50 @@
+@import '../../styles/utils/placeholders';
+@import '../../styles/utils/mixins';
+
+.PageLayout {
+
+  padding: 25px 0 65px;
+
+  @include onDesktop  {
+    padding-bottom: 80px;
+  }
+
+  &__breadcrumbs {
+    margin-bottom: 24px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
+
+  &__title {
+    @extend %h1;
+    margin-bottom: 8px;
+  }
+
+  &__product-info {
+    margin-bottom: 32px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__actions {
+    margin-bottom: 24px;
+  }
+
+  &__catalog {
+    margin-bottom: 24px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+  }
+}
