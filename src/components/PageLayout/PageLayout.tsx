@@ -6,30 +6,32 @@ import { Pagination } from '../Pagination';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { ProductCatalogForm } from '../ProductCatalogForm';
 
-interface PageLayoutProps {
-  title: string
+interface Props {
+  title: string;
 }
 
-export const PageLayout: FC<PageLayoutProps> = ({ title }) => {
+export const PageLayout: FC<Props> = ({ title }) => {
   return (
     <Container>
-      <section className="page__breadcrumbs">
-        <Breadcrumbs />
-      </section>
+      <div className="PageLayout">
+        <section className="PageLayout__breadcrumbs">
+          <Breadcrumbs />
+        </section>
 
-      <h1 className="page__title">{title}</h1>
+        <h1 className="PageLayout__title">{title}</h1>
 
-      <section className="page__actions">
-        <ProductCatalogForm />
-      </section>
+        <section className="PageLayout__actions">
+          <ProductCatalogForm />
+        </section>
 
-      <section className="page__catalog">
-        <ProductCatalog />
-      </section>
+        <section className="PageLayout__catalog">
+          <ProductCatalog />
+        </section>
 
-      <section className="page__pagination">
-        <Pagination />
-      </section>
+        <section className="PageLayout__pagination">
+          <Pagination />
+        </section>
+      </div>
     </Container>
   );
 };

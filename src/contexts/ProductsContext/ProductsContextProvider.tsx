@@ -10,6 +10,8 @@ interface Props {
 export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   const [cart, setCart] = useState<Product[]>([]);
   const [likedProducts, setLikedProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  console.log(products);
 
   const addProductToCart = useCallback((product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
@@ -32,11 +34,13 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     total: 15,
     limit: 2,
     cart,
+    products,
+    setProducts,
     addProductToCart,
     likedProducts,
     toggleLikeProduct,
 
-  }), [cart, likedProducts]);
+  }), [cart, likedProducts, products]);
 
   return (
     <ProductsContext.Provider value={value}>
