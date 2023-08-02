@@ -1,4 +1,4 @@
-import { FC, ReactNode, memo, useCallback, useMemo } from 'react';
+import { FC, ReactNode, memo, useCallback, useMemo, useState } from 'react';
 import { findItemById } from '../../helpers/findItemById';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Product } from '../../types/Product';
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useLocalStorage<Product[]>('cart', []);
   const [likedProducts, setLikedProducts] = useLocalStorage<Product[]>(
     'liked',
@@ -38,11 +39,14 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     limit: 16,
     cart,
     likedProducts,
+    products,
+    setProducts,
     cartProductsCount: cart.length,
     likedProductsCount: likedProducts.length,
     addProductToCart,
     toggleLikeProduct,
-  }), [cart, likedProducts]);
+
+  }), [products, cart, likedProducts]);
 
   return (
     <ProductsContext.Provider value={value}>

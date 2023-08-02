@@ -1,7 +1,6 @@
 import { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import cardImage from '../../assets/images/category-phones.png';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { BASE_URL } from '../../helpers/fetchClient';
 import { findItemById } from '../../helpers/findItemById';
@@ -61,7 +60,7 @@ export const ProductCard: FC<Props> = memo((/* { product } */) => {
       <Link to={`/${product.category}/${product.itemId}`}>
         <img
           className="Card__image"
-          src={cardImage || `${BASE_URL}/${product.image}`} //! delete cardImage
+          src={`${BASE_URL}/uploads/${product.image}`}
           alt={product.name}
         />
 
