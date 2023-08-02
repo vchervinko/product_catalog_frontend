@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { Logo } from '../Logo';
@@ -23,8 +24,8 @@ export const Header: FC = () => {
     setIsMenuOpened((currentState) => !currentState);
   };
 
-  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.60rem' } : {};
-  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.60rem' } : {};
+  const likedFontSize = getFontSize(likedProductsCount);
+  const cartFontSize = getFontSize(cartProductsCount);
 
   return (
     <>

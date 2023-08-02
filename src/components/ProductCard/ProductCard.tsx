@@ -12,23 +12,7 @@ interface Props {
   product: Product;
 }
 
-// TODO: replace this mock with real data
-const product = {
-  'id': 120,
-  'category': 'phones',
-  'itemId': 'apple-iphone-13-pro-max-1tb-graphite',
-  'name': 'Apple iPhone 13 Pro Max 1TB Graphite',
-  'fullPrice': 1740,
-  'price': 1520,
-  'screen': '6.1\' OLED',
-  'capacity': '1TB',
-  'color': 'graphite',
-  'ram': '6GB',
-  'year': 2022,
-  'image': 'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
-};
-
-export const ProductCard: FC<Props> = memo((/* { product } */) => {
+export const ProductCard: FC<Props> = memo(({ product }) => {
   const {
     cart,
     likedProducts,
@@ -57,7 +41,7 @@ export const ProductCard: FC<Props> = memo((/* { product } */) => {
 
   return (
     <article className="Card">
-      <Link to={`/${product.category}/${product.id}`}>
+      <Link to={`${product.id}`}>
         <img
           className="Card__image"
           src={`${BASE_URL}/${product.image}`}

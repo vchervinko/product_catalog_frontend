@@ -1,29 +1,23 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { getProducts } from '../api/products';
 import { PageLayout } from '../components/PageLayout';
 import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
-import { Product } from '../types/Product';
-
-//TODO: replace this with a call to the API
-const products: Product[] = [
-  { id: 1},
-  { id: 2},
-  { id: 3},
-  { id: 4},
-  { id: 5},
-  { id: 6},
-  { id: 7},
-  { id: 8},
-  { id: 9},
-];
 
 const PhonesPage: FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
   const { setProducts } = useProductsContext();
 
+  //TODO: swap to getPhones
   useEffect(() => {
-    setProducts(products);
+    getProducts()
+      .then(setProducts)
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoaded(true));
   }, []);
 
-  return (
+  return !error && isLoaded && (
     <PageLayout title="Mobile phones"/>
   );
 };
