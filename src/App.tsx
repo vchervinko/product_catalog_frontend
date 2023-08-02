@@ -7,6 +7,7 @@ import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PhonesPage from './pages/PhonesPage';
 import TabletsPage from './pages/TabletsPage';
+import PhoneDetailsPage from './pages/PhoneDetailsPage/PhoneDetailsPage';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,12 @@ const router = createBrowserRouter([
       {
         path: 'phones',
         element: <PhonesPage />,
+        children: [
+          {
+            path: ':phoneId',
+            element: <PhoneDetailsPage />,
+          },
+        ],
       },
       {
         path: 'tablets',
