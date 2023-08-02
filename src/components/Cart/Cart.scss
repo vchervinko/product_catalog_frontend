@@ -3,14 +3,11 @@
 @import "../../styles/utils/mixins";
 
 .cart {
-  min-height: $mobileMainContentHeight;
-  padding: 24px 0;
-
-  @include onTablet {
-    min-height: $mainContentHeight;
-  }
+  padding-block: 24px;
 
   &__content {
+    display: block;
+
     @include onDesktop {
       display: flex;
       flex-direction: row;

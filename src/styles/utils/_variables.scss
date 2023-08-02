@@ -7,14 +7,3 @@ $white-color: #fff;
 $green-color: #27ae60;
 $red-color: #eb5757;
 $default-transition: 0.3s;
-
-$footerHeight: 100px;
-$mobileFooterHeight: 267px;
-
-$headerHeight: 64px;
-$mobileHeaderHeight: 48px;
-
-$mainContentHeight: calc(100vh - $headerHeight - $footerHeight);
-$mobileMainContentHeight: calc(
-  100vh - $mobileHeaderHeight - $mobileFooterHeight
-);

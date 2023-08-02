@@ -31,12 +31,12 @@ const router = createBrowserRouter([
         element: <AccessoriesPage />,
       },
       {
-        path: '*',
-        element: <NotFoundPage />,
-      },
-      {
         path: 'cart',
         element: <CartPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

@@ -1,12 +1,7 @@
 import { FC } from 'react';
-import { Container } from '../components/Container';
 
 const TabletsPage: FC = () => (
-  <main>
-    <Container>
-      Tablets Page
-    </Container>
-  </main>
+  <main>Tablets Page</main>
 );
 
 export default TabletsPage;
