@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { FC } from 'react';
-import './PhoneDetailsPage.scss';
+import './ProductPage.scss';
 
-const PhoneDetailsPage: FC = () => {
+const ProductPage: FC = () => {
 
   const product = {
     'id': 'apple-iphone-13-pro-max-1tb-graphite',
@@ -101,4 +101,4 @@ const PhoneDetailsPage: FC = () => {
   );
 };
 
-export default PhoneDetailsPage;
+export default ProductPage;
