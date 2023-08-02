@@ -52,68 +52,74 @@ export const Cart: FC<CartProps> = () => {
       <p className="cart__title">Cart</p>
 
       <div className="cart__content">
-        <div className="cart__itemsList">
-          {cart.map((product) => {
-            const quantity = cartItems[product.id] || 1;
+        {cart.length === 0 ? (
+          <p className="cart__emptyMessage">Cart is empty now</p>
+        ) : (
+          <div className="cart__itemsList">
+            {cart.map((product) => {
+              const quantity = cartItems[product.id] || 1;
 
-            return (
-              <div className="cart__item" key={product.id}>
-                <div className="cart__row">
-                  <button
-                    className="cart__closeButton"
-                    onClick={() => deleteProductFromCart(product)}
-                  ></button>
+              return (
+                <div className="cart__item" key={product.id}>
+                  <div className="cart__row">
+                    <button
+                      className="cart__closeButton"
+                      onClick={() => deleteProductFromCart(product)}
+                    ></button>
 
-                  <picture>
-                    <img
-                      src={`${BASE_URL}/${product.image}`}
-                      alt={product.name}
-                      className="cart__image"
-                    />
-                  </picture>
+                    <picture>
+                      <img
+                        src={`${BASE_URL}/${product.image}`}
+                        alt={product.name}
+                        className="cart__image"
+                      />
+                    </picture>
 
-                  <p className="cart__description">{product.name}</p>
-                </div>
-
-                <div className="cart__row">
-                  <div className="cart__quantitySelector">
-                    <button onClick={() =>
-                      changeQuantity(String(product.id), -1)
-                    }>
-                      <Icon size={32} type="minus" />
-                    </button>
-
-                    <span className="cart__quantity">{quantity}</span>
-
-                    <button onClick={() =>
-                      changeQuantity(String(product.id), 1)
-                    }>
-                      <Icon size={32} type="plus" />
-                    </button>
+                    <p className="cart__description">{product.name}</p>
                   </div>
 
-                  <p className="cart__price">
-                    ${calculateItemPrice(product)}
-                  </p>
+                  <div className="cart__row">
+                    <div className="cart__quantitySelector">
+                      <button onClick={() =>
+                        changeQuantity(String(product.id), -1)
+                      }>
+                        <Icon size={32} type="minus" />
+                      </button>
+
+                      <span className="cart__quantity">{quantity}</span>
+
+                      <button onClick={() =>
+                        changeQuantity(String(product.id), 1)
+                      }>
+                        <Icon size={32} type="plus" />
+                      </button>
+                    </div>
+
+                    <p className="cart__price">
+                      ${calculateItemPrice(product)}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
-        <div className="cart__checkout">
-          <p className="cart__checkoutPrice">
-            ${totalPrice}
-          </p>
+        {cart.length > 0 && (
+          <div className="cart__checkout">
+            <p className="cart__checkoutPrice">
+              ${totalPrice}
+            </p>
 
-          <p className="cart__total">
-            Total for {totalItems} items
-          </p>
+            <p className="cart__total">
+              Total for {totalItems} items
+            </p>
 
-          <button className="cart__checkoutButton">
-            Checkout
-          </button>
-        </div>
+            <button className="cart__checkoutButton">
+              Checkout
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

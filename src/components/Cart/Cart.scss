@@ -3,7 +3,12 @@
 @import "../../styles/utils/mixins";
 
 .cart {
+  min-height: $mobileMainContentHeight;
   padding: 24px 0;
+
+  @include onTablet {
+    min-height: $mainContentHeight;
+  }
 
   &__content {
     @include onDesktop {
@@ -175,5 +180,10 @@
     &:hover {
       box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
     }
+  }
+
+  &__emptyMessage {
+    @extend %h2;
+    color: $gray-secondary;
   }
 }

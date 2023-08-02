@@ -2,7 +2,7 @@
 @import "../../styles/utils/variables";
 
 .Header {
-  height: 48px;
+  height: $mobileHeaderHeight;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +10,7 @@
   border-block: 1px solid $gray-icons-placeholders;
 
   @include onDesktop {
-    height: 64px;
+    height: $headerHeight;
   }
 
   &__logo {
