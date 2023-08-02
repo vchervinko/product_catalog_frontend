@@ -20,6 +20,12 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     setCart((currentCart: Product[]) => [...currentCart, product]);
   }, [cart]);
 
+  const deleteProductFromCart = useCallback((product: Product) => {
+    setCart((currentCart: Product[]) =>
+      currentCart.filter((item) => item.id !== product.id)
+    );
+  }, []);
+
   const toggleLikeProduct = useCallback((product: Product) => {
     setLikedProducts((currentProducts: Product[]) => {
       const foundProduct = findItemById(currentProducts, product.id);
@@ -44,6 +50,7 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     cartProductsCount: cart.length,
     likedProductsCount: likedProducts.length,
     addProductToCart,
+    deleteProductFromCart,
     toggleLikeProduct,
 
   }), [products, cart, likedProducts]);

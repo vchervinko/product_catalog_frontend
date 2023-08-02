@@ -77,7 +77,6 @@ export const Header: FC = () => {
               </div>
             </NavLink>
           </div>
-
           <div className="icon">
             <NavLink
               className={({ isActive }) => classNames('icon__link', {

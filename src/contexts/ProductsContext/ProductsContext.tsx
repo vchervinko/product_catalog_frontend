@@ -11,6 +11,7 @@ export interface Props {
   cartProductsCount: number,
   likedProductsCount: number,
   addProductToCart: (product: Product) => void,
+  deleteProductFromCart: (product: Product) => void,
   toggleLikeProduct: (product: Product) => void,
 }
 
@@ -24,5 +25,6 @@ export const ProductsContext = createContext<Props>({
   cart: [],
   likedProducts: [],
   addProductToCart: () => {/* empty */},
+  deleteProductFromCart: () => {/* empty */},
   toggleLikeProduct: () => { /* empty */ },
 });
