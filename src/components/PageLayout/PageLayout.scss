@@ -1,0 +1,47 @@
+@import '../../styles/utils/placeholders';
+@import '../../styles/utils/mixins';
+
+.page__breadcrumbs {
+  padding-top: 25px;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+
+.page__title {
+  @extend %h1;
+  margin-bottom: 8px;
+}
+
+.page__product-info {
+  margin-bottom: 32px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.page__actions {
+  margin-bottom: 24px;
+}
+
+.page__catalog {
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.page__pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 65px;
+
+  @include onDesktop  {
+    margin-bottom: 80px;
+  }
+}

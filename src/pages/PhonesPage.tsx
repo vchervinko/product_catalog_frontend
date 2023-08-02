@@ -1,18 +1,11 @@
 import { FC } from 'react';
-import { Container } from '../components/Container';
-import { Pagination } from '../components/Pagination';
-import { ProductCard } from '../components/ProductCard';
 import { ProductsContextProvider } from '../contexts/ProductsContext/ProductsContextProvider';
+import { PageLayout } from '../components/PageLayout';
 
 const PhonesPage: FC = () => (
   <ProductsContextProvider>
     <main>
-      <Container>
-        Mobile phones
-
-        <ProductCard product={{id: 5}}/>
-        <Pagination />
-      </Container>
+      <PageLayout title="Mobile phones"/>
     </main>
   </ProductsContextProvider>
 );
