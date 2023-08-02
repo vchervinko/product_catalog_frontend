@@ -4,10 +4,10 @@ import { Product } from '../../types/Product';
 export interface Props {
   total: number,
   limit: number,
-  likedProductsCount: number,
-  cartProductsCount: number,
   cart: Product[]
   likedProducts: Product[],
+  cartProductsCount: number,
+  likedProductsCount: number,
   addProductToCart: (product: Product) => void,
   toggleLikeProduct: (product: Product) => void,
 }

@@ -34,13 +34,13 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   }, [likedProducts]);
 
   const value: ProductContextProps = useMemo(() => ({
-    total: 48,
+    total: 64,
     limit: 16,
     cart,
-    likedProductsCount: likedProducts.length,
-    cartProductsCount: cart.length,
-    addProductToCart,
     likedProducts,
+    cartProductsCount: cart.length,
+    likedProductsCount: likedProducts.length,
+    addProductToCart,
     toggleLikeProduct,
   }), [cart, likedProducts]);
 
