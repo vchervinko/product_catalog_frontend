@@ -20,7 +20,7 @@ const products: Product[] = [
 const PhonesPage: FC = () => {
   const { setProducts } = useProductsContext();
   const location = useLocation();
-  
+
   const isPhoneDetailsPage = location.pathname.startsWith('/phones/');
 
   useEffect(() => {
