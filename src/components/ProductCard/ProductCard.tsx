@@ -41,13 +41,15 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
 
   return (
     <article className="Card">
-      <Link to={`${product.id}`}>
+      <Link className="Card__link" to={`${product.id}`}>
         <img
           className="Card__image"
           src={`${BASE_URL}/${product.image}`}
           alt={product.name}
         />
+      </Link>
 
+      <Link to={`${product.id}`}>
         <h3 className="Card__title">
           {product.name}
         </h3>
