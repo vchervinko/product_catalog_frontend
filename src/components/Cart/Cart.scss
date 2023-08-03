@@ -182,7 +182,8 @@
   }
 
   &__empty-message {
-    @extend %h2;
+    @extend %h3;
+    font-family: Mont-Regular, "Helvetica Neue", sans-serif; // Overriding
     color: $gray-secondary;
   }
 }

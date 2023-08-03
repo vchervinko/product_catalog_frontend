@@ -7,9 +7,10 @@ import './PageLayout.scss';
 
 interface Props {
   title: string;
+  hasControls?: boolean;
 }
 
-export const PageLayout: FC<Props> = ({ title }) => {
+export const PageLayout: FC<Props> = ({ title, hasControls = true }) => {
   return (
     <div className="PageLayout">
       <section className="PageLayout__breadcrumbs">
@@ -18,17 +19,21 @@ export const PageLayout: FC<Props> = ({ title }) => {
 
       <h1 className="PageLayout__title">{title}</h1>
 
-      <section className="PageLayout__actions">
-        <ProductCatalogForm />
-      </section>
+      {hasControls && (
+        <section className="PageLayout__actions">
+          <ProductCatalogForm />
+        </section>
+      )}
 
       <section className="PageLayout__catalog">
         <ProductCatalog />
       </section>
 
-      <section className="PageLayout__pagination">
-        <Pagination />
-      </section>
+      {hasControls && (
+        <section className="PageLayout__pagination">
+          <Pagination />
+        </section>
+      )}
     </div>
   );
 };
