@@ -41,7 +41,11 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
 
   return (
     <article className="Card">
-      <Link className="Card__link" to={`${product.id}`}>
+      <Link
+        className="Card__link"
+        to={`${product.id}`}
+        state={{ productName: product.name }}
+      >
         <img
           className="Card__image"
           src={`${BASE_URL}/${product.image}`}
