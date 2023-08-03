@@ -7,6 +7,8 @@ const AccessoriesPage: FC = () => {
   const { products, setProducts } = useProductsContext();
 
   useEffect(() => {
+    document.title = 'Nice Gadgets | Accessories';
+
     getAccessories()
       .then(setProducts);
   }, [setProducts]);
