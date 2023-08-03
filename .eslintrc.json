@@ -5,8 +5,11 @@
   },
   "extends": [
     "eslint:recommended",
+    "airbnb-typescript",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "overrides": [
     {
@@ -16,9 +19,11 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "ignorePatterns": ["vite.config.ts"],
+  "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
@@ -103,6 +108,7 @@
       }
     ],
     "no-whitespace-before-property": "warn",
+    "import/no-unresolved": "error",
     "no-duplicate-imports": "error",
     "react/react-in-jsx-scope": "off",
     "no-multiple-empty-lines": [
@@ -114,5 +120,16 @@
     ],
     "react/prop-types": "off",
     "react/display-name": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
   }
 }
