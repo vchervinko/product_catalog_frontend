@@ -7,7 +7,7 @@ interface Props extends Omit<LinkProps, 'to'> {
 }
 
 export const SearchLink: FC<Props> = (
-  { children, params, ...props }
+  { children, params, ...props },
 ) => {
   const [searchParams] = useSearchParams();
 

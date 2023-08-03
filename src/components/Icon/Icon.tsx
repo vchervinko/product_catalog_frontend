@@ -2,10 +2,10 @@ import { FC } from 'react';
 import './Icon.scss';
 
 export type IconType = 'plus' | 'minus'
-  | 'like' | 'like-filled'
-  | 'arrow-up' | 'arrow-up-disabled'
-  | 'arrow-left' | 'arrow-left-disabled'
-  | 'arrow-right' | 'arrow-right-disabled';
+| 'like' | 'like-filled'
+| 'arrow-up' | 'arrow-up-disabled'
+| 'arrow-left' | 'arrow-left-disabled'
+| 'arrow-right' | 'arrow-right-disabled';
 
 interface Props {
   size: number;
