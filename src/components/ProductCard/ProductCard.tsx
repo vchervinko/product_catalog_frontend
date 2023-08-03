@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { BASE_URL } from '../../helpers/fetchClient';
 import { findItemById } from '../../helpers/findItemById';
+import { normalizeLink } from '../../helpers/normalizeLink';
 import { Product } from '../../types/Product';
 import { Icon } from '../Icon';
 import './ProductCard.scss';
@@ -37,14 +38,19 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
   const hasItemInCart = Boolean(findItemById(cart, product.id));
   const isLiked = Boolean(findItemById(likedProducts, product.id));
 
+  const productLink = normalizeLink(product.name);
+
   const likeButtonIcon = isLiked ? 'like-filled' : 'like';
 
   return (
     <article className="Card">
       <Link
         className="Card__link"
-        to={`${product.id}`}
-        state={{ productName: product.name }}
+        to={productLink}
+        state={{
+          productId: product.id,
+          productName: product.name
+        }}
       >
         <img
           className="Card__image"
