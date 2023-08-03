@@ -7,7 +7,7 @@ const PhonesPage: FC = () => {
   const { products, setProducts } = useProductsContext();
 
   useEffect(() => {
-    document.title = 'Nice Gadgets | Phones';
+    document.title = 'Phones | Nice Gadgets';
 
     getPhones()
       .then(setProducts);

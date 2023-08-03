@@ -3,7 +3,7 @@ import { Cart } from '../components/Cart';
 
 const CartPage: FC = () => {
   useEffect(() => {
-    document.title = 'Nice Gadgets | Cart';
+    document.title = 'Cart | Nice Gadgets';
   }, []);
 
   return (

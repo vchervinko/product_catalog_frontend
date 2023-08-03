@@ -3,7 +3,7 @@ import { NotFound } from '../components/NotFound';
 
 const NotFoundPage: FC = () => {
   useEffect(() => {
-    document.title = 'Nice Gadgets | Not Found';
+    document.title = 'Not Found | Nice Gadgets';
   }, []);
 
   return (

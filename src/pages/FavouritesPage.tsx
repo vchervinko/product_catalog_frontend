@@ -6,7 +6,7 @@ const FavouritesPage: FC = () => {
   const { likedProducts } = useProductsContext();
 
   useEffect(() => {
-    document.title = 'Nice Gadgets | Favourites';
+    document.title = 'Favourites | Nice Gadgets';
   }, []);
 
   return (
