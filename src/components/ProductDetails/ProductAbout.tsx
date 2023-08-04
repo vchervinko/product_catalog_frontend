@@ -4,7 +4,7 @@ import { ProductInfo } from '../../types/Product';
 
 const ProductAbout: FC<{ product: ProductInfo }> = ({ product }) => {
   const keysAfterDescription = Object.keys(product).slice(
-    Object.keys(product).indexOf('description') + 1
+    Object.keys(product).indexOf('description') + 1,
   );
 
   return (

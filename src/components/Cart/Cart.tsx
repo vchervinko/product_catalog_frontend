@@ -13,7 +13,7 @@ export const Cart: FC = () => {
 
   const navigate = useNavigate();
 
-  const decrementQuantity = (id: string, increment: number) => {
+  const decrementQuantity = (id: number, increment: number) => {
     setCartItems((currentItems) => {
       const currentQuantity = currentItems[id] || 1;
       const newQuantity = Math.max(currentQuantity + increment, 1);
@@ -33,11 +33,11 @@ export const Cart: FC = () => {
   };
 
   const totalPrice = cart.reduce((total, product) => (
-    total + calculateItemPrice(product)), 0
+    total + calculateItemPrice(product)), 0,
   );
 
   const totalItems = cart.reduce((total, product) => (
-    total + (cartItems[product.id] || 1)), 0
+    total + (cartItems[product.id] || 1)), 0,
   );
 
   return (
@@ -68,7 +68,7 @@ export const Cart: FC = () => {
                     <div className="Cart__row">
                       <button
                         className="Cart__close-button"
-                        onClick={() => deleteProductFromCart(product)}
+                        onClick={() => deleteProductFromCart(product.id)}
                       />
 
                       <img

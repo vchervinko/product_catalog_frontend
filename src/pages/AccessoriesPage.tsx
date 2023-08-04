@@ -1,8 +1,21 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { getAccessories } from '../api/accessories';
 import { PageLayout } from '../components/PageLayout';
+import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
 
-const AccessoriesPage: FC = () => (
-  <PageLayout title="Accessories" />
-);
+const AccessoriesPage: FC = () => {
+  const { products, setProducts } = useProductsContext();
+
+  useEffect(() => {
+    document.title = 'Accessories | Nice Gadgets';
+
+    getAccessories()
+      .then(setProducts);
+  }, [setProducts]);
+
+  return (
+    <PageLayout title="Accessories" data={products} />
+  );
+};
 
 export default AccessoriesPage;

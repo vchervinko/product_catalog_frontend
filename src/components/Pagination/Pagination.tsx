@@ -37,7 +37,7 @@ export const Pagination: FC = () => {
 
   return (
     <section className="Pagination">
-      <SearchLink params={{ page: `${previousPage.page}`}}>
+      <SearchLink params={{ page: `${previousPage.page}` }}>
         <Icon size={32} type={previousPage.type} />
       </SearchLink>
 

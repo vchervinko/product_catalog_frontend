@@ -1,9 +1,8 @@
 /* eslint-disable max-len */
 import { FC } from 'react';
-import './ProductPage.scss';
-import ProductDetails from '../../components/ProductDetails/ProductDetails';
-import ProductAbout from '../../components/ProductDetails/ProductAbout';
-import ProductRecomendedGoods from '../../components/ProductDetails/ProductRecomendedGoods';
+import ProductDetails from '../components/ProductDetails/ProductDetails';
+import ProductAbout from '../components/ProductDetails/ProductAbout';
+import ProductRecomendedGoods from '../components/ProductDetails/ProductRecomendedGoods';
 
 export const product = {
   'id': 'apple-iphone-13-pro-max-1tb-graphite',
@@ -19,28 +18,28 @@ export const product = {
     'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
     'img/phones/apple-iphone-13-pro-max/graphite/01.webp',
     'img/phones/apple-iphone-13-pro-max/graphite/02.webp',
-    'img/phones/apple-iphone-13-pro-max/graphite/03.webp'
+    'img/phones/apple-iphone-13-pro-max/graphite/03.webp',
   ],
   'description': [
     {
       'title': 'And then was a Pro',
       'text': [
         'A transformative triple-camera system that adds tons of capability without complexity.',
-        'An unprecedented leap in battery life. And a mind-blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.'
-      ]
+        'An unprecedented leap in battery life. And a mind-blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.',
+      ],
     },
     {
       'title': 'Camera',
       'text': [
-        'Meet the first triple-camera system to combine cutting-edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest-quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.'
-      ]
+        'Meet the first triple-camera system to combine cutting-edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest-quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.',
+      ],
     },
     {
       'title': 'Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.',
       'text': [
-        'iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.'
-      ]
-    }
+        'iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.',
+      ],
+    },
   ],
   'screen': '6.1 OLED (Super Retina XDR)',
   'resolution': '2556x1179',
@@ -48,7 +47,7 @@ export const product = {
   'ram': '6GB',
   'camera': '48 Mp + 12 Mp + 12MP + 12Mp',
   'zoom': 'Digital 5x, Optical 2x',
-  'cell': ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE', '5G']
+  'cell': ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE', '5G'],
 };
 
 const ProductPage: FC = () => {

@@ -21,7 +21,11 @@ const ProductDetails: FC<{ product: ProductInfo }> = ({ product }) => {
 
       <div className="product-images">
         {product.images.map((image, index) => (
-          <img key={index} src={image} alt={`Image ${index}`} />
+          <img
+            key={index}
+            src={image}
+            alt={image}
+          />
         ))}
       </div>
     </div>

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { scrollToTopDefault } from '../../helpers/ScrollToTop.tsx';
-import { externalLinks } from '../../helpers/constants/externalLinks.ts';
-import { Container } from '../Container/Container.tsx';
-import { Icon } from '../Icon/Icon.tsx';
+import { scrollToTopDefault } from '../../helpers/ScrollToTop';
+import { externalLinks } from '../../helpers/constants/externalLinks';
+import { Container } from '../Container';
+import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 import './Footer.scss';
 

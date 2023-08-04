@@ -21,7 +21,7 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
   return (
     <nav
       className={classNames('BurgerMenu', {
-        'BurgerMenu--opened': isMenuOpened
+        'BurgerMenu--opened': isMenuOpened,
       })}
     >
       <Navigation toggleMenu={toggleMenu} />

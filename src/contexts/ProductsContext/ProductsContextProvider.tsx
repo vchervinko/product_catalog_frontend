@@ -18,13 +18,13 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
 
   const addProductToCart = useCallback((product: Product) => {
     setCart((currentCart: Product[]) => [...currentCart, product]);
-  }, [cart]);
+  }, [setCart]);
 
-  const deleteProductFromCart = useCallback((product: Product) => {
-    setCart((currentCart: Product[]) =>
-      currentCart.filter((item) => item.id !== product.id)
-    );
-  }, []);
+  const deleteProductFromCart = useCallback((productId: number) => {
+    setCart((currentCart: Product[]) => currentCart.filter(
+      ({ id }) => id !== productId,
+    ));
+  }, [setCart]);
 
   const toggleLikeProduct = useCallback((product: Product) => {
     setLikedProducts((currentProducts: Product[]) => {
@@ -38,7 +38,7 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
 
       return [...currentProducts, product];
     });
-  }, [likedProducts]);
+  }, [setLikedProducts]);
 
   const value: ProductContextProps = useMemo(() => ({
     total: 64,
@@ -46,14 +46,20 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     cart,
     likedProducts,
     products,
-    setProducts,
     cartProductsCount: cart.length,
     likedProductsCount: likedProducts.length,
     addProductToCart,
     deleteProductFromCart,
     toggleLikeProduct,
-
-  }), [products, cart, likedProducts]);
+    setProducts,
+  }), [
+    cart,
+    likedProducts,
+    products,
+    addProductToCart,
+    deleteProductFromCart,
+    toggleLikeProduct,
+  ]);
 
   return (
     <ProductsContext.Provider value={value}>

@@ -49,7 +49,7 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
         to={productLink}
         state={{
           productId: product.id,
-          productName: product.name
+          productName: product.name,
         }}
       >
         <img

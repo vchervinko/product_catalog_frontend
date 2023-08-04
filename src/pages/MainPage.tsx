@@ -1,7 +1,13 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
-const MainPage: FC = () => (
-  <h1>Home Page</h1>
-);
+const MainPage: FC = () => {
+  useEffect(() => {
+    document.title = 'Nice Gadgets';
+  }, []);
+
+  return (
+    <h1>Home Page</h1>
+  );
+};
 
 export default MainPage;

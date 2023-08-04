@@ -7,10 +7,9 @@ import 'swiper/css/navigation';
 import './ProductRecomendedGoods.scss';
 import { Icon } from '../Icon';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { ProductInfo } from '../../types/Product';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 
-const ProductRecomendedGoods: FC<{ product: ProductInfo }> = () => {
+const ProductRecomendedGoods: FC = () => {
   const { products } = useProductsContext();
 
   return (
