@@ -1,0 +1,34 @@
+@import "../../styles/utils/placeholders";
+@import "../../styles/utils/variables";
+
+.Recomended-goods {
+  &__heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    @extend %h2;
+  }
+
+  &__slider-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__slider {
+    min-width: 1200px;
+    margin-bottom: 56px;
+
+    @include onTablet {
+      margin-bottom: 64px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 80px;
+    }
+  }
+}

@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import PhonesPage from './pages/PhonesPage';
 import TabletsPage from './pages/TabletsPage';
 import CartPage from './pages/CartPage';
+import ProductPage from './pages/ProductPage/ProductPage';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: 'phones',
         element: <PhonesPage />,
+      },
+      {
+        path: 'phones/:phoneId',
+        element: <ProductPage />,
       },
       {
         path: 'tablets',
