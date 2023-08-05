@@ -23,9 +23,14 @@ export const Cart: FC = () => {
 
   const totalQuantity = calculateQuantity(cart);
 
+  const hasItemsInCart = cart.length > 0;
+
   return (
     <section className="Cart">
-      <button className="Cart__breadcrumbs" onClick={() => navigate(-1)}>
+      <button
+        className="Cart__breadcrumbs"
+        onClick={() => navigate(-1)}
+      >
         <i className="Cart__go-back-arrow" />
 
         <span className="Cart__breadcrumbs-text">
@@ -35,14 +40,15 @@ export const Cart: FC = () => {
 
       <h2 className="Cart__title">Cart</h2>
 
-      <div className="Cart__content">
-        {cart.length === 0
-          ? (
-            <h2 className="Cart__empty-message">
-              Cart is empty now
-            </h2>
-          )
-          : (
+      {!hasItemsInCart && (
+        <h2 className="Cart__empty-message">
+          Cart is empty now
+        </h2>
+      )}
+
+      {hasItemsInCart && (
+        <>
+          <div className="Cart__content">
             <div className="Cart__list">
               {cart.map((product) => {
                 const itemPrice = calculatePrice(product);
@@ -108,9 +114,8 @@ export const Cart: FC = () => {
                 );
               })}
             </div>
-          )}
+          </div>
 
-        {cart.length > 0 && (
           <div className="Cart__checkout">
             <p className="Cart__total-price">
               {totalPrice}
@@ -124,8 +129,8 @@ export const Cart: FC = () => {
               Checkout
             </button>
           </div>
-        )}
-      </div>
+        </>
+      )}
     </section>
   );
 };

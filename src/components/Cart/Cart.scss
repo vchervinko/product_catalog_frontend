@@ -96,7 +96,6 @@
   }
 
   &__close-button {
-    position: relative;
     @include square(16px);
     padding: 10px;
     background-image: url(../../assets/icons/Close-disable.svg);
@@ -154,8 +153,8 @@
   }
 
   &__price {
-    display: inline;
     @extend %h3;
+    display: inline;
     width: max-content;
 
     @include onTablet {
