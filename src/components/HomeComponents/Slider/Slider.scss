@@ -1,0 +1,99 @@
+@import "../../../styles/utils/normalize";
+@import "../../../styles/utils/reset";
+@import "../../../styles/utils/variables";
+@import "../../../styles/utils/mixins";
+
+.mySwiper {
+  margin: 0 auto;
+
+  @include onTablet {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.Slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  @include onTablet {
+    width: 575px;
+    gap: 19px;
+  }
+
+  @include onDesktop {
+    width: 100%;
+    gap: 16px;
+  }
+
+  &__button {
+    display: none;
+    transition: box-shadow $default-transition ease;
+
+    @include onTablet {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid $gray-icons-placeholders;
+      width: 32px;
+      height: 190px;
+    }
+
+    @include onDesktop {
+      width: 32px;
+      height: 400px;
+    }
+  }
+
+  .prev {
+    &:hover {
+      box-shadow: -3px 0 3px 0 rgba(23, 32, 49, 0.4);
+    }
+    &:active {
+      box-shadow: none;
+    }
+  }
+  .next {
+    &:hover {
+      box-shadow: 3px 0 3px 0 rgba(23, 32, 49, 0.4);
+    }
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  &__image {
+    cursor: pointer;
+    height: 320px;
+
+    @include onTablet {
+      height: 190px;
+    }
+
+    @include onDesktop {
+      width: 1040px;
+      height: 400px;
+    }
+  }
+}
+
+.mySwiper {
+  display: block;
+  position: relative;
+  width: 320px;
+  height: 320px;
+
+  @include onTablet {
+    width: 490px;
+    height: 190px;
+    margin: 0 auto;
+  }
+
+  @include onDesktop {
+    width: 1040px;
+    height: 400px;
+  }
+}

@@ -6,6 +6,7 @@ export interface Props {
   limit: number,
   cart: CartProduct[],
   products: Product[],
+  promoProducts: Product[],
   isLoaded: boolean,
   likedProducts: Product[],
   cartProductsCount: number,
@@ -14,6 +15,7 @@ export interface Props {
   deleteProductFromCart: (productId: number, fully?: boolean) => void,
   toggleLikeProduct: (product: Product) => void,
   setProducts: (products: Product[]) => void,
+  setPromoProducts: (products: Product[]) => void,
   setIsLoaded: (isLoaded: boolean) => void,
 }
 
@@ -21,6 +23,7 @@ export const ProductsContext = createContext<Props>({
   total: 0,
   limit: 0,
   products: [],
+  promoProducts: [],
   isLoaded: false,
   cart: [],
   likedProducts: [],
@@ -30,5 +33,6 @@ export const ProductsContext = createContext<Props>({
   deleteProductFromCart: () => {/* empty */},
   toggleLikeProduct: () => { /* empty */ },
   setProducts: () => {/* empty */},
+  setPromoProducts: () => {/* empty */},
   setIsLoaded: () => {/* empty */},
 });
