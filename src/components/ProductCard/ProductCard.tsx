@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { BASE_URL } from '../../helpers/fetchClient';
 import { findItemById } from '../../helpers/findItemById';
-import { normalizeLink } from '../../helpers/normalizeLink';
 import { Product } from '../../types/Product';
 import { Icon } from '../Icon';
 import './ProductCard.scss';
@@ -39,8 +38,6 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
   const isLiked = Boolean(findItemById(likedProducts, product.id));
 
   const likeButtonIcon = isLiked ? 'like-filled' : 'like';
-
-  const productLink = normalizeLink(product.name);
 
   return (
     <article className="Card">
