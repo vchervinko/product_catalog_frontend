@@ -1,0 +1,68 @@
+@import "../../styles/utils/variables";
+@import "../../styles/utils/mixins";
+@import "../../styles/utils/placeholders";
+
+.flex {
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include onDesktop {
+      flex-direction: row;
+    }
+
+    @include onTablet {
+      flex-direction: row;
+    }
+
+    &-image {
+      @include onDesktop {
+        order: 2;
+        flex: 2;
+        flex-basis: 2ch;
+        margin-right: auto;
+      }
+      @include onTablet {
+        order: 2;
+        margin-right: auto;
+      }
+    }
+
+      &-selector--photo {
+        @include onDesktop {
+          flex: 1;
+          order: 1;
+        }
+        @include onTablet {
+          order: 1;
+        }
+      }
+
+      &-selector--details {
+
+        @include onDesktop {
+          flex: 2;
+          flex-basis: 2ch;
+          order: 3;
+        }
+        @include onTablet {
+          order: 3;
+
+        }
+      }
+      &-ID {
+        display: none;
+        @include onDesktop {
+          display:flex;
+          flex: 1;
+          order: 4;
+        }
+        @include onTablet {
+          order: 4;
+
+        }
+      }
+    }
+  }
