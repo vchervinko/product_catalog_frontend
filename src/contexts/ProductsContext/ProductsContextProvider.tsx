@@ -11,6 +11,7 @@ interface Props {
 
 export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [promoProducts, setPromoProducts] = useState<Product[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [cart, setCart] = useLocalStorage<CartProduct[]>('cart', []);
   const [likedProducts, setLikedProducts] = useLocalStorage<Product[]>(
@@ -82,6 +83,7 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     cart,
     likedProducts,
     products,
+    promoProducts,
     isLoaded,
     cartProductsCount: calculateQuantity(cart),
     likedProductsCount: likedProducts.length,
@@ -89,12 +91,14 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     deleteProductFromCart,
     toggleLikeProduct,
     setProducts,
+    setPromoProducts,
     setProductQuantity,
     setIsLoaded,
   }), [
     cart,
     likedProducts,
     products,
+    promoProducts,
     isLoaded,
     addProductToCart,
     deleteProductFromCart,

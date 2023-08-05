@@ -1,0 +1,51 @@
+@import "../../../styles/utils/placeholders";
+@import "../../../styles/utils/variables";
+
+.error {
+  margin: 0 auto;
+  font-family: "Mont-Bold", sans-serif;
+  font-size: 32px;
+  color: $gray-primary;
+  line-height: 41px;
+  text-align: center;
+}
+
+.Hot-prices {
+  &__heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    font-family: "Mont-Bold", sans-serif;
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: $gray-primary;
+
+    @include onTablet {
+      font-size: 32px;
+    }
+  }
+
+  &__slider-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__slider {
+    min-width: 1200px;
+    margin-bottom: 56px;
+
+    @include onTablet {
+      margin-bottom: 64px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 80px;
+    }
+  }
+}
+
