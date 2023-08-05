@@ -61,7 +61,7 @@ export const Cart: FC = () => {
                         onClick={() => deleteProductFromCart(product.id, true)}
                       />
 
-                      <Link to={`/${product.category}/${product.itemId}`}>
+                      <Link to="/">
                         <img
                           className="Cart__image"
                           src={`${BASE_URL}/${product.image}`}
@@ -71,7 +71,7 @@ export const Cart: FC = () => {
 
                       <Link
                         className="Cart__description"
-                        to={`/${product.category}/${product.itemId}`}
+                        to="/"
                       >
                         {product.name}
                       </Link>
