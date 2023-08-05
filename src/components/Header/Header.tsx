@@ -32,7 +32,7 @@ export const Header: FC = () => {
       <header className="Header">
         <div className="Header__branding">
           <div className="Header__logo">
-            <Logo height={28} />
+            <Logo type="header" />
           </div>
 
           <div className="Header__nav">
@@ -46,9 +46,8 @@ export const Header: FC = () => {
             type="button"
             onClick={() => toggleMenu()}
           >
-            <div
+            <i
               className={classNames('Header__menu-icon', {
-                'Header__menu-icon--closed': !isMenuOpened,
                 'Header__menu-icon--opened': isMenuOpened,
               })}
             />
@@ -66,10 +65,7 @@ export const Header: FC = () => {
               <div className="icon__image icon__image--Favourites">
                 {likedProductsCount > 0 && (
                   <div className="icon__counter">
-                    <span
-                      className="icon__counter-text"
-                      style={likedFontSize}
-                    >
+                    <span className="icon__counter-text" style={likedFontSize}>
                       {likedProductsCount < 100 ? likedProductsCount : '99+'}
                     </span>
                   </div>
@@ -88,10 +84,7 @@ export const Header: FC = () => {
               <div className="icon__image icon__image--Cart">
                 {cartProductsCount > 0 && (
                   <div className="icon__counter">
-                    <span
-                      className="icon__counter-text"
-                      style={cartFontSize}
-                    >
+                    <span className="icon__counter-text" style={cartFontSize}>
                       {cartProductsCount < 100 ? cartProductsCount : '99+'}
                     </span>
                   </div>

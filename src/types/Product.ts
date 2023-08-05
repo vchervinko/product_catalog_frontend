@@ -7,7 +7,9 @@ export interface Product {
   capacity: string;
   ram: string;
   year: number;
-  categoryId: number;
-  colorId: number;
   image: string;
+}
+
+export interface CartProduct extends Product {
+  quantity: number;
 }

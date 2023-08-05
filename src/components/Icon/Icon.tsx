@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import './Icon.scss';
 
-export type IconType = 'plus' | 'minus'
+export type IconType = 'like' | 'like-filled'
+| 'plus' | 'plus-disabled'
+| 'minus' | 'minus-disabled'
 | 'like' | 'like-filled'
 | 'arrow-up' | 'arrow-up-disabled'
 | 'arrow-left' | 'arrow-left-disabled'
@@ -13,12 +15,11 @@ interface Props {
 }
 
 export const Icon: FC<Props> = ({ size, type }) => (
-  <div
+  <i
     className={`Icon Icon--${type}`}
     style={{
       width: size,
       height: size,
     }}
-  >
-  </div>
+  />
 );

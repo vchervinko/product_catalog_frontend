@@ -1,24 +1,27 @@
 import { createContext } from 'react';
-import { Product } from '../../types/Product';
+import { CartProduct, Product } from '../../types/Product';
 
 export interface Props {
   total: number,
   limit: number,
+  cart: CartProduct[],
   products: Product[],
-  cart: Product[],
+  isLoaded: boolean,
   likedProducts: Product[],
   cartProductsCount: number,
   likedProductsCount: number,
   addProductToCart: (product: Product) => void,
-  deleteProductFromCart: (productId: number) => void,
+  deleteProductFromCart: (productId: number, fully?: boolean) => void,
   toggleLikeProduct: (product: Product) => void,
   setProducts: (products: Product[]) => void,
+  setIsLoaded: (isLoaded: boolean) => void,
 }
 
 export const ProductsContext = createContext<Props>({
   total: 0,
   limit: 0,
   products: [],
+  isLoaded: false,
   cart: [],
   likedProducts: [],
   cartProductsCount: 0,
@@ -27,4 +30,5 @@ export const ProductsContext = createContext<Props>({
   deleteProductFromCart: () => {/* empty */},
   toggleLikeProduct: () => { /* empty */ },
   setProducts: () => {/* empty */},
+  setIsLoaded: () => {/* empty */},
 });

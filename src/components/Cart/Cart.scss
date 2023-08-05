@@ -3,14 +3,15 @@
 @import "../../styles/utils/placeholders";
 
 .Cart {
-  padding-block: 24px;
+  padding: 25px 0 65px;
 
-  @include onTablet {
-    padding-block: 40px;
+  @include onDesktop {
+    padding-bottom: 80px;
   }
 
   &__content {
     display: block;
+    padding-block: 16px;
 
     @include onDesktop {
       display: flex;
@@ -21,33 +22,37 @@
     }
   }
 
-  &__button {
-    @extend %small-text;
+  &__breadcrumbs {
     margin-bottom: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
     color: $gray-secondary;
     transition: color $default-transition ease-in-out;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
 
     &:hover {
       color: $gray-primary;
     }
-
-    @include onTablet {
-      margin-bottom: 16px;
-    }
   }
 
-  &__go-back-button {
-    width: 16px;
-    height: 16px;
+  &__go-back-arrow {
+    @include square(16px);
     background-image: url(../../assets/icons/arrow-left-default.svg);
+  }
+
+  &__breadcrumbs-text {
+    @extend %small-text;
+    transform: translateY(1px); // fix for the text centering
   }
 
   &__title {
     @extend %h1;
-    margin-bottom: 32px;
+    margin-bottom: 8px;
   }
 
   &__list {
@@ -78,22 +83,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    gap: 28px;
 
     @include onTablet {
       margin-bottom: 0;
       justify-content: space-between;
     }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__close-button {
-    width: 16px;
-    height: 16px;
-    background-image: url(../../assets/icons/Close.svg);
+    position: relative;
+    @include square(16px);
+    padding: 10px;
+    background-image: url(../../assets/icons/Close-disable.svg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &:hover {
+      background-image: url(../../assets/icons/Close.svg);
+    }
   }
 
   &__image {
@@ -115,9 +128,9 @@
   }
 
   &__quantity {
+    @include square(34px);
     @extend %body-text;
-    width: 32px;
-    line-height: 32px;
+    line-height: 34px;
     text-align: center;
   }
 
@@ -126,16 +139,31 @@
     justify-content: space-between;
   }
 
-  &__price {
-    @extend %h3;
-    width: 100%;
+  &__modify-button {
+    border: 1px solid $gray-icons-placeholders;
+    transition: border-color $default-transition ease-in-out;
 
-    &::before {
-      content: "$";
+    &:hover {
+      border-color: $gray-primary;
     }
+
+    &:disabled {
+      border-color: $gray-elements;
+      pointer-events: none;
+    }
+  }
+
+  &__price {
+    display: inline;
+    @extend %h3;
+    width: max-content;
 
     @include onTablet {
       width: 80px;
+    }
+
+    &::before {
+      content: "$";
     }
   }
 
@@ -143,8 +171,7 @@
     @extend %body-text;
     margin-bottom: 32px;
     padding: 24px;
-    width: auto;
-    min-width: 256px;
+    min-width: 368px;
     border: 1px solid $gray-elements;
     background: $white-color;
   }
@@ -154,6 +181,10 @@
     font-size: 32px;
     line-height: 41px;
     text-align: center;
+
+    &::before {
+      content: "$";
+    }
   }
 
   &__total {

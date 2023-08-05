@@ -11,7 +11,7 @@ export const Footer: FC = () => (
   <footer className="Footer">
     <Container>
       <div className="Footer__content">
-        <Logo height={32} />
+        <Logo type="footer" />
 
         <ul className="Footer__list">
           {externalLinks.map(({ id, name, link }) => (
@@ -26,7 +26,9 @@ export const Footer: FC = () => (
         <button className="Footer__button" onClick={scrollToTopDefault}>
           Back to top
 
-          <Icon size={32} type="arrow-up" />
+          <span className="Footer__button-icon">
+            <Icon size={32} type="arrow-up" />
+          </span>
         </button>
       </div>
     </Container>

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
@@ -27,7 +27,7 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
       <Navigation toggleMenu={toggleMenu} />
       <div className="BurgerMenu__icons">
         <div className="icon">
-          <NavLink
+          <Link
             className="icon__link"
             to="favourites"
             onClick={() => toggleMenu(false)}
@@ -44,11 +44,11 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
                 </div>
               )}
             </div>
-          </NavLink>
+          </Link>
         </div>
 
         <div className="icon">
-          <NavLink
+          <Link
             className="icon__link"
             to="cart"
             onClick={() => toggleMenu(false)}
@@ -65,7 +65,7 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
                 </div>
               )}
             </div>
-          </NavLink>
+          </Link>
         </div>
       </div>
     </nav>

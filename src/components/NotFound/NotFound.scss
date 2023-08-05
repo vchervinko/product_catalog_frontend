@@ -9,11 +9,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $white-color;
+  background-color: $white-color;
 
   &__title {
     @extend %h1;
-    position: relative;
     margin-bottom: 10px;
     display: block;
     font-size: 200px;
@@ -47,7 +46,6 @@
 
   &__subtitle {
     @extend %h2;
-    position: relative;
     margin-bottom: 15px;
     text-transform: uppercase;
     color: $gray-primary;
@@ -58,26 +56,5 @@
     @extend %h4;
     margin-bottom: 20px;
     color: $gray-primary;
-  }
-
-  &__button {
-    @extend %buttons;
-    padding: 10px 25px;
-    display: inline-block;
-    color: $white-color;
-    background-color: $gray-primary;
-    transition: box-shadow $default-transition ease-in-out;
-
-    @include onTablet {
-      padding-inline: 35px;
-    }
-
-    @include onDesktop {
-      padding-inline: 45px;
-    }
-
-    &:hover {
-      box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
-    }
   }
 }

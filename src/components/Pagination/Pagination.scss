@@ -11,9 +11,8 @@
   }
 
   &__item {
+    @include square(32px);
     @extend %buttons;
-    width: 32px;
-    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +27,11 @@
       color: $white-color;
       background-color: $gray-primary;
       border-color: $gray-primary;
+    }
+
+    &--disabled {
+      cursor: default;
+      pointer-events: none;
     }
   }
 }

@@ -14,14 +14,14 @@ interface Props {
 }
 
 export const ProductCard: FC<Props> = memo(({ product }) => {
+  const navigate = useNavigate();
+
   const {
     cart,
     likedProducts,
     addProductToCart,
     toggleLikeProduct,
   } = useProductsContext();
-
-  const navigate = useNavigate();
 
   const addToCart = () => {
     addProductToCart(product);
@@ -31,16 +31,16 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
     navigate('/cart');
   };
 
-  const likeProduct = () => {
+  const toggleLike = () => {
     toggleLikeProduct(product);
   };
 
   const hasItemInCart = Boolean(findItemById(cart, product.id));
   const isLiked = Boolean(findItemById(likedProducts, product.id));
 
-  const productLink = normalizeLink(product.name);
-
   const likeButtonIcon = isLiked ? 'like-filled' : 'like';
+
+  const productLink = normalizeLink(product.name);
 
   return (
     <article className="Card">
@@ -60,19 +60,19 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
       </Link>
 
       <Link to={`${product.id}`}>
-        <h3 className="Card__title">
+        <h2 className="Card__title">
           {product.name}
-        </h3>
+        </h2>
       </Link>
 
       <section className="Card__prices">
-        <h2 className="Card__current-price">
+        <span className="Card__current-price">
           {product.price}
-        </h2>
+        </span>
 
-        <h2 className="Card__previous-price">
+        <span className="Card__previous-price">
           {product.fullPrice}
-        </h2>
+        </span>
       </section>
 
       <hr className="Card__divide-line"></hr>
@@ -128,7 +128,10 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
             </button>
           )}
 
-        <button onClick={likeProduct}>
+        <button
+          className="Card__actions-button Card__actions-button--like"
+          onClick={toggleLike}
+        >
           <Icon size={40} type={likeButtonIcon} />
         </button>
       </section>
