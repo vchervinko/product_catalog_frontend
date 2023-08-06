@@ -1,5 +1,5 @@
-@import "../../../styles/utils/placeholders";
-@import "../../../styles/utils/variables";
+@import "../../styles/utils/placeholders";
+@import "../../styles/utils/variables";
 
 .error {
   margin: 0 auto;
@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.New-models {
+.Hot-prices {
   &__heading {
     display: flex;
     flex-direction: row;
@@ -47,8 +47,4 @@
       margin-bottom: 80px;
     }
   }
-  &__loader {
-    margin: 0;
-  }
 }
-

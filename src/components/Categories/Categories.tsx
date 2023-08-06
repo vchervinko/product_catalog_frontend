@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import phones from '../../../assets/images/home-category-phones.png';
-import tablets from '../../../assets/images/home-category-tablets.png';
-import accessories from '../../../assets/images/home-category-accessories.png';
+import accessories from '../../assets/images/home-category-accessories.png';
+import phones from '../../assets/images/home-category-phones.png';
+import tablets from '../../assets/images/home-category-tablets.png';
 
 import './Categories.scss';
 
-const Categories: FC = () => {
+export const Categories: FC = () => {
   const categoriesData = [
     {
       imageSrc: phones,
@@ -62,5 +62,3 @@ const Categories: FC = () => {
     </section>
   );
 };
-
-export default Categories;

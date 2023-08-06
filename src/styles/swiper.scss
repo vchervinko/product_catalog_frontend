@@ -1,0 +1,20 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+
+.swiper-pagination {
+  position: static;
+
+  &-bullets &-bullet {
+    height: 5px;
+    width: 18px;
+    background-color: $gray-primary;
+    margin: 0 8px;
+    border-radius: 0;
+    transition: opacity $default-transition ease-in-out;
+
+    @include onDesktop {
+      height: 8px;
+      width: 20px;
+    }
+  }
+}

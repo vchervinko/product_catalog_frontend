@@ -1,33 +1,30 @@
 import { FC } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import './NewModels.scss';
-import { Icon } from '../../Icon';
-import { ProductCard } from '../../ProductCard/ProductCard';
-import {
-  useProductsContext,
-} from '../../../contexts/ProductsContext/useProductsContext';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useErrorContext } from '../../contexts/ErrorContext/useErrorContext';
+import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { Icon } from '../Icon';
+import { Loader } from '../Loader';
+import { ProductCard } from '../ProductCard/ProductCard';
+import './HotPrices.scss';
 
-import { Loader } from '../../Loader';
-import { useErrorContext } from '../../../contexts/ErrorContext/useErrorContext';
-
-const NewModels: FC = () => {
-  const { products, isLoaded } = useProductsContext();
+export const HotPrices: FC = () => {
+  const { promoProducts, isLoaded } = useProductsContext();
   const { error } = useErrorContext();
 
   const shouldShowLoader = !error && !isLoaded;
   const shouldShowError = Boolean(error);
 
   return (
-    <div className="New-models">
-      <div className="New-models__heading">
-        <h2 className="New-models__title">
-          Brand new models
+    <div className="Hot-prices">
+      <div className="Hot-prices__heading">
+        <h2 className="Hot-prices__title">
+          Hot prices
         </h2>
-        <div className="New-models__slider-buttons">
+        <div className="Hot-prices__slider-buttons">
           <button className="prev__model">
             <Icon size={32} type="arrow-left" />
           </button>
@@ -38,13 +35,13 @@ const NewModels: FC = () => {
         </div>
       </div>
 
-      <div className="New-models__slider">
+      <div className="Hot-prices__slider">
         {shouldShowError && (
           <h2 className="error">Something went wrong!</h2>
         )}
 
         {shouldShowLoader && (
-          <span className="New-models__loader">
+          <span className="PageLayout__loader">
             <Loader size={30} />
           </span>
         )}
@@ -58,7 +55,7 @@ const NewModels: FC = () => {
           }}
           modules={[Pagination, Navigation]}
         >
-          {products.map((product) => (
+          {promoProducts.map((product) => (
             <SwiperSlide key={product.id}>
               <ProductCard product={product} />
             </SwiperSlide>
@@ -68,5 +65,3 @@ const NewModels: FC = () => {
     </div>
   );
 };
-
-export default NewModels;

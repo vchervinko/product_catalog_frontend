@@ -1,34 +1,31 @@
 import { FC, useCallback, useEffect } from 'react';
-import HomePage from '../components/HomePage/HomePage';
 import { getPhones } from '../api/phones';
-import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
+import { Main } from '../components/Main';
 import { useErrorContext } from '../contexts/ErrorContext/useErrorContext';
-import { getPromoProducts } from '../helpers/getPromoProducts';
+import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
 import { getNewestProducts } from '../helpers/getNewestProducts';
+import { getPromoProducts } from '../helpers/getPromoProducts';
 
 const MainPage: FC = () => {
   const { setProducts, setPromoProducts, setIsLoaded } = useProductsContext();
   const { setError, clearError } = useErrorContext();
 
   useEffect(() => {
-    document.title = 'Home | Nice Gadgets';
+    document.title = 'Nice Gadgets';
   }, []);
 
-  const loadNewmodels = useCallback(async () => {
+  const loadNewModels = useCallback(async () => {
     try {
       clearError();
       setIsLoaded(false);
 
-      const productsFromServer = await getPhones(); //<---- змінити
+      const productsFromServer = await getPhones(); //<---- fix
 
       const newest = getNewestProducts(productsFromServer);
-
-      setProducts(newest);
-
       const promo = getPromoProducts(productsFromServer);
 
+      setProducts(newest);
       setPromoProducts(promo);
-
     } catch (error: unknown) {
       setError(error as Error);
     } finally {
@@ -37,11 +34,11 @@ const MainPage: FC = () => {
   }, [setProducts, setPromoProducts, setIsLoaded, setError, clearError]);
 
   useEffect(() => {
-    loadNewmodels();
-  }, [loadNewmodels]);
+    loadNewModels();
+  }, [loadNewModels]);
 
   return (
-    <HomePage />
+    <Main />
   );
 };
 

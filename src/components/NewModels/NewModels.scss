@@ -1,32 +1,25 @@
-@import "../../../styles/utils/placeholders";
-@import "../../../styles/utils/variables";
+@import "../../styles/utils/placeholders";
+@import "../../styles/utils/variables";
 
 .error {
+  @extend %h2;
   margin: 0 auto;
-  font-family: "Mont-Bold", sans-serif;
-  font-size: 32px;
-  color: $gray-primary;
-  line-height: 41px;
+  color: $gray-secondary;
   text-align: center;
 }
 
-.Hot-prices {
+.New-models {
   &__heading {
+    margin-bottom: 24px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 24px;
   }
 
   &__title {
-    font-family: "Mont-Bold", sans-serif;
-    font-size: 22px;
+    @extend %h2;
     margin-bottom: 24px;
     color: $gray-primary;
-
-    @include onTablet {
-      font-size: 32px;
-    }
   }
 
   &__slider-buttons {
@@ -47,5 +40,8 @@
       margin-bottom: 80px;
     }
   }
-}
 
+  &__loader {
+    margin: 0;
+  }
+}
