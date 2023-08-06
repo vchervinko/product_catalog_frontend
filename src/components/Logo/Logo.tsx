@@ -1,19 +1,18 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/icons/Logo.svg';
 import './Logo.scss';
 
 interface Props {
-  height: number;
+  type: 'header' | 'footer';
 }
 
-export const Logo: FC<Props> = ({ height }) => (
-  <Link to="/" className="Logo">
-    <img
-      className="Logo__image"
-      style={{ height }}
-      src={logo}
-      alt="Nice Gadgets logo"
-    />
-  </Link>
+export const Logo: FC<Props> = ({ type }) => (
+  <Link
+    className={classNames('Logo', {
+      'Logo--header': type === 'header',
+      'Logo--footer': type === 'footer',
+    })}
+    to="/"
+  />
 );

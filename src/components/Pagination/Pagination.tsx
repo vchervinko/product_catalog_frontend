@@ -37,7 +37,12 @@ export const Pagination: FC = () => {
 
   return (
     <section className="Pagination">
-      <SearchLink params={{ page: `${previousPage.page}`}}>
+      <SearchLink
+        className={classNames('Pagination__item', {
+          'Pagination__item--disabled': isFirstPage,
+        })}
+        params={{ page: `${previousPage.page}` }}
+      >
         <Icon size={32} type={previousPage.type} />
       </SearchLink>
 
@@ -56,7 +61,12 @@ export const Pagination: FC = () => {
         ))}
       </ul>
 
-      <SearchLink params={{ page: `${nextPage.page}` }}>
+      <SearchLink
+        className={classNames('Pagination__item', {
+          'Pagination__item--disabled': isLastPage,
+        })}
+        params={{ page: `${nextPage.page}` }}
+      >
         <Icon size={32} type={nextPage.type} />
       </SearchLink>
     </section>

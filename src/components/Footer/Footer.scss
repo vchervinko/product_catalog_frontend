@@ -58,4 +58,13 @@
       color: $gray-primary;
     }
   }
+
+  &__button-icon {
+    border: 1px solid $gray-icons-placeholders;
+    transition: border-color $default-transition;
+  }
+}
+
+.Footer__button:hover .Footer__button-icon {
+  border-color: $gray-primary;
 }

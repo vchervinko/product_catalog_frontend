@@ -12,31 +12,15 @@ interface Props {
   product: Product;
 }
 
-// TODO: replace this mock with real data
-const product = {
-  'id': 120,
-  'category': 'phones',
-  'itemId': 'apple-iphone-13-pro-max-1tb-graphite',
-  'name': 'Apple iPhone 13 Pro Max 1TB Graphite',
-  'fullPrice': 1740,
-  'price': 1520,
-  'screen': '6.1\' OLED',
-  'capacity': '1TB',
-  'color': 'graphite',
-  'ram': '6GB',
-  'year': 2022,
-  'image': 'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
-};
+export const ProductCard: FC<Props> = memo(({ product }) => {
+  const navigate = useNavigate();
 
-export const ProductCard: FC<Props> = memo((/* { product } */) => {
   const {
     cart,
     likedProducts,
     addProductToCart,
     toggleLikeProduct,
   } = useProductsContext();
-
-  const navigate = useNavigate();
 
   const addToCart = () => {
     addProductToCart(product);
@@ -46,7 +30,7 @@ export const ProductCard: FC<Props> = memo((/* { product } */) => {
     navigate('/cart');
   };
 
-  const likeProduct = () => {
+  const toggleLike = () => {
     toggleLikeProduct(product);
   };
 
@@ -57,26 +41,31 @@ export const ProductCard: FC<Props> = memo((/* { product } */) => {
 
   return (
     <article className="Card">
-      <Link to={`/${product.category}/${product.itemId}`}>
+      <Link
+        className="Card__link"
+        to="/"
+      >
         <img
           className="Card__image"
-          src={`${BASE_URL}/uploads/${product.image}`}
+          src={`${BASE_URL}/${product.image}`}
           alt={product.name}
         />
+      </Link>
 
-        <h3 className="Card__title">
+      <Link to="/">
+        <h2 className="Card__title">
           {product.name}
-        </h3>
+        </h2>
       </Link>
 
       <section className="Card__prices">
-        <h2 className="Card__current-price">
+        <span className="Card__current-price">
           {product.price}
-        </h2>
+        </span>
 
-        <h2 className="Card__previous-price">
+        <span className="Card__previous-price">
           {product.fullPrice}
-        </h2>
+        </span>
       </section>
 
       <hr className="Card__divide-line"></hr>
@@ -132,7 +121,10 @@ export const ProductCard: FC<Props> = memo((/* { product } */) => {
             </button>
           )}
 
-        <button onClick={likeProduct}>
+        <button
+          className="Card__actions-button Card__actions-button--like"
+          onClick={toggleLike}
+        >
           <Icon size={40} type={likeButtonIcon} />
         </button>
       </section>

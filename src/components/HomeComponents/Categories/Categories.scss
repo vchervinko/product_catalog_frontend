@@ -1,0 +1,120 @@
+@import "../../../styles/utils/fonts";
+@import "../../../styles/utils/normalize";
+@import "../../../styles/utils/reset";
+@import "../../../styles/utils/mixins";
+@import "../../../styles/utils/variables";
+
+.Categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Mont-Bold", sans-serif;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  }
+
+  &__title {
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: $gray-primary;
+
+    @include onTablet {
+      font-size: 32px;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+
+    @include onTablet {
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+  .image__container {
+    width: 288px;
+    height: 288px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: box-shadow $default-transition ease-in-out;
+
+    @include onTablet {
+      width: 188px;
+      height: 188px;
+    }
+    @include onDesktop {
+      width: 368px;
+      height: 368px;
+    }
+
+    &:hover {
+      box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
+    }
+  }
+  &__image--phones {
+    height: 365px;
+    object-position: 5px 30px;
+    background-color: $category-phones-bg;
+
+    @include onTablet {
+      height: 250px;
+      object-position: 0 18px;
+    }
+    @include onDesktop {
+      height: 465px;
+      object-position: 6px 36px;
+    }
+  }
+  &__image--tablets {
+    height: 415px;
+    background-color: $gray-secondary;
+    object-position: 25px 20px;
+
+    @include onTablet {
+      height: 270px;
+      object-position: 15px 10px;
+    }
+    @include onDesktop {
+      height: 540px;
+      object-position: 25px 20px;
+    }
+  }
+  &__image--accessories {
+    height: 600px;
+    background-color: $category-accessories-bg;
+    object-position: -240px -300px;
+
+    @include onTablet {
+      height: 400px;
+      object-position: -162px -203px;
+    }
+    @include onDesktop {
+      height: 716px;
+      object-position: -278px -348px;
+    }
+  }
+
+  &__productName {
+    font-family: "Mont-Regular", sans-serif;
+    font-size: 20px;
+    color: $gray-primary;
+  }
+
+  &__info {
+    font-family: "Mont-Regular", sans-serif;
+    font-size: 14px;
+    color: $gray-secondary;
+    line-height: 21px;
+  }
+}

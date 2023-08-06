@@ -3,6 +3,9 @@
 @import "../../styles/utils/placeholders";
 
 .Card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   padding: 32px;
   border: 1px solid $gray-elements;
   transition: box-shadow $default-transition ease-in-out;
@@ -11,15 +14,20 @@
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
   }
 
+  &__link {
+    flex: 1 0 0;
+  }
+
   &__image {
     margin: 0 auto 24px;
     width: 100%;
-    height: 130px;
+    max-height: 130px;
+    display: block;
     object-fit: contain;
     object-position: center;
 
     @include onTablet {
-      height: 196px;
+      max-height: 196px;
     }
   }
 
@@ -43,9 +51,9 @@
   }
 
   &__previous-price {
-    font-family: Mont-Regular, "Helvetica Neue", sans-serif; // Overriding
-    color: $gray-secondary;
+    font-family: Mont-Regular, "Helvetica Neue", sans-serif;
     text-decoration: line-through;
+    color: $gray-secondary;
 
     &::before {
       content: "$";
@@ -54,6 +62,8 @@
 
   &__divide-line {
     margin-bottom: 8px;
+    width: 100%;
+    height: 1px;
     color: $gray-elements;
   }
 
@@ -83,19 +93,20 @@
 
   &__actions {
     display: flex;
+    gap: 8px;
   }
 
   &__actions-button {
-    margin-right: 8px;
+    @extend %buttons;
     height: 40px;
-    flex: 1 0 0;
     border: 1px solid transparent;
-    transition: box-shadow $default-transition ease-in-out;
-    cursor: pointer;
+    transition: border-color $default-transition ease-in-out;
 
     &--add {
+      flex: 1 0 0;
       color: $white-color;
       background-color: $gray-primary;
+      transition: box-shadow $default-transition ease-in-out;
 
       &:hover {
         box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
@@ -103,12 +114,21 @@
     }
 
     &--added {
+      flex: 1 0 0;
       color: $green-color;
       background-color: $white-color;
       border-color: $gray-elements;
 
       &:hover {
-        box-shadow: inset 1px 1px 3px 0 rgba(23, 32, 49, 0.4);
+        border-color: $gray-primary;
+      }
+    }
+
+    &--like {
+      border-color: $gray-elements;
+
+      &:hover {
+        border-color: $gray-primary;
       }
     }
   }

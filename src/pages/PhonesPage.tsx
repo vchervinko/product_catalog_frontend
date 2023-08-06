@@ -1,40 +1,42 @@
-import { FC, useEffect } from 'react';
-import { ProductsContextProvider } from '../contexts/ProductsContext/ProductsContextProvider';
+import { FC, useCallback, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { getPhones } from '../api/phones';
 import { PageLayout } from '../components/PageLayout';
+import { useErrorContext } from '../contexts/ErrorContext/useErrorContext';
 import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
-import { Product } from '../types/Product';
-import { Outlet, useLocation } from 'react-router';
-
-const products: Product[] = [
-  { id: 1},
-  { id: 2},
-  { id: 3},
-  { id: 4},
-  { id: 5},
-  { id: 6},
-  { id: 7},
-  { id: 8},
-  { id: 9},
-];
 
 const PhonesPage: FC = () => {
-  const { setProducts } = useProductsContext();
-  const location = useLocation();
+  const { setProducts, setIsLoaded } = useProductsContext();
+  const { setError, clearError } = useErrorContext();
 
-  const isPhoneDetailsPage = location.pathname.startsWith('/phones/');
+  const { search } = useLocation();
 
   useEffect(() => {
-    console.log(products);
-    setProducts(products);
+    document.title = 'Phones | Nice Gadgets';
   }, []);
 
+  const loadPhones = useCallback(async () => {
+    try {
+      clearError();
+      setIsLoaded(false);
+
+      const phonesFromServer = await getPhones();
+
+      setProducts(phonesFromServer);
+    } catch (error: unknown) {
+      setError(error as Error);
+    } finally {
+      setIsLoaded(true);
+    }
+  }, [setProducts, setIsLoaded, setError, clearError]);
+
+  useEffect(() => {
+    loadPhones();
+  }, [search, loadPhones]);
+
   return (
-    <ProductsContextProvider>
-      <main>
-        {!isPhoneDetailsPage && <PageLayout title="Mobile phones"/>}
-        <Outlet />
-      </main>
-    </ProductsContextProvider>
+    <PageLayout title="Mobile phones" loadData={loadPhones} />
+
   );
 };
 

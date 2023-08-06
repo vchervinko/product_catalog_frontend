@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
+import { Icon } from '../Icon';
 import { Navigation } from '../Navigation';
 import './BurgerMenu.scss';
 
@@ -14,24 +16,26 @@ interface Props {
 export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
   const { likedProductsCount, cartProductsCount } = useProductsContext();
 
-  const cartFontSize = cartProductsCount > 9 ? { fontSize: '0.75rem' } : {};
-  const likedFontSize = likedProductsCount > 9 ? { fontSize: '0.75rem' } : {};
+  const likedFontSize = getFontSize(likedProductsCount);
+  const cartFontSize = getFontSize(cartProductsCount);
 
   return (
-    <div
+    <nav
       className={classNames('BurgerMenu', {
-        'BurgerMenu--opened': isMenuOpened
+        'BurgerMenu--opened': isMenuOpened,
       })}
     >
       <Navigation toggleMenu={toggleMenu} />
       <div className="BurgerMenu__icons">
         <div className="icon">
-          <NavLink
+          <Link
             className="icon__link"
             to="favourites"
             onClick={() => toggleMenu(false)}
           >
-            <div className="icon__image icon__image--Favourites">
+            <div className="icon__image icon__image">
+              <Icon type="like" size={18} />
+
               {likedProductsCount > 0 && (
                 <div className="icon__counter">
                   <span
@@ -43,16 +47,18 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
                 </div>
               )}
             </div>
-          </NavLink>
+          </Link>
         </div>
 
         <div className="icon">
-          <NavLink
+          <Link
             className="icon__link"
             to="cart"
             onClick={() => toggleMenu(false)}
           >
-            <div className="icon__image icon__image--Cart">
+            <div className="icon__image">
+              <Icon type="cart" size={18} />
+
               {cartProductsCount > 0 && (
                 <div className="icon__counter">
                   <span
@@ -64,9 +70,9 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
                 </div>
               )}
             </div>
-          </NavLink>
+          </Link>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };

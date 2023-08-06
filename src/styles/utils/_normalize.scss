@@ -1,19 +1,25 @@
-@import "placeholders";
+@import "./variables";
+@import "./placeholders";
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  @extend %body-text;
   scroll-behavior: smooth;
+  color: $gray-primary;
 }
 
 body {
   overflow-x: hidden;
 }
 
+main {
+  flex: 1 0 0; //! stretch to fill the remaining space
+}
+
 #root {
+  @extend %body-text;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

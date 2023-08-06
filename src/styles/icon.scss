@@ -44,30 +44,16 @@
   }
 
   &__image {
+    @include square($header-icon-size);
     position: relative;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    &--Favourites {
-      background-image: url("/src/assets/icons/Favourites.svg");
-    }
-
-    &--Cart {
-      background-image: url("/src/assets/icons/Cart.svg");
-    }
   }
 
   &__counter {
+    @include square($header-icon-size);
     @extend %small-text;
     position: absolute;
     top: -50%;
     right: -50%;
-    width: 16px;
-    height: 16px;
     display: flex;
     justify-content: center;
     align-items: center;

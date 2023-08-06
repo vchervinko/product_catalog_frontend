@@ -1,0 +1,48 @@
+@import "../../styles/utils/normalize";
+@import "../../styles/utils/reset";
+@import "../../styles/utils/mixins";
+
+
+.Home__promo {
+  margin-bottom: 56px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+}
+
+.Home__new {
+  margin-bottom: 57px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+}
+
+.Home__categories {
+  margin-bottom: 56px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+}
+
+.Home__hot {
+  margin-bottom: 64px;
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+}

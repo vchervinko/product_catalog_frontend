@@ -1,15 +1,16 @@
-import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { FC } from 'react';
+import { Product } from '../../types/Product';
 import { ProductCard } from '../ProductCard';
 import './ProductCatalog.scss';
 
-export const ProductCatalog = () => {
-  const { products } = useProductsContext();
+interface Props {
+  products: Product[];
+}
 
-  return (
-    <section className="ProductCatalog">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </section>
-  );
-};
+export const ProductCatalog: FC<Props> = ({ products }) => (
+  <section className="ProductCatalog">
+    {products.map((product) => (
+      <ProductCard key={product.id} product={product} />
+    ))}
+  </section>
+);

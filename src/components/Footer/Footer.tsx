@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { externalLinks } from '../../helpers/constants/externalLinks.ts';
-import { scrollToTop } from '../../helpers/scrollToTop.ts';
-import { Container } from '../Container/Container.tsx';
-import { Icon } from '../Icon/Icon.tsx';
+import { scrollToTopDefault } from '../../helpers/ScrollToTop';
+import { externalLinks } from '../../helpers/constants/externalLinks';
+import { Container } from '../Container';
+import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 import './Footer.scss';
 
@@ -11,7 +11,7 @@ export const Footer: FC = () => (
   <footer className="Footer">
     <Container>
       <div className="Footer__content">
-        <Logo height={32} />
+        <Logo type="footer" />
 
         <ul className="Footer__list">
           {externalLinks.map(({ id, name, link }) => (
@@ -23,10 +23,12 @@ export const Footer: FC = () => (
           ))}
         </ul>
 
-        <button className="Footer__button" onClick={scrollToTop}>
+        <button className="Footer__button" onClick={scrollToTopDefault}>
           Back to top
 
-          <Icon size={32} type="arrow-up" />
+          <span className="Footer__button-icon">
+            <Icon size={32} type="arrow-up" />
+          </span>
         </button>
       </div>
     </Container>

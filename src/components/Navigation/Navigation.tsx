@@ -15,7 +15,7 @@ export const Navigation: FC<Props> = ({ toggleMenu }) => (
         <li key={id} className="Navigation__item">
           <NavLink
             className={({ isActive }) => classNames('Navigation__link', {
-              'Navigation__link--active': isActive
+              'Navigation__link--active': isActive,
             })}
             to={path}
             onClick={() => toggleMenu && toggleMenu(false)}
