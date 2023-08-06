@@ -1,12 +1,11 @@
-@import "variables";
-@import "placeholders";
+@import "./variables";
+@import "./placeholders";
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  @extend %body-text;
   scroll-behavior: smooth;
   color: $gray-primary;
 }
@@ -20,6 +19,7 @@ main {
 }
 
 #root {
+  @extend %body-text;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

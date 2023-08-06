@@ -4,12 +4,12 @@ export interface FontSize {
 
 export function getFontSize(count: number): FontSize {
   if (count > 99) {
-    return { fontSize: '0.65rem' };
+    return { fontSize: '0.55rem' };
   }
 
   if (count > 9) {
-    return { fontSize: '0.75rem' };
+    return { fontSize: '0.675rem' };
   }
 
-  return { fontSize: '0.85rem' };
+  return { fontSize: '0.80rem' };
 }

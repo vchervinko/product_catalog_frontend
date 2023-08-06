@@ -97,6 +97,7 @@
   }
 
   &__actions-button {
+    @extend %buttons;
     height: 40px;
     border: 1px solid transparent;
     transition: border-color $default-transition ease-in-out;
