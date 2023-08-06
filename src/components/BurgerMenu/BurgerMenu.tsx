@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
+import { Icon } from '../Icon';
 import { Navigation } from '../Navigation';
 import './BurgerMenu.scss';
 
@@ -32,7 +33,9 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
             to="favourites"
             onClick={() => toggleMenu(false)}
           >
-            <div className="icon__image icon__image--Favourites">
+            <div className="icon__image icon__image">
+              <Icon type="like" size={18} />
+
               {likedProductsCount > 0 && (
                 <div className="icon__counter">
                   <span
@@ -53,7 +56,9 @@ export const BurgerMenu: FC<Props> = ({ isMenuOpened, toggleMenu }) => {
             to="cart"
             onClick={() => toggleMenu(false)}
           >
-            <div className="icon__image icon__image--Cart">
+            <div className="icon__image">
+              <Icon type="cart" size={18} />
+
               {cartProductsCount > 0 && (
                 <div className="icon__counter">
                   <span

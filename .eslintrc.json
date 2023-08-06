@@ -108,6 +108,7 @@
       }
     ],
     "no-whitespace-before-property": "warn",
+    "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "error",
     "no-duplicate-imports": "error",
     "react/react-in-jsx-scope": "off",

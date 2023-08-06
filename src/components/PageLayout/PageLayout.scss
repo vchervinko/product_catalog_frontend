@@ -46,8 +46,10 @@
   }
 
   &__loader {
-    // @include square(100%);
-    height: 300px;
+    min-height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__catalog {

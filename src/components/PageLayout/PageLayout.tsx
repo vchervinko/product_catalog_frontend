@@ -15,13 +15,14 @@ interface Props {
 }
 
 export const PageLayout: FC<Props> = ({ title, loadData }) => {
-  const { total, products, isLoaded } = useProductsContext();
+  const { total, limit, products, isLoaded } = useProductsContext();
   const { error } = useErrorContext();
 
   const shouldShowError = Boolean(error);
   const shouldShowLoader = !error && !isLoaded;
   const shouldShowEmptyMessage = !error && isLoaded && products.length === 0;
   const shouldShowCatalog = !error && isLoaded && products.length > 0;
+  const shouldShowPagination = (total / limit) > 1;
 
   return (
     <div className="PageLayout">
@@ -69,9 +70,11 @@ export const PageLayout: FC<Props> = ({ title, loadData }) => {
         </section>
       )}
 
-      <section className="PageLayout__pagination">
-        <Pagination />
-      </section>
+      {shouldShowPagination && (
+        <section className="PageLayout__pagination">
+          <Pagination />
+        </section>
+      )}
     </div>
   );
 };

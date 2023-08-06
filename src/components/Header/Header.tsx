@@ -5,6 +5,7 @@ import { useProductsContext } from '../../contexts/ProductsContext/useProductsCo
 import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
+import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 import { Navigation } from '../Navigation/Navigation';
 import './Header.scss';
@@ -62,7 +63,9 @@ export const Header: FC = () => {
               })}
               to="favourites"
             >
-              <div className="icon__image icon__image--Favourites">
+              <div className="icon__image">
+                <Icon type="like" size={18} />
+
                 {likedProductsCount > 0 && (
                   <div className="icon__counter">
                     <span className="icon__counter-text" style={likedFontSize}>
@@ -81,7 +84,9 @@ export const Header: FC = () => {
               })}
               to="cart"
             >
-              <div className="icon__image icon__image--Cart">
+              <div className="icon__image">
+                <Icon type="cart" size={18} />
+
                 {cartProductsCount > 0 && (
                   <div className="icon__counter">
                     <span className="icon__counter-text" style={cartFontSize}>

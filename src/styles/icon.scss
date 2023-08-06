@@ -46,18 +46,6 @@
   &__image {
     @include square($header-icon-size);
     position: relative;
-    display: flex;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    &--Favourites {
-      background-image: url("/src/assets/icons/Favourites.svg");
-    }
-
-    &--Cart {
-      background-image: url("/src/assets/icons/Cart.svg");
-    }
   }
 
   &__counter {
