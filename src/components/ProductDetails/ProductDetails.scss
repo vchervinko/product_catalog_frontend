@@ -1,0 +1,208 @@
+@import "../../styles/utils/variables";
+@import "../../styles/utils/mixins";
+@import "../../styles/utils/placeholders";
+
+.product {
+
+  .decorative-line {
+    height: 1px;
+    width: 100%;
+    background-color: $gray-elements;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin-bottom: 32px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+
+    @extend %h2
+  }
+
+  &__img {
+    margin: 0 auto 24px;
+    width: 287px;
+    height: 287px;
+    object-fit: contain;
+    object-position: center;
+
+    @include onDesktop {
+      width: 464px;
+      height: 464px;
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include onDesktop {
+        display: block;
+      }
+
+      @include onTablet {
+        display: block;
+      }
+    }
+  }
+
+
+  &__image-selector {
+    margin: 30px 0 40px;
+
+    &--container {
+      justify-content: center;
+      max-width: 290px;
+      margin: 0 auto;
+      padding: 0;
+
+      @include onDesktop {
+        max-width: 464px;
+      }
+    }
+
+    &--list {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+
+      @include onDesktop {
+        flex-direction: column;
+      }
+
+      @include onTablet {
+        flex-direction: column;
+      }
+
+      object-fit: contain;
+      object-position: center;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &--item {
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    &--photo {
+      height: 50px;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+
+      @include onDesktop {
+        height: 80px;
+      }
+
+      &-button {
+        border: 1px solid $gray-elements;
+        transition: all 0.3s ease;
+
+        &:hover,
+        &--active {
+          transform: scale(1.1);
+          filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        &--active {
+          transform: scale(1);
+          filter: none;
+          border: 1px solid $gray-primary;
+        }
+      }
+    }
+  }
+
+  &__details-selector {
+    &--container {
+      margin-bottom: 24px;
+    }
+
+    &--title {
+      @extend %small-text;
+      color: $gray-secondary;
+
+      &-ID {
+        display: flex;
+
+        @include onDesktop {
+          display: none;
+        }
+      }
+    }
+
+    &--titleContainer {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+
+    &--list {
+      display: flex;
+    }
+
+    &--item {
+      padding-right: 8px;
+
+      &-button {
+        width: 36px;
+        height: 36px;
+        border: 1px solid $gray-elements;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease, border 0.3s ease;
+
+        &:not(.product__details-selector--item-button--active):hover {
+          border: 1px solid $gray-secondary;
+        }
+
+        &--active {
+          transform: scale(1);
+          border: 1px solid $gray-primary;
+          filter: none;
+        }
+      }
+
+    }
+
+    &--color-button {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &--capacity-button {
+      width: 56px;
+      height: 32px;
+      border: 1px solid $gray-icons-placeholders;
+
+      &--active {
+        background-color: $gray-primary;
+        color: $white-color;
+      }
+    }
+  }
+
+  &__section {
+
+    &-actions {
+      margin-bottom: 32px;
+    }
+
+    &-techspechs {
+      margin-bottom: 56px;
+    }
+  }
+}
