@@ -34,8 +34,6 @@ export const PageLayout: FC<Props> = ({ title, loadData }) => {
         {title}
       </h1>
 
-      <ProductFilters />
-
       {shouldShowError && (
         <div className="PageLayout__error">
           <Error loadData={loadData} />

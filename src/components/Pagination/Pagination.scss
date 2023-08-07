@@ -1,13 +1,36 @@
 @import "../../styles/utils/variables";
+@import "../../styles/utils/mixins";
 @import "../../styles/utils/placeholders";
 
 .Pagination {
   display: flex;
+  width: 100%;
   gap: 16px;
+  justify-content: space-around;
+
+  @include onTablet {
+    justify-content: center;
+  }
 
   &__list {
-    display: flex;
+    display: none;
     gap: 8px;
+
+    @include onTablet {
+      display: flex;
+    }
+  }
+
+  &__mobile-page {
+    @extend %h4;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include onTablet {
+      display: none;
+    }
   }
 
   &__item {

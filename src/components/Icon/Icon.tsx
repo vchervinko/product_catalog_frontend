@@ -81,7 +81,10 @@ export const Icon: FC<Props> = ({ children, size, type }) => {
   return (
     <div
       className={`Icon Icon--${type}`}
-      style={{ width: size, height: size }}
+      style={{
+        width: size,
+        height: size,
+      }}
     >
       {children}
       <ReactSVG src={getIcon()} />

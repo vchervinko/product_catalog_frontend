@@ -61,6 +61,10 @@ export const Pagination: FC = () => {
         ))}
       </ul>
 
+      <div className="Pagination__mobile-page">
+        {`${currentPage} / ${pages[pages.length - 1]}`}
+      </div>
+
       <SearchLink
         className={classNames('Pagination__item', {
           'Pagination__item--disabled': isLastPage,
