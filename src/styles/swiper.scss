@@ -2,13 +2,13 @@
 @import "./utils/mixins";
 
 .swiper-pagination {
-  position: static;
+  display: block;
 
   &-bullets &-bullet {
-    height: 5px;
+    margin-block: 8px;
     width: 18px;
+    height: 5px;
     background-color: $gray-primary;
-    margin: 0 8px;
     border-radius: 0;
     transition: opacity $default-transition ease-in-out;
 

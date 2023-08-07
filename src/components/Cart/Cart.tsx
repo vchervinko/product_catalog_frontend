@@ -67,7 +67,7 @@ export const Cart: FC = () => {
                       <Icon size={16} type="close-disabled" />
                     </button>
 
-                    <Link to="/">
+                    <Link to={`/${product.category}/${product.itemId}`}>
                       <img
                         className="Cart__image"
                         src={`${BASE_URL}/${product.image}`}
@@ -77,7 +77,7 @@ export const Cart: FC = () => {
 
                     <Link
                       className="Cart__description"
-                      to="/"
+                      to={`/${product.category}/${product.itemId}`}
                     >
                       {product.name}
                     </Link>

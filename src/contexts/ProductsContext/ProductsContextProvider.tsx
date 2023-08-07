@@ -11,8 +11,10 @@ interface Props {
 
 export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [promoProducts, setPromoProducts] = useState<Product[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useLocalStorage('limit', 16);
+  const [sortBy, setSortBy] = useLocalStorage('sortBy', 'newest');
   const [cart, setCart] = useLocalStorage<CartProduct[]>('cart', []);
   const [likedProducts, setLikedProducts] = useLocalStorage<Product[]>(
     'liked',
@@ -51,18 +53,6 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
     });
   }, [setCart]);
 
-  const setProductQuantity = useCallback((
-    productId: number,
-    quantity: number,
-  ) => {
-    setCart((currentCart: CartProduct[]) => {
-      return currentCart.map((item) => item.id === productId
-        ? { ...item, quantity }
-        : item,
-      );
-    });
-  }, [setCart]);
-
   const toggleLikeProduct = useCallback((product: Product) => {
     setLikedProducts((currentProducts: Product[]) => {
       const foundProduct = findItemById(currentProducts, product.id);
@@ -78,32 +68,37 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   }, [setLikedProducts]);
 
   const value: ProductContextProps = useMemo(() => ({
-    total: 64,
-    limit: 16,
+    total,
+    limit,
+    sortBy,
     cart,
     likedProducts,
     products,
-    promoProducts,
     isLoaded,
     cartProductsCount: calculateQuantity(cart),
     likedProductsCount: likedProducts.length,
+    setTotal,
+    setLimit,
+    setSortBy,
     addProductToCart,
     deleteProductFromCart,
     toggleLikeProduct,
     setProducts,
-    setPromoProducts,
-    setProductQuantity,
     setIsLoaded,
   }), [
+    total,
+    limit,
+    sortBy,
     cart,
     likedProducts,
     products,
-    promoProducts,
     isLoaded,
+    setTotal,
+    setLimit,
+    setSortBy,
     addProductToCart,
     deleteProductFromCart,
     toggleLikeProduct,
-    setProductQuantity,
   ]);
 
   return (

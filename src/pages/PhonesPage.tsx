@@ -1,12 +1,21 @@
 import { FC, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { getPhones } from '../api/phones';
+import { getProducts } from '../api/product';
 import { PageLayout } from '../components/PageLayout';
 import { useErrorContext } from '../contexts/ErrorContext/useErrorContext';
 import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
 
 const PhonesPage: FC = () => {
-  const { setProducts, setIsLoaded } = useProductsContext();
+  const {
+    sortBy,
+    limit,
+    setProducts,
+    setIsLoaded,
+    setTotal,
+    setLimit,
+    setSortBy,
+  } = useProductsContext();
+
   const { setError, clearError } = useErrorContext();
 
   const { search } = useLocation();
@@ -20,19 +29,45 @@ const PhonesPage: FC = () => {
       clearError();
       setIsLoaded(false);
 
-      const phonesFromServer = await getPhones();
+      const searchParams = new URLSearchParams(search);
 
-      setProducts(phonesFromServer);
+      const paramsPage = Number(searchParams.get('page')) || 1;
+      const paramsLimit = Number(searchParams.get('limit')) || limit;
+      const paramsSortBy = searchParams.get('sortBy') || sortBy;
+
+      setLimit(limit);
+      setSortBy(sortBy);
+
+      const tabletsFromServer = await getProducts(
+        'phones',
+        paramsPage,
+        paramsLimit,
+        paramsSortBy as 'newest' | 'highestPrice' | 'lowestPrice',
+      );
+
+      setTotal(tabletsFromServer.count);
+      setProducts(tabletsFromServer.data);
     } catch (error: unknown) {
       setError(error as Error);
     } finally {
       setIsLoaded(true);
     }
-  }, [setProducts, setIsLoaded, setError, clearError]);
+  }, [
+    search,
+    limit,
+    sortBy,
+    setProducts,
+    setIsLoaded,
+    setError,
+    clearError,
+    setTotal,
+    setLimit,
+    setSortBy,
+  ]);
 
   useEffect(() => {
     loadPhones();
-  }, [search, loadPhones]);
+  }, [loadPhones]);
 
   return (
     <PageLayout title="Mobile phones" loadData={loadPhones} />

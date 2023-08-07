@@ -8,8 +8,8 @@ import FavouritesPage from './pages/FavouritesPage';
 import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PhonesPage from './pages/PhonesPage';
+import ProductPage from './pages/ProductPage';
 import TabletsPage from './pages/TabletsPage';
-import ProductPage from './pages/ProductPage/ProductPage';
 
 const router = createBrowserRouter([
   {
@@ -37,10 +37,22 @@ const router = createBrowserRouter([
       {
         path: 'tablets',
         element: <TabletsPage />,
+        children: [
+          {
+            path: ':tabletId',
+            element: <ProductPage />,
+          },
+        ],
       },
       {
         path: 'accessories',
         element: <AccessoriesPage />,
+        children: [
+          {
+            path: ':accessoryId',
+            element: <ProductPage />,
+          },
+        ],
       },
       {
         path: 'favourites',

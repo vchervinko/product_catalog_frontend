@@ -3,7 +3,6 @@
 @import "../../styles/utils/placeholders";
 
 .PageLayout {
-  position: relative;
   padding: 25px 0 65px;
   height: 100%;
 
@@ -46,7 +45,7 @@
   }
 
   &__loader {
-    min-height: 50%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

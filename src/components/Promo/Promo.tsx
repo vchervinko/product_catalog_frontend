@@ -13,6 +13,9 @@ export const Promo: FC = () => (
       <Slider />
     </div>
 
-    <div className="swiper-pagination" />
+    <div
+      style={{ position: 'static' }}
+      className="swiper-pagination"
+    />
   </section>
 );

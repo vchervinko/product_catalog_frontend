@@ -5,6 +5,7 @@
 
 .NotFound {
   height: 100%;
+  padding-block: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,8 +16,8 @@
     @extend %h1;
     margin-bottom: 10px;
     display: block;
-    font-size: 200px;
-    line-height: inherit;
+    font-size: 100px;
+    line-height: 100px;
     text-align: center;
     background: -webkit-repeating-linear-gradient(
       -45deg,
@@ -36,11 +37,13 @@
     animation: animate-404 10s ease-in-out infinite;
 
     @include onTablet {
-      font-size: 250px;
+      font-size: 200px;
+      line-height: 200px;
     }
 
     @include onDesktop {
       font-size: 300px;
+      line-height: 300px;
     }
   }
 

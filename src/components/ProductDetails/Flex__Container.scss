@@ -3,7 +3,6 @@
 @import "../../styles/utils/placeholders";
 
 .flex {
-
   &__container {
     display: flex;
     flex-direction: column;
@@ -30,39 +29,41 @@
       }
     }
 
-      &-selector--photo {
-        @include onDesktop {
-          flex: 1;
-          order: 1;
-        }
-        @include onTablet {
-          order: 1;
-        }
+    &-selector--photo {
+      @include onDesktop {
+        flex: 1;
+        order: 1;
       }
-
-      &-selector--details {
-
-        @include onDesktop {
-          flex: 2;
-          flex-basis: 2ch;
-          order: 3;
-        }
-        @include onTablet {
-          order: 3;
-
-        }
+      @include onTablet {
+        order: 1;
       }
-      &-ID {
-        display: none;
-        @include onDesktop {
-          display:flex;
-          flex: 1;
-          order: 4;
-        }
-        @include onTablet {
-          order: 4;
+    }
 
-        }
+    &-selector--details {
+
+      @include onDesktop {
+        flex: 2;
+        flex-basis: 2ch;
+        order: 3;
+      }
+      @include onTablet {
+        order: 3;
+
+      }
+    }
+
+    &-ID {
+      display: none;
+
+      @include onDesktop {
+        display: flex;
+        flex: 1;
+        order: 4;
+      }
+      @include onTablet {
+        order: 4;
+
       }
     }
   }
+}

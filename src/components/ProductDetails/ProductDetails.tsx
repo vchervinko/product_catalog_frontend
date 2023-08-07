@@ -1,63 +1,21 @@
 /* eslint-disable max-len */
+import classNames from 'classnames';
 import { FC, useState } from 'react';
-import './ProductDetails.scss';
-import './Flex__Container.scss';
-import { ProductInfo } from '../../types/Product';
-import cn from 'classnames';
-import { Icon } from '../Icon';
-import { findItemById } from '../../helpers/findItemById';
 import { useNavigate } from 'react-router';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+import { findItemById } from '../../helpers/findItemById';
+import { ProductInfo } from '../../types/Product';
+import { Icon } from '../Icon';
+import './Flex__Container.scss';
+import './ProductDetails.scss';
 
-const product: ProductInfo = {
-  'id': '908432948',
-  'namespaceId': 'apple-iphone-13-pro-max',
-  'name': 'Apple iPhone 13 Pro Max 1TB Graphite',
-  'capacityAvailable': ['128GB', '256GB', '512GB', '1TB'],
-  'capacity': '1TB',
-  'priceRegular': 1700,
-  'priceDiscount': 1540,
-  'colorsAvailable': ['graphite', 'gold', 'sierrablue'],
-  'color': 'graphite',
-  'images': [
-    '/src/assets/images/category-phones.png',
-    '/src/assets/images/category-phones.png',
-    '/src/assets/images/category-phones.png',
-    '/src/assets/images/category-phones.png',
-  ],
-  'description': [
-    {
-      'title': 'And then was a Pro',
-      'text': [
-        'A transformative triple-camera system that adds tons of capability without complexity.',
-        'An unprecedented leap in battery life. And a mind-blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.'
-      ]
-    },
-    {
-      'title': 'Camera',
-      'text': [
-        'Meet the first triple-camera system to combine cutting-edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest-quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.'
-      ]
-    },
-    {
-      'title': 'Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.',
-      'text': [
-        'iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.'
-      ]
-    }
-  ],
-  'screen': '6.1 OLED (Super Retina XDR)',
-  'resolution': '2556x1179',
-  'processor': 'Apple A16 Bionic',
-  'ram': '6GB',
-  'camera': '48 Mp + 12 Mp + 12MP + 12Mp',
-  'zoom': 'Digital 5x, Optical 2x',
-  'cell': ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE', '5G']
-};
+interface Props {
+  product: ProductInfo;
+}
 
-const ProductDetails: FC<{ product: ProductInfo }> = () => {
+export const ProductDetails: FC<Props> = ({ product }) => {
   const [selectedCapacity, setSelectedCapacity] = useState(product.capacity);
-  const [selectedColor, setSelectedColor] = useState(product.color);
+  const [selectedColor, setSelectedColor] = useState(product.colorId);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const colorCodes: Record<string, string> = {
@@ -108,7 +66,7 @@ const ProductDetails: FC<{ product: ProductInfo }> = () => {
             <img
               className="product__img"
               src={product.images[selectedImageIndex]}
-              alt={`Product Image ${selectedImageIndex + 1}`}
+              alt={`Product ${selectedImageIndex + 1}`}
             />
           </div>
 
@@ -116,12 +74,12 @@ const ProductDetails: FC<{ product: ProductInfo }> = () => {
             <div className="product__image-selector--container">
               <ul className="product__image-selector--list">
                 {product.images.map(
-                  (image, index) => (
+                  (image: string, index: number) => (
                     <li
                       key={`image-${index}`}
                       className="product__image-selector--item">
                       <button
-                        className={cn('product__image-selector--photo-button', {
+                        className={classNames('product__image-selector--photo-button', {
                           'product__image-selector--photo-button--active': selectedImageIndex === index,
                         })}
                         onClick={() => handleImageClick(index)}
@@ -129,7 +87,7 @@ const ProductDetails: FC<{ product: ProductInfo }> = () => {
                         <img
                           className="product__image-selector--photo"
                           src={image}
-                          alt={`Product Image ${index + 1}`}
+                          alt={`Product ${index + 1}`}
                         />
                       </button>
                     </li>
@@ -153,11 +111,11 @@ const ProductDetails: FC<{ product: ProductInfo }> = () => {
                 </span>
               </div>
               <ul className="product__details-selector--list">
-                {product.colorsAvailable.map((color, index) => (
+                {product.colorsAvailable.map((color: string, index: number) => (
                   <li
                     key={`color-${index}`}
                     className="product__details-selector--item">
-                    <div className={cn('product__details-selector--item-button', {
+                    <div className={classNames('product__details-selector--item-button', {
                       'product__details-selector--item-button--active': selectedColor === color,
                     })}
                     >
@@ -182,13 +140,13 @@ const ProductDetails: FC<{ product: ProductInfo }> = () => {
                   </span>
                 </div>
                 <ul className="product__details-selector--list">
-                  {product.capacityAvailable.map((capacity, index) => (
+                  {product.capacityAvailable.map((capacity: string, index: number) => (
                     <li
                       key={`capacity-${index}`}
                       className="product__details-selector--item"
                     >
                       <button
-                        className={cn('product__details-selector--capacity-button', {
+                        className={classNames('product__details-selector--capacity-button', {
                           'product__details-selector--capacity-button--active': selectedCapacity === capacity,
                         })}
                         onClick={() => handleCapacityClick(capacity)}
@@ -282,13 +240,10 @@ const ProductDetails: FC<{ product: ProductInfo }> = () => {
           <span
             className="product__details-selector--title flex__container-ID"
           >
-            ID:{product.id}
+            ID: {product.id}
           </span>
         </div>
       </div>
-
     </article>
   );
 };
-
-export default ProductDetails;

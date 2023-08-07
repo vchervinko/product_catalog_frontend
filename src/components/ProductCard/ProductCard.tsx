@@ -43,7 +43,7 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
     <article className="Card">
       <Link
         className="Card__link"
-        to="/"
+        to={`/${product.category}/${product.itemId}`}
       >
         <img
           className="Card__image"
@@ -52,7 +52,7 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
         />
       </Link>
 
-      <Link to="/">
+      <Link to={`/${product.category}/${product.itemId}`}>
         <h2 className="Card__title">
           {product.name}
         </h2>
@@ -68,7 +68,7 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
         </span>
       </section>
 
-      <hr className="Card__divide-line"></hr>
+      <hr className="Card__divide-line" />
 
       <ul className="Card__list-specifications">
         <li className="Card__item-specification">

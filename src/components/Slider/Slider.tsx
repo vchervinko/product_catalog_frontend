@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,7 +18,7 @@ export const Slider: FC = () => (
       <Icon size={32} type="arrow-left" />
     </button>
 
-    <div className="Slider__container">
+    <div className="Slider__slides">
       <Swiper
         className="Slider__swiper"
         autoplay={{
@@ -38,27 +39,33 @@ export const Slider: FC = () => (
         modules={[Autoplay, Pagination, Navigation]}
       >
         <SwiperSlide>
-          <img
-            className="Slider__image"
-            src={firstSlide}
-            alt="Phones now available in our store!"
-          />
+          <Link to="/phones">
+            <img
+              className="Slider__image"
+              src={firstSlide}
+              alt="Phones now available in our store!"
+            />
+          </Link>
         </SwiperSlide>
 
         <SwiperSlide>
-          <img
-            className="Slider__image"
-            src={secondSlide}
-            alt="Tablets now available in our store!"
-          />
+          <Link to="/tablets">
+            <img
+              className="Slider__image"
+              src={secondSlide}
+              alt="Tablets now available in our store!"
+            />
+          </Link>
         </SwiperSlide>
 
         <SwiperSlide>
-          <img
-            className="Slider__image"
-            src={thirdSlide}
-            alt="Accessories now available in our store!"
-          />
+          <Link to="/accessories">
+            <img
+              className="Slider__image"
+              src={thirdSlide}
+              alt="Accessories now available in our store!"
+            />
+          </Link>
         </SwiperSlide>
       </Swiper>
     </div>
