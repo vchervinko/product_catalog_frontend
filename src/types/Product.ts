@@ -21,6 +21,7 @@ Product,
 > {
   id: string;
   namespaceId: string;
+  color: string;
   colorId: number;
   capacityAvailable: string[];
   colorsAvailable: string[];

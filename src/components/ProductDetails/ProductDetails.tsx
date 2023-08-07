@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { findItemById } from '../../helpers/findItemById';
+import { colorCodes } from '../../helpers/constants/colorCodes';
 import { ProductInfo } from '../../types/Product';
 import { Icon } from '../Icon';
 import './Flex__Container.scss';
@@ -15,18 +16,9 @@ interface Props {
 
 export const ProductDetails: FC<Props> = ({ product }) => {
   const [selectedCapacity, setSelectedCapacity] = useState(product.capacity);
-  const [selectedColor, setSelectedColor] = useState(product.colorId);
+  const [selectedColor, setSelectedColor] = useState(product.color);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
-  const colorcodes: Record<number, string> = {
-    1: '#FCDBC1',
-    2: '#4C4C4C',
-    3: '#69abce',
-    4: '#5F7170',
-    5: '#333334',
-    6: '#004953',
-    7: '#C0C0C0',
-  };
+  const [animateImage, setAnimateImage] = useState(true);
 
   const {
     cart,
@@ -48,12 +40,17 @@ export const ProductDetails: FC<Props> = ({ product }) => {
     setSelectedCapacity(capacity);
   };
 
-  const handleColorClick = (colorId: number) => {
-    setSelectedColor(colorId);
+  const handleColorClick = (color: string) => {
+    setSelectedColor(color);
   };
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);
+    setAnimateImage(true);
+  };
+
+  const handleAnimationEnd = () => {
+    setAnimateImage(false);
   };
 
   return (
@@ -64,7 +61,8 @@ export const ProductDetails: FC<Props> = ({ product }) => {
         <div className="flex__container">
           <div className="flex__container-image product__img-container">
             <img
-              className="product__img"
+              onAnimationEnd={handleAnimationEnd}
+              className={classNames('product__img', { 'product__img-animated': animateImage })}
               src={`https://apple-catalog-api.onrender.com/${product.images[selectedImageIndex]}`}
               alt={`Product ${selectedImageIndex + 1}`}
             />
@@ -111,19 +109,18 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                 </span>
               </div>
               <ul className="product__details-selector--list">
-                {product.colorsAvailable.map((color: string, index: number) => (
+                {product.colorsAvailable.map((color, index) => (
                   <li
                     key={`color-${index}`}
                     className="product__details-selector--item">
                     <div className={classNames('product__details-selector--item-button', {
-                      'product__details-selector--item-button--active': selectedColor === Number(color),
+                      'product__details-selector--item-button--active': selectedColor === color,
                     })}
                     >
                       <button
                         className="product__details-selector--color-button"
-                        onClick={() => handleColorClick(Number(color))}
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        style={{ backgroundColor: colorcodes[color as any] }}
+                        onClick={() => handleColorClick(color)}
+                        style={{ backgroundColor: colorCodes[color] }}
                       >
                       </button>
                     </div>
