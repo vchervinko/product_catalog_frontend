@@ -17,11 +17,13 @@ export interface CartProduct extends Product {
 
 export interface ProductInfo extends Omit<
 Product,
-'id' | 'image' | 'category'
+'id' | 'image' | 'category' | 'itemId'
 > {
   id: string;
-  namespaceId: string;
+  namespaceId: number;
   colorId: number;
+  color: string;
+  categoryId: number;
   capacityAvailable: string[];
   colorsAvailable: string[];
   images: string[];
@@ -31,7 +33,8 @@ Product,
   }[];
   resolution: string;
   processor: string;
-  camera: string;
-  zoom: string;
+  camera?: string;
+  zoom?: string;
   cell: string[];
+  itemId: number;
 }
