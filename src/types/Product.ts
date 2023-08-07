@@ -25,7 +25,7 @@ Product,
   capacityAvailable: string[];
   colorsAvailable: string[];
   images: string[];
-  description: {
+  descriptions: {
     title: string;
     text: string[];
   }[];
