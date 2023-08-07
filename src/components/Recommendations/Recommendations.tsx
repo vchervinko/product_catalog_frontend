@@ -91,21 +91,20 @@ export const Recommendations: FC<Props> = ({ title, products }) => {
         </div>
       </div>
 
-      <div className="Recommendations__slider">
-        {shouldShowError && (
-          <h3 className="Recommendations__error-message">
+      {shouldShowLoader && (
+        <span className="Recommendations__loader">
+          <Loader size={50} />
+        </span>
+      )}
+
+      {shouldShowError && (
+        <h3 className="Recommendations__error-message">
             Something went wrong!
-          </h3>
-        )}
+        </h3>
+      )}
 
-        {shouldShowLoader && (
-          <span className="Recommendations__loader">
-            <Loader size={50} />
-          </span>
-        )}
-
+      <div className="Recommendations__slider">
         <ReactSwiper
-          className="Recommendations__swiper"
           slidesPerView={slidesPerView}
           spaceBetween={16}
           loop={false}
