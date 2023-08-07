@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import { Main } from '../components/Main';
 
 const MainPage: FC = () => {
   useEffect(() => {
@@ -6,7 +7,7 @@ const MainPage: FC = () => {
   }, []);
 
   return (
-    <h1>Home Page</h1>
+    <Main />
   );
 };
 

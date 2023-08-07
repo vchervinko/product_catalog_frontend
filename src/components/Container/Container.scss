@@ -1,14 +1,19 @@
 @import "../../styles/utils/mixins";
+@import "../../styles/utils/variables";
 
 .Container {
   width: 100%;
+  max-width: 1200px;
   height: 100%;
-  max-width: 1248px;
-  margin: 0 auto;
-  padding: 0 24px;
+  margin-inline: auto;
+  padding-inline: $container-padding-mobile;
   overflow: hidden;
 
   @include onTablet {
-    padding: 0 24px;
+    padding-inline: $container-padding-tablet;
+  }
+
+  @include onDesktop {
+    padding-inline: $container-padding-desktop;
   }
 }

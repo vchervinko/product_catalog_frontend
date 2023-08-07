@@ -1,13 +1,10 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
+import { MainButton } from '../MainButton';
 import './NotFound.scss';
 
 export const NotFound: FC = () => {
   const navigate = useNavigate();
-
-  const goHome = () => {
-    navigate('/');
-  };
 
   return (
     <div className="NotFound">
@@ -23,9 +20,9 @@ export const NotFound: FC = () => {
         Sorry, the page you&apos;re looking for doesn&apos;t exist.
       </p>
 
-      <button className="NotFound__button" onClick={goHome}>
+      <MainButton onClick={() => navigate('/')}>
         Return Home
-      </button>
+      </MainButton>
     </div>
   );
 };

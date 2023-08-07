@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { BASE_URL } from '../../helpers/fetchClient';
 import { findItemById } from '../../helpers/findItemById';
-import { normalizeLink } from '../../helpers/normalizeLink';
 import { Product } from '../../types/Product';
 import { Icon } from '../Icon';
 import './ProductCard.scss';
@@ -14,14 +13,14 @@ interface Props {
 }
 
 export const ProductCard: FC<Props> = memo(({ product }) => {
+  const navigate = useNavigate();
+
   const {
     cart,
     likedProducts,
     addProductToCart,
     toggleLikeProduct,
   } = useProductsContext();
-
-  const navigate = useNavigate();
 
   const addToCart = () => {
     addProductToCart(product);
@@ -31,14 +30,12 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
     navigate('/cart');
   };
 
-  const likeProduct = () => {
+  const toggleLike = () => {
     toggleLikeProduct(product);
   };
 
   const hasItemInCart = Boolean(findItemById(cart, product.id));
   const isLiked = Boolean(findItemById(likedProducts, product.id));
-
-  const productLink = normalizeLink(product.name);
 
   const likeButtonIcon = isLiked ? 'like-filled' : 'like';
 
@@ -46,11 +43,7 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
     <article className="Card">
       <Link
         className="Card__link"
-        to={productLink}
-        state={{
-          productId: product.id,
-          productName: product.name,
-        }}
+        to={`/${product.category}/${product.itemId}`}
       >
         <img
           className="Card__image"
@@ -59,23 +52,23 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
         />
       </Link>
 
-      <Link to={`${product.id}`}>
-        <h3 className="Card__title">
+      <Link to={`/${product.category}/${product.itemId}`}>
+        <h2 className="Card__title">
           {product.name}
-        </h3>
+        </h2>
       </Link>
 
       <section className="Card__prices">
-        <h2 className="Card__current-price">
+        <span className="Card__current-price">
           {product.price}
-        </h2>
+        </span>
 
-        <h2 className="Card__previous-price">
+        <span className="Card__previous-price">
           {product.fullPrice}
-        </h2>
+        </span>
       </section>
 
-      <hr className="Card__divide-line"></hr>
+      <hr className="Card__divide-line" />
 
       <ul className="Card__list-specifications">
         <li className="Card__item-specification">
@@ -128,7 +121,10 @@ export const ProductCard: FC<Props> = memo(({ product }) => {
             </button>
           )}
 
-        <button onClick={likeProduct}>
+        <button
+          className="Card__actions-button Card__actions-button--like"
+          onClick={toggleLike}
+        >
           <Icon size={40} type={likeButtonIcon} />
         </button>
       </section>

@@ -5,6 +5,7 @@ import { useProductsContext } from '../../contexts/ProductsContext/useProductsCo
 import { getFontSize } from '../../helpers/getFontSize';
 import '../../styles/icon.scss';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
+import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 import { Navigation } from '../Navigation/Navigation';
 import './Header.scss';
@@ -32,7 +33,7 @@ export const Header: FC = () => {
       <header className="Header">
         <div className="Header__branding">
           <div className="Header__logo">
-            <Logo height={28} />
+            <Logo type="header" />
           </div>
 
           <div className="Header__nav">
@@ -46,9 +47,8 @@ export const Header: FC = () => {
             type="button"
             onClick={() => toggleMenu()}
           >
-            <div
+            <i
               className={classNames('Header__menu-icon', {
-                'Header__menu-icon--closed': !isMenuOpened,
                 'Header__menu-icon--opened': isMenuOpened,
               })}
             />
@@ -63,13 +63,12 @@ export const Header: FC = () => {
               })}
               to="favourites"
             >
-              <div className="icon__image icon__image--Favourites">
+              <div className="icon__image">
+                <Icon type="like" size={18} />
+
                 {likedProductsCount > 0 && (
                   <div className="icon__counter">
-                    <span
-                      className="icon__counter-text"
-                      style={likedFontSize}
-                    >
+                    <span className="icon__counter-text" style={likedFontSize}>
                       {likedProductsCount < 100 ? likedProductsCount : '99+'}
                     </span>
                   </div>
@@ -85,13 +84,12 @@ export const Header: FC = () => {
               })}
               to="cart"
             >
-              <div className="icon__image icon__image--Cart">
+              <div className="icon__image">
+                <Icon type="cart" size={18} />
+
                 {cartProductsCount > 0 && (
                   <div className="icon__counter">
-                    <span
-                      className="icon__counter-text"
-                      style={cartFontSize}
-                    >
+                    <span className="icon__counter-text" style={cartFontSize}>
                       {cartProductsCount < 100 ? cartProductsCount : '99+'}
                     </span>
                   </div>

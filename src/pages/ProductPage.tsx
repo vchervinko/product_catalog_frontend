@@ -1,62 +1,56 @@
-/* eslint-disable max-len */
-import { FC } from 'react';
-import ProductDetails from '../components/ProductDetails/ProductDetails';
-import ProductAbout from '../components/ProductDetails/ProductAbout';
-import ProductRecomendedGoods from '../components/ProductDetails/ProductRecomendedGoods';
+import { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import { getProductById } from '../api/product';
+import { ProductDetails } from '../components/ProductDetails';
+import { useErrorContext } from '../contexts/ErrorContext/useErrorContext';
+import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
+import { ProductInfo } from '../types/Product';
+import ProductAbout from '../components/ProductAbout/ProductAbout';
 
-export const product = {
-  'id': 'apple-iphone-13-pro-max-1tb-graphite',
-  'namespaceId': 'apple-iphone-13-pro-max',
-  'name': 'Apple iPhone 13 Pro Max 1TB Graphite',
-  'capacityAvailable': ['128GB', '256GB', '512GB', '1TB'],
-  'capacity': '1TB',
-  'priceRegular': 1700,
-  'priceDiscount': 1540,
-  'colorsAvailable': ['graphite', 'gold', 'sierrablue'],
-  'color': 'graphite',
-  'images': [
-    'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
-    'img/phones/apple-iphone-13-pro-max/graphite/01.webp',
-    'img/phones/apple-iphone-13-pro-max/graphite/02.webp',
-    'img/phones/apple-iphone-13-pro-max/graphite/03.webp',
-  ],
-  'description': [
-    {
-      'title': 'And then was a Pro',
-      'text': [
-        'A transformative triple-camera system that adds tons of capability without complexity.',
-        'An unprecedented leap in battery life. And a mind-blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.',
-      ],
-    },
-    {
-      'title': 'Camera',
-      'text': [
-        'Meet the first triple-camera system to combine cutting-edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest-quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.',
-      ],
-    },
-    {
-      'title': 'Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.',
-      'text': [
-        'iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.',
-      ],
-    },
-  ],
-  'screen': '6.1 OLED (Super Retina XDR)',
-  'resolution': '2556x1179',
-  'processor': 'Apple A16 Bionic',
-  'ram': '6GB',
-  'camera': '48 Mp + 12 Mp + 12MP + 12Mp',
-  'zoom': 'Digital 5x, Optical 2x',
-  'cell': ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE', '5G'],
-};
+const ProductPage = () => {
+  const [product, setProduct] = useState<ProductInfo | null>(null);
 
-const ProductPage: FC = () => {
-  return (
+  const { pathname } = useLocation();
+
+  const { setError, clearError } = useErrorContext();
+  const { setIsLoaded } = useProductsContext();
+
+  useEffect(() => {
+    if (product) {
+      document.title = `${product.name} | Nice Gadgets`;
+
+      return;
+    }
+
+    document.title = 'Loading... | Nice Gadgets';
+  }, [product]);
+
+  const loadProduct = useCallback(async () => {
+    try {
+      clearError();
+      setIsLoaded(false);
+
+      const [, category, id] = pathname.split('/');
+      const productFromServer = await getProductById(id, category);
+
+      setProduct(productFromServer);
+    } catch (error: unknown) {
+      setError(error as Error);
+    } finally {
+      setIsLoaded(true);
+    }
+  }, [pathname, setIsLoaded, setError, clearError]);
+
+  useEffect(() => {
+    loadProduct();
+  }, [pathname, loadProduct]);
+
+  return (product && (
     <>
       <ProductDetails product={product} />
-      <ProductAbout product={product}/>
-      <ProductRecomendedGoods />
+      <ProductAbout product={product} />
     </>
+  )
   );
 };
 

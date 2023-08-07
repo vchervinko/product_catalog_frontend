@@ -5,19 +5,19 @@
 
 .NotFound {
   height: 100%;
+  padding-block: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $white-color;
+  background-color: $white-color;
 
   &__title {
     @extend %h1;
-    position: relative;
     margin-bottom: 10px;
     display: block;
-    font-size: 200px;
-    line-height: inherit;
+    font-size: 100px;
+    line-height: 100px;
     text-align: center;
     background: -webkit-repeating-linear-gradient(
       -45deg,
@@ -37,17 +37,18 @@
     animation: animate-404 10s ease-in-out infinite;
 
     @include onTablet {
-      font-size: 250px;
+      font-size: 200px;
+      line-height: 200px;
     }
 
     @include onDesktop {
       font-size: 300px;
+      line-height: 300px;
     }
   }
 
   &__subtitle {
     @extend %h2;
-    position: relative;
     margin-bottom: 15px;
     text-transform: uppercase;
     color: $gray-primary;
@@ -58,26 +59,5 @@
     @extend %h4;
     margin-bottom: 20px;
     color: $gray-primary;
-  }
-
-  &__button {
-    @extend %buttons;
-    padding: 10px 25px;
-    display: inline-block;
-    color: $white-color;
-    background-color: $gray-primary;
-    transition: box-shadow $default-transition ease-in-out;
-
-    @include onTablet {
-      padding-inline: 35px;
-    }
-
-    @include onDesktop {
-      padding-inline: 45px;
-    }
-
-    &:hover {
-      box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.4);
-    }
   }
 }

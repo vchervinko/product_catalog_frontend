@@ -1,26 +1,36 @@
 export interface Product {
-  id: number,
+  id: number;
+  name: string;
+  fullPrice: number;
+  price: number;
+  image: string;
+  category: string;
+  capacity: string;
+  screen: string;
+  ram: string;
+  itemId: string;
 }
 
-export interface ProductInfo {
+export interface CartProduct extends Product {
+  quantity: number;
+}
+
+export interface ProductInfo extends Omit<
+Product,
+'id' | 'image' | 'category'
+> {
   id: string;
   namespaceId: string;
-  name: string;
+  colorId: number;
   capacityAvailable: string[];
-  capacity: string;
-  priceRegular: number;
-  priceDiscount: number;
   colorsAvailable: string[];
-  color: string;
   images: string[];
-  description: {
+  descriptions: {
     title: string;
     text: string[];
   }[];
-  screen: string;
   resolution: string;
   processor: string;
-  ram: string;
   camera: string;
   zoom: string;
   cell: string[];

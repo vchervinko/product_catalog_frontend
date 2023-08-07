@@ -1,7 +1,8 @@
 import { FC, ReactNode, memo, useCallback, useMemo, useState } from 'react';
+import { calculateQuantity } from '../../helpers/calculateQuantity';
 import { findItemById } from '../../helpers/findItemById';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { Product } from '../../types/Product';
+import { CartProduct, Product } from '../../types/Product';
 import { Props as ProductContextProps, ProductsContext } from './ProductsContext';
 
 interface Props {
@@ -10,20 +11,46 @@ interface Props {
 
 export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useLocalStorage<Product[]>('cart', []);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useLocalStorage('limit', 16);
+  const [sortBy, setSortBy] = useLocalStorage('sortBy', 'newest');
+  const [cart, setCart] = useLocalStorage<CartProduct[]>('cart', []);
   const [likedProducts, setLikedProducts] = useLocalStorage<Product[]>(
     'liked',
     [],
   );
 
   const addProductToCart = useCallback((product: Product) => {
-    setCart((currentCart: Product[]) => [...currentCart, product]);
+    setCart((currentCart: CartProduct[]) => {
+      const foundProduct = findItemById(currentCart, product.id);
+
+      if (foundProduct) {
+        return currentCart.map((item) => item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item,
+        );
+      }
+
+      return [...currentCart, { ...product, quantity: 1 }];
+    });
   }, [setCart]);
 
-  const deleteProductFromCart = useCallback((productId: number) => {
-    setCart((currentCart: Product[]) => currentCart.filter(
-      ({ id }) => id !== productId,
-    ));
+  const deleteProductFromCart = useCallback((
+    productId: number,
+    fully: boolean = false,
+  ) => {
+    setCart((currentCart: CartProduct[]) => {
+      return currentCart.map((item) => {
+        if (item.id === productId) {
+          return fully || item.quantity === 1
+            ? null
+            : { ...item, quantity: item.quantity - 1 };
+        }
+
+        return item;
+      }).filter(Boolean);
+    });
   }, [setCart]);
 
   const toggleLikeProduct = useCallback((product: Product) => {
@@ -41,21 +68,34 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   }, [setLikedProducts]);
 
   const value: ProductContextProps = useMemo(() => ({
-    total: 64,
-    limit: 16,
+    total,
+    limit,
+    sortBy,
     cart,
     likedProducts,
     products,
-    cartProductsCount: cart.length,
+    isLoaded,
+    cartProductsCount: calculateQuantity(cart),
     likedProductsCount: likedProducts.length,
+    setTotal,
+    setLimit,
+    setSortBy,
     addProductToCart,
     deleteProductFromCart,
     toggleLikeProduct,
     setProducts,
+    setIsLoaded,
   }), [
+    total,
+    limit,
+    sortBy,
     cart,
     likedProducts,
     products,
+    isLoaded,
+    setTotal,
+    setLimit,
+    setSortBy,
     addProductToCart,
     deleteProductFromCart,
     toggleLikeProduct,
