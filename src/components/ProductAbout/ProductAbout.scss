@@ -19,32 +19,13 @@
     }
   }
 
-  &__container {
+  &__content {
     display: block;
 
     @include onDesktop {
       display: grid;
       grid-template-columns: repeat(24, 1fr);
       column-gap: 16px;
-    }
-  }
-
-  &__about {
-    grid-column: 1 / 13;
-
-    &-list {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      margin-bottom: 56px;
-
-      @include onTablet {
-        margin-bottom: 64px;
-      }
-
-      @include onDesktop {
-        margin-bottom: 0;
-      }
     }
   }
 
@@ -55,46 +36,65 @@
     border-bottom: 1px solid $gray-elements;
   }
 
-  &__section-title {
+  &__about-section {
+    grid-column: 1 / 13;
+  }
+
+  &__about-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 56px;
+
+    @include onTablet {
+      margin-bottom: 64px;
+    }
+
+    @include onDesktop {
+      margin-bottom: 0;
+    }
+  }
+
+  &__description-title {
     @extend %h4;
     margin-bottom: 16px;
   }
 
-  &__section-text {
+  &__description-text {
     @extend %body-text;
     color: $gray-secondary;
   }
 
-  &__specs {
+  &__tech-specs {
+    grid-column: 14 / 24;
+  }
+
+  &__tech-specs-title {
+    @extend %h3;
+    padding-bottom: 16px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid $gray-elements;
+  }
+
+  &__specs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__specs-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    &-name {
-      @extend %body-text;
-      color: $gray-secondary;
-    }
-
-    &-text {
-      @extend %body-text;
-      color: $gray-primary;
-    }
   }
 
-  &__tech-specs {
-    grid-column: 14 / 24;
+  &__specs-title {
+    @extend %body-text;
+    color: $gray-secondary;
+  }
 
-    &-title {
-      @extend %h3;
-      padding-bottom: 16px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid $gray-elements;
-    }
-
-    &-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+  &__specs-value {
+    @extend %body-text;
+    color: $gray-primary;
   }
 }

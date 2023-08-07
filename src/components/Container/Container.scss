@@ -7,6 +7,7 @@
   height: 100%;
   margin-inline: auto;
   padding-inline: $container-padding-mobile;
+  margin-bottom: 64px;
   overflow: hidden;
 
   @include onTablet {
@@ -14,6 +15,7 @@
   }
 
   @include onDesktop {
+    margin-bottom: 80px;
     padding-inline: $container-padding-desktop;
   }
 }

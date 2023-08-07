@@ -21,18 +21,14 @@ export const Error: FC<Props> = ({ loadData }) => {
 
       <div className="Error__buttons">
         <MainButton
-          style={{
-            width: BUTTON_WIDTH,
-          }}
+          style={{ width: BUTTON_WIDTH }}
           onClick={loadData}
         >
           Try again
         </MainButton>
 
         <SecondaryButton
-          style={{
-            width: BUTTON_WIDTH,
-          }}
+          style={{ width: BUTTON_WIDTH }}
           onClick={() => navigate('/')}
         >
           Return Home
