@@ -14,19 +14,18 @@ export enum SortByOptions {
   'Lowest price' = 'lowestPrice',
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-const getEnumKeys = <T extends {}>(enumToDeconstruct: T)
-  : Array<keyof typeof enumToDeconstruct> => {
+const getEnumKeys = <T extends object>(enumType: T)
+  : Array<keyof typeof enumType> => {
   return Object
-    .keys(enumToDeconstruct) as Array<keyof typeof enumToDeconstruct>;
+    .keys(enumType) as Array<keyof typeof enumType>;
 };
 
 export const ProductFilters: FC = () => {
   const { limit: initialLimit } = useProductsContext();
   const [searchParams] = useSearchParams();
 
-  const [isOpenSortBy, setIsOpenSortBy] = useState(false);
-  const [isOpenLimit, setIsOpenLimit] = useState(false);
+  const [isSortByOpened, setIsSortByOpened] = useState(false);
+  const [isLimitOpened, setIsLimitOpened] = useState(false);
 
   const limit = searchParams.get('limit') || initialLimit;
   const sortBy = searchParams.get('sortBy') || 'newest';
@@ -34,11 +33,11 @@ export const ProductFilters: FC = () => {
   const sortByOptions = getEnumKeys(SortByOptions);
 
   const toggleSortBy = () => {
-    setIsOpenSortBy((prev) => !prev );
+    setIsSortByOpened((prev) => !prev );
   };
 
   const toggleLimit = () => {
-    setIsOpenLimit((prev) => !prev);
+    setIsLimitOpened((prev) => !prev);
   };
 
   const refSortBy = useRef();
@@ -47,17 +46,17 @@ export const ProductFilters: FC = () => {
   useEffect(() => {
     const checkIfClickedOutside = (e: MouseEvent) => {
       if (
-        isOpenSortBy
+        isSortByOpened
         && refSortBy.current
         && !refSortBy.current.contains(e.target)) {
-        setIsOpenSortBy(false);
+        setIsSortByOpened(false);
       }
 
       if (
-        isOpenLimit
+        isLimitOpened
         && refLimit.current
         && !refLimit.current.contains(e.target)) {
-        setIsOpenLimit(false);
+        setIsLimitOpened(false);
       }
     };
 
@@ -66,13 +65,13 @@ export const ProductFilters: FC = () => {
     return () => {
       document.removeEventListener('mousedown', checkIfClickedOutside);
     };
-  }, [isOpenSortBy, isOpenLimit]);
+  }, [isSortByOpened, isLimitOpened]);
 
   return (
     <section className="ProductFilters">
       <form className="ProductFilters__form">
 
-        <div className="ProductFilters__sortBy-container" >
+        <div className="ProductFilters__sortBy-container" ref={refSortBy}>
           <p className="ProductFilters__label">Sort by</p>
           <div
             role="button"
@@ -84,13 +83,12 @@ export const ProductFilters: FC = () => {
             {sortByOptions
               .filter(key => SortByOptions[key] === sortBy)[0]}
             <div
-              className="ProductFilters__icon-container"
-            ></div>
+              className="ProductFilters__icon-container" />
           </div>
 
-          <div className="ProductFilters__list-container" ref={refSortBy}>
+          <div className="ProductFilters__list-container" >
             <ul className={classNames('ProductFilters__list', {
-              'ProductFilters__list-sortBy-opened': isOpenSortBy,
+              'ProductFilters__list-sortBy-opened': isSortByOpened,
             })} >
               {sortByOptions.map(key=> (
 
@@ -113,8 +111,9 @@ export const ProductFilters: FC = () => {
           </div>
         </div>
 
-        <div className="ProductFilters__itemPage-container">
+        <div className="ProductFilters__itemPage-container" ref={refLimit}>
           <p className="ProductFilters__label">Items on page</p>
+
           <div
             role="button"
             tabIndex={0}
@@ -124,13 +123,12 @@ export const ProductFilters: FC = () => {
           >
             {limit}
             <div
-              className="ProductFilters__icon-container"
-            ></div>
+              className="ProductFilters__icon-container" />
           </div>
 
-          <div className="ProductFilters__list-container" ref={refLimit}>
+          <div className="ProductFilters__list-container" >
             <ul className={classNames('ProductFilters__list', {
-              'ProductFilters__list-limit-opened': isOpenLimit,
+              'ProductFilters__list-limit-opened': isLimitOpened,
             })}>
               {limitOptions.map(limitOption=> (
 
