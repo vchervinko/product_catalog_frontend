@@ -18,14 +18,14 @@ export const ProductDetails: FC<Props> = ({ product }) => {
   const [selectedColor, setSelectedColor] = useState(product.colorId);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  const colorCodes: Record<string, string> = {
-    gold: '#FCDBC1',
-    graphite: '#4C4C4C',
-    sierrablue: '#69abce',
-    spacegray: '#5F7170',
-    spaceblack: '#333334',
-    midnightgreen: '#004953',
-    silver: '#C0C0C0',
+  const colorcodes: Record<number, string> = {
+    1: '#FCDBC1',
+    2: '#4C4C4C',
+    3: '#69abce',
+    4: '#5F7170',
+    5: '#333334',
+    6: '#004953',
+    7: '#C0C0C0',
   };
 
   const {
@@ -48,8 +48,8 @@ export const ProductDetails: FC<Props> = ({ product }) => {
     setSelectedCapacity(capacity);
   };
 
-  const handleColorClick = (color: string) => {
-    setSelectedColor(color);
+  const handleColorClick = (colorId: number) => {
+    setSelectedColor(colorId);
   };
 
   const handleImageClick = (index: number) => {
@@ -65,7 +65,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
           <div className="flex__container-image product__img-container">
             <img
               className="product__img"
-              src={product.images[selectedImageIndex]}
+              src={`https://apple-catalog-api.onrender.com/${product.images[selectedImageIndex]}`}
               alt={`Product ${selectedImageIndex + 1}`}
             />
           </div>
@@ -86,7 +86,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                       >
                         <img
                           className="product__image-selector--photo"
-                          src={image}
+                          src={`https://apple-catalog-api.onrender.com/${image}`}
                           alt={`Product ${index + 1}`}
                         />
                       </button>
@@ -116,13 +116,14 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                     key={`color-${index}`}
                     className="product__details-selector--item">
                     <div className={classNames('product__details-selector--item-button', {
-                      'product__details-selector--item-button--active': selectedColor === color,
+                      'product__details-selector--item-button--active': selectedColor === Number(color),
                     })}
                     >
                       <button
                         className="product__details-selector--color-button"
-                        onClick={() => handleColorClick(color)}
-                        style={{ backgroundColor: colorCodes[color] }}
+                        onClick={() => handleColorClick(Number(color))}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        style={{ backgroundColor: colorcodes[color as any] }}
                       >
                       </button>
                     </div>
@@ -162,11 +163,11 @@ export const ProductDetails: FC<Props> = ({ product }) => {
 
             <section className="Card__prices">
               <h2 className="Card__current-price">
-                {product.priceDiscount}
+                {product.price}
               </h2>
 
               <h2 className="Card__previous-price">
-                {product.priceRegular}
+                {product.fullPrice}
               </h2>
             </section>
 

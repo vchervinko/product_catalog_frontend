@@ -27,32 +27,26 @@ const router = createBrowserRouter([
       {
         path: 'phones',
         element: <PhonesPage />,
-        children: [
-          {
-            path: ':phoneId',
-            element: <ProductPage />,
-          },
-        ],
+      },
+      {
+        path: 'phones/:id',
+        element: <ProductPage />,
       },
       {
         path: 'tablets',
         element: <TabletsPage />,
-        children: [
-          {
-            path: ':tabletId',
-            element: <ProductPage />,
-          },
-        ],
+      },
+      {
+        path: 'tablets/:id',
+        element: <ProductPage />,
       },
       {
         path: 'accessories',
         element: <AccessoriesPage />,
-        children: [
-          {
-            path: ':accessoryId',
-            element: <ProductPage />,
-          },
-        ],
+      },
+      {
+        path: 'accessories/:id',
+        element: <ProductPage />,
       },
       {
         path: 'favourites',
