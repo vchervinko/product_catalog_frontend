@@ -13,7 +13,7 @@ export const getProducts = async (
   sortBy: 'newest' | 'highestPrice' | 'lowestPrice',
 ): Promise<ProductResponse> => {
   const response = await client.get<ProductResponse>(
-    `/${category}?page=${page}&?limit=${limit}&?sortBy=${sortBy}`,
+    `/slfjas${category}?page=${page}&?limit=${limit}&?sortBy=${sortBy}`,
   );
 
   return response;
