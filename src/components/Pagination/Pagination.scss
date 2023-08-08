@@ -3,10 +3,10 @@
 @import "../../styles/utils/placeholders";
 
 .Pagination {
-  display: flex;
   width: 100%;
-  gap: 16px;
+  display: flex;
   justify-content: space-around;
+  gap: 16px;
 
   @include onTablet {
     justify-content: center;
@@ -14,14 +14,14 @@
 
   &__list {
     display: none;
-    gap: 8px;
 
     @include onTablet {
       display: flex;
+      gap: 8px;
     }
   }
 
-  &__mobile-page {
+  &__count {
     @extend %h4;
     width: 50%;
     display: flex;
