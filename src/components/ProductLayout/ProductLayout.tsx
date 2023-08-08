@@ -22,7 +22,11 @@ export const ProductLayout: FC = () => {
   const { setIsLoaded } = useProductsContext();
 
   useEffect(() => {
-    document.title = `${product?.name} | Nice Gadgets`;
+    document.title = 'Nice Gadgets';
+
+    if (product) {
+      document.title = `${product.name} | Nice Gadgets`;
+    }
   }, [product]);
 
   const loadProduct = useCallback(async () => {
