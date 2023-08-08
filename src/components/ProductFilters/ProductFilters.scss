@@ -1,6 +1,7 @@
 @import "../../styles/utils/variables";
 @import "../../styles/utils/mixins";
 @import "../../styles/utils/placeholders";
+@import "../../styles/utils/keyframes";
 
 .ProductFilters {
   display: flex;
@@ -42,6 +43,15 @@
 
     &:hover {
       border-color: $gray-primary;
+    }
+  }
+
+  &__arrow {
+    transition: transform $default-transition ease-in-out;
+    transform: rotate(360deg);
+
+    &--opened {
+      transform: rotate(180deg);
     }
   }
 

@@ -1,17 +1,7 @@
 @import "../../styles/utils/variables";
 @import "../../styles/utils/mixins";
 @import "../../styles/utils/placeholders";
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+@import "../../styles/utils/keyframes";
 
 .product {
   .decorative-line {
@@ -39,7 +29,7 @@
     object-position: center;
 
     &-animated {
-      animation: fadeIn 0.5s ease-in-out forwards;
+      animation: fade-in $default-transition * 2 ease-in-out forwards;
       opacity: 1;
       transform: scale(1);
     }
@@ -63,8 +53,6 @@
         display: block;
       }
     }
-
-
   }
 
   &__image-selector {
@@ -188,7 +176,6 @@
           filter: none;
         }
       }
-
     }
 
     &--color-button {
@@ -212,13 +199,7 @@
     }
   }
 
-  &__section {
-
-    &-actions {
-      margin-bottom: 32px;
-    }
+  &__section-actions {
+    margin-bottom: 32px;
   }
 }
-
-
-

@@ -88,7 +88,12 @@ export const ProductFilters: FC = () => {
           onKeyDown={toggleSortBy}
         >
           {sortByOptions.find((key) => SortByOptions[key] === sortBy)}
-          <Icon size={16} type="arrow-up" />
+
+          <div className={classNames('ProductFilters__arrow', {
+            'ProductFilters__arrow--opened': isSortByOpened,
+          })}>
+            <Icon size={16} type="arrow-up" />
+          </div>
         </div>
 
         <div className="ProductFilters__option" >
@@ -126,7 +131,12 @@ export const ProductFilters: FC = () => {
           onKeyDown={toggleLimit}
         >
           {limit}
-          <Icon size={16} type="arrow-up" />
+
+          <div className={classNames('ProductFilters__arrow', {
+            'ProductFilters__arrow--opened': isLimitOpened,
+          })}>
+            <Icon size={16} type="arrow-up" />
+          </div>
         </div>
 
         <div className="ProductFilters__option">
