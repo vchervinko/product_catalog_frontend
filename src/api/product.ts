@@ -80,3 +80,11 @@ export const getRecommendedProducts = async (
 
   return response;
 };
+
+export const getProductByQuery = async (query: string): Promise<Product[]> => {
+  const response = await client.get<Product[]>(
+    `/products/search?query=${query}`,
+  );
+
+  return response;
+};
