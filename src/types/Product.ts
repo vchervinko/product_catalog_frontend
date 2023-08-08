@@ -20,9 +20,9 @@ Product,
 'id' | 'image' | 'category' | 'itemId'
 > {
   id: string;
+  color: string;
   namespaceId: number;
   colorId: number;
-  color: string;
   categoryId: number;
   capacityAvailable: string[];
   colorsAvailable: string[];

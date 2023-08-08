@@ -13,7 +13,7 @@ export const getProducts = async (
   sortBy: 'newest' | 'highestPrice' | 'lowestPrice',
 ): Promise<ProductResponse> => {
   const response = await client.get<ProductResponse>(
-    `/${category}?page=${page}&?limit=${limit}&?sortBy=${sortBy}`,
+    `/${category}?page=${page}&limit=${limit}&sortBy=${sortBy}`,
   );
 
   return response;
@@ -60,4 +60,19 @@ export const getProductsCount = async (): Promise<number[]> => {
   const accessoriesCount = accessoriesResponse.count;
 
   return [phonesCount, tabletsCount, accessoriesCount];
+};
+
+export const getRecommendedProducts = async (
+  price: number,
+  fullPrice: number,
+  categoryId: number,
+): Promise<Product[]> => {
+  const response = await client.get<Product[]>(
+    '/products/recommended'
+      + `price=${price}`
+      + `&fullPrice=${fullPrice}`
+      + `&categoryId=${categoryId}`,
+  );
+
+  return response;
 };

@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { getProductById } from '../api/product';
+import { getNewProducts, getProductById } from '../api/product';
 import { ProductDetails } from '../components/ProductDetails';
 import { useErrorContext } from '../contexts/ErrorContext/useErrorContext';
 import { useProductsContext } from '../contexts/ProductsContext/useProductsContext';
-import { ProductInfo } from '../types/Product';
+import { Product, ProductInfo } from '../types/Product';
+import ProductAbout from '../components/ProductAbout/ProductAbout';
+import { Recommendations } from '../components/Recommendations';
 
 const ProductPage = () => {
   const [product, setProduct] = useState<ProductInfo | null>(null);
+  const [recomendedProducts, setRecomendedProducts] = useState<Product[]>([]);
 
   const { pathname } = useLocation();
 
@@ -32,7 +35,10 @@ const ProductPage = () => {
       const [, category, id] = pathname.split('/');
       const productFromServer = await getProductById(id, category);
 
+      const [newest] = await Promise.all([getNewProducts()]);
+
       setProduct(productFromServer);
+      setRecomendedProducts(newest);
     } catch (error: unknown) {
       setError(error as Error);
     } finally {
@@ -45,9 +51,15 @@ const ProductPage = () => {
   }, [pathname, loadProduct]);
 
   return (product && (
-    <ProductDetails product={product} />
-  )
-  );
+    <>
+      <ProductDetails product={product} />
+      <ProductAbout product={product} />
+      <Recommendations
+        title="You may also like"
+        products={recomendedProducts}
+      />
+    </>
+  ));
 };
 
 export default ProductPage;
