@@ -17,21 +17,21 @@
     }
 
     &-image {
+      @include onTablet {
+        order: 2;
+        padding-right: 50px;
+
+      }
       @include onDesktop {
         order: 2;
         flex: 2;
         flex-basis: 2ch;
-        margin-right: auto;
-      }
-      @include onTablet {
-        order: 2;
-        margin-right: auto;
+        padding-right: 80px;
       }
     }
 
     &-selector--photo {
       @include onDesktop {
-        flex: 1;
         order: 1;
       }
       @include onTablet {
