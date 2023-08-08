@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { calculatePrice } from '../../helpers/calculatePrice';
 import { calculateQuantity } from '../../helpers/calculateQuantity';
 import { BASE_URL } from '../../helpers/fetchClient';
+import { BackButton } from '../BackButton';
 import { Icon } from '../Icon';
 import './Cart.scss';
 
@@ -14,8 +14,6 @@ export const Cart: FC = () => {
     addProductToCart,
     deleteProductFromCart,
   } = useProductsContext();
-
-  const navigate = useNavigate();
 
   const totalPrice = cart.reduce((total, product) => (
     total + calculatePrice(product)
@@ -27,16 +25,9 @@ export const Cart: FC = () => {
 
   return (
     <section className="Cart">
-      <button
-        className="Cart__breadcrumbs"
-        onClick={() => navigate(-1)}
-      >
-        <Icon type="arrow-left" size={16} />
-
-        <span className="Cart__breadcrumbs-text">
-          Back
-        </span>
-      </button>
+      <div className="Cart__go-back">
+        <BackButton />
+      </div>
 
       <h2 className="Cart__title">Cart</h2>
 

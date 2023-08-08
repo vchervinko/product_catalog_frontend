@@ -19,6 +19,7 @@ export const Pagination: FC = () => {
   const { total, limit } = useProductsContext();
 
   const currentPage = Number(searchParams.get('page')) || 1;
+  const lastPage = pages[pages.length - 1];
 
   useEffect(() => {
     setPages(getNumbers(total, limit));
@@ -61,8 +62,8 @@ export const Pagination: FC = () => {
         ))}
       </ul>
 
-      <div className="Pagination__mobile-page">
-        {`${currentPage} / ${pages[pages.length - 1]}`}
+      <div className="Pagination__count">
+        {`${currentPage} / ${lastPage}`}
       </div>
 
       <SearchLink

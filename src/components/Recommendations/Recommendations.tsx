@@ -61,6 +61,8 @@ export const Recommendations: FC<Props> = ({ title, products }) => {
 
   const normalizedClassName = getClassName(title);
 
+  const hasProducts = products.length > 0;
+
   return (
     <div className="Recommendations">
       <div className="Recommendations__heading">
@@ -68,27 +70,29 @@ export const Recommendations: FC<Props> = ({ title, products }) => {
           {title}
         </h2>
 
-        <div className="Recommendations__controllers">
-          <button
-            className={classNames(`
-            Recommendations__button
-            prev__${normalizedClassName}`, {
-              'Recommendations__button--disabled': isBeginning,
-            })}
-          >
-            <Icon size={32} type={leftButtonIcon} />
-          </button>
+        {hasProducts && (
+          <div className="Recommendations__controllers">
+            <button
+              className={classNames(`
+              Recommendations__button
+              prev__${normalizedClassName}`, {
+                'Recommendations__button--disabled': isBeginning,
+              })}
+            >
+              <Icon size={32} type={leftButtonIcon} />
+            </button>
 
-          <button
-            className={classNames(`
-            Recommendations__button
-            next__${normalizedClassName}`, {
-              'Recommendations__button--disabled': isEnd,
-            })}
-          >
-            <Icon size={32} type={rightButtonIcon} />
-          </button>
-        </div>
+            <button
+              className={classNames(`
+              Recommendations__button
+              next__${normalizedClassName}`, {
+                'Recommendations__button--disabled': isEnd,
+              })}
+            >
+              <Icon size={32} type={rightButtonIcon} />
+            </button>
+          </div>
+        )}
       </div>
 
       {shouldShowLoader && (
@@ -103,28 +107,30 @@ export const Recommendations: FC<Props> = ({ title, products }) => {
         </h3>
       )}
 
-      <div className="Recommendations__slider">
-        <ReactSwiper
-          slidesPerView={slidesPerView}
-          spaceBetween={16}
-          loop={false}
-          navigation={{
-            prevEl: `.prev__${normalizedClassName}`,
-            nextEl: `.next__${normalizedClassName}`,
-          }}
-          modules={[Pagination, Navigation]}
-          onSlideChange={handleSwiperChange}
-        >
-          {products.map((product) => (
-            <SwiperSlide
-              key={product.id}
-              className="Recommendations__slide"
-            >
-              <ProductCard product={product} />
-            </SwiperSlide>
-          ))}
-        </ReactSwiper>
-      </div>
+      {hasProducts && (
+        <div className="Recommendations__slider">
+          <ReactSwiper
+            slidesPerView={slidesPerView}
+            spaceBetween={16}
+            loop={false}
+            navigation={{
+              prevEl: `.prev__${normalizedClassName}`,
+              nextEl: `.next__${normalizedClassName}`,
+            }}
+            modules={[Pagination, Navigation]}
+            onSlideChange={handleSwiperChange}
+          >
+            {products.map((product) => (
+              <SwiperSlide
+                key={product.id}
+                className="Recommendations__slide"
+              >
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
+          </ReactSwiper>
+        </div>
+      )}
     </div>
   );
 };

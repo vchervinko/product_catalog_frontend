@@ -4,8 +4,12 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.scss';
 
-export const Breadcrumbs: FC = () => {
-  const { pathname, state } = useLocation();
+interface Props {
+  productName?: string;
+}
+
+export const Breadcrumbs: FC<Props> = ({ productName }) => {
+  const { pathname } = useLocation();
 
   const [category] = pathname.split('/').filter(Boolean);
 
@@ -17,20 +21,20 @@ export const Breadcrumbs: FC = () => {
 
       <Link
         className={classNames('Breadcrumbs__crumb', {
-          'Breadcrumbs__crumb--active': Boolean(state),
-          'Breadcrumbs__crumb--disabled': !state,
+          'Breadcrumbs__crumb--active': Boolean(productName),
+          'Breadcrumbs__crumb--disabled': !productName,
         })}
         to={`/${category}`}
       >
         {category}
       </Link>
 
-      {state && (
+      {productName && (
         <>
           <div className="Breadcrumbs__arrow" />
 
           <div className="Breadcrumbs__crumb">
-            {state.productName}
+            {productName}
           </div>
         </>
       )}

@@ -1,82 +1,68 @@
-import React, { FC } from 'react';
-import './ProductAbout.scss';
-import { ProductInfo } from '../../types/Product';
+import { FC } from 'react';
 import { capitalize } from '../../helpers/capitalize';
+import { getValidFields } from '../../helpers/getValidFields';
+import { ProductInfo } from '../../types/Product';
+import './ProductAbout.scss';
 
 interface Props {
   product: ProductInfo;
 }
 
-const ProductAbout: FC<Props> = ({ product }) => {
-  console.log(product);
+export const ProductAbout: FC<Props> = ({ product }) => (
+  <div className="ProductAbout">
+    <div className="ProductAbout__content">
+      <div className="ProductAbout__about-info">
+        <h2 className="ProductAbout__about-title">
+          About
+        </h2>
 
-  const techSpecsKeys: (keyof ProductInfo)[] = [
-    'screen',
-    'resolution',
-    'processor',
-    'ram',
-    'camera',
-    'zoom',
-    'cell',
-  ];
+        <ul className="ProductAbout__about-list">
+          {product.descriptions.map(({ title, text }) => (
+            <li key={title} className="ProductAbout__about-item">
+              <h3 className="ProductAbout__description-title">
+                {title}
+              </h3>
 
-  return (
-    <div className="Product__description">
-      <div className="Product__content">
-        <div className="Product__about-section">
-          <h2 className="Product__about-title">
-            About
-          </h2>
+              <ul>
+                {text.map((paragraph) => (
+                  <li
+                    key={paragraph}
+                    className="ProductAbout__description-text"
+                  >
+                    {paragraph}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-          <ul className="Product__about-list">
-            {product.descriptions.map((section, index) => (
-              <li key={index} className="Product__about-item">
-                <h3 className="Product__description-title">
-                  {section.title}
+      <div className="ProductAbout__specs-info">
+        <h2 className="ProductAbout__specs-title">
+          Tech specs
+        </h2>
+
+        <ul className="ProductAbout__specs-list">
+          {getValidFields(String(product.category)).map((key) => {
+            const value = product[key];
+
+            return (
+              <li key={key} className="ProductAbout__specs-item">
+                <h3 className="ProductAbout__tech-specs-title">
+                  {capitalize(key)}:
                 </h3>
 
-                <ul>
-                  {section.text.map((item, idx) => (
-                    <li key={idx} className="Product__description-text">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <span className="ProductAbout__tech-specs-text">
+                  {Array.isArray(value)
+                    ? value.join(', ')
+                    : value}
+                </span>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="Product__tech-specs">
-          <h2 className="Product__tech-specs-title">
-            Tech specs
-          </h2>
-
-          <ul className="Product__specs-list">
-            {techSpecsKeys.map((key) => {
-              const value = product[key];
-
-              return (
-                <React.Fragment key={key}>
-                  <li className="Product__specs-item">
-                    <p className="Product__specs-title">
-                      {capitalize(key)}:
-                    </p>
-
-                    <span className="Product__specs-value">
-                      {Array.isArray(value)
-                        ? value.join(', ')
-                        : value}
-                    </span>
-                  </li>
-                </React.Fragment>
-              );
-            })}
-          </ul>
-        </div>
+            );
+          })}
+        </ul>
       </div>
     </div>
-  );
-};
-
-export default ProductAbout;
+  </div>
+);

@@ -23,7 +23,8 @@ Product,
   color: string;
   namespaceId: number;
   colorId: number;
-  categoryId: number;
+  color: string;
+  category: string;
   capacityAvailable: string[];
   colorsAvailable: string[];
   images: string[];

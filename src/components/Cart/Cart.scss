@@ -9,6 +9,14 @@
     padding-bottom: 80px;
   }
 
+  &__go-back {
+    margin-bottom: 24px;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
   &__content {
     display: block;
     padding-block: 16px;
@@ -20,29 +28,6 @@
       align-items: start;
       gap: 16px;
     }
-  }
-
-  &__breadcrumbs {
-    margin-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    color: $gray-secondary;
-    transition: color $default-transition ease-in-out;
-
-    @include onTablet {
-      margin-bottom: 40px;
-    }
-
-    &:hover {
-      color: $gray-primary;
-    }
-  }
-
-  &__breadcrumbs-text {
-    @extend %small-text;
-    transform: translateY(1px); // fix for the text centering
   }
 
   &__title {

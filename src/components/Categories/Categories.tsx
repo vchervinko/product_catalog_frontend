@@ -35,7 +35,7 @@ export const Categories: FC<Props> = ({ totals }) => (
           </Link>
 
           <p className="Categories__info">
-            {totals[category.id--] || 0} total
+            {totals[category.id - 1] || 0} total
           </p>
         </li>
       ))}

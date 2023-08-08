@@ -40,17 +40,13 @@ export const PageLayout: FC<Props> = ({ title, loadData }) => {
         </div>
       )}
 
-      {shouldShowCatalog && (
-        <div className="PageLayout__models">
-          {total} models
-        </div>
-      )}
+      <div className="PageLayout__models">
+        {total} models
+      </div>
 
-      {shouldShowCatalog && (
-        <section className="PageLayout__actions">
-          <ProductFilters />
-        </section>
-      )}
+      <section className="PageLayout__actions">
+        <ProductFilters />
+      </section>
 
       {shouldShowLoader && (
         <span className="PageLayout__loader">
