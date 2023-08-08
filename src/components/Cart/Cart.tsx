@@ -1,19 +1,27 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import classNames from 'classnames';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { calculatePrice } from '../../helpers/calculatePrice';
 import { calculateQuantity } from '../../helpers/calculateQuantity';
 import { BASE_URL } from '../../helpers/fetchClient';
-import { BackButton } from '../BackButton';
+import { Modal } from '../Modal/Modal';
 import { Icon } from '../Icon';
 import './Cart.scss';
+import './../../styles/modal.scss';
 
 export const Cart: FC = () => {
   const {
     cart,
     addProductToCart,
     deleteProductFromCart,
+    deleteAllProductsFromCart,
   } = useProductsContext();
+
+  const navigate = useNavigate();
+  const [modalActive, setModalActive] = useState(false);
 
   const totalPrice = cart.reduce((total, product) => (
     total + calculatePrice(product)
@@ -23,104 +31,134 @@ export const Cart: FC = () => {
 
   const hasItemsInCart = cart.length > 0;
 
+  const cartContainerClasses = classNames('Cart__container', {
+    blur: modalActive,
+  });
+
+  const checkoutHandler = () => {
+    setModalActive(true);
+
+    deleteAllProductsFromCart();
+  }
+
   return (
     <section className="Cart">
-      <div className="Cart__go-back">
-        <BackButton />
-      </div>
+      <div className={cartContainerClasses}>
+        <button
+          className="Cart__breadcrumbs"
+          onClick={() => navigate(-1)}
+        >
+          <Icon type="arrow-left" size={16} />
 
-      <h2 className="Cart__title">Cart</h2>
+          <span className="Cart__breadcrumbs-text">
+            Back
+          </span>
+        </button>
 
-      {!hasItemsInCart && (
-        <h2 className="Cart__empty-message">
-          Cart is empty now
-        </h2>
-      )}
+        <h2 className="Cart__title">Cart</h2>
 
-      {hasItemsInCart && (
-        <div className="Cart__content">
-          <div className="Cart__list">
-            {cart.map((product) => {
-              const itemPrice = calculatePrice(product);
+        {!hasItemsInCart && (
+          <h2 className="Cart__empty-message">
+            Cart is empty now
+          </h2>
+        )}
 
-              const canIncrement = product.quantity < 99;
-              const canDecrement = product.quantity > 1;
+        {hasItemsInCart && (
+          <div className="Cart__content">
+            <div className="Cart__list">
+              {cart.map((product) => {
+                const itemPrice = calculatePrice(product);
 
-              const incrementIcon = canIncrement ? 'plus' : 'plus-disabled';
-              const decrementIcon = canDecrement ? 'minus' : 'minus-disabled';
+                const canIncrement = product.quantity < 99;
+                const canDecrement = product.quantity > 1;
 
-              return (
-                <div key={product.id} className="Cart__item">
-                  <div className="Cart__row">
-                    <button
-                      onClick={() => deleteProductFromCart(product.id, true)}
-                    >
-                      <Icon size={16} type="close-disabled" />
-                    </button>
+                const incrementIcon = canIncrement ? 'plus' : 'plus-disabled';
+                const decrementIcon = canDecrement ? 'minus' : 'minus-disabled';
 
-                    <Link to={`/${product.category}/${product.itemId}`}>
-                      <img
-                        className="Cart__image"
-                        src={`${BASE_URL}/${product.image}`}
-                        alt={product.name}
-                      />
-                    </Link>
-
-                    <Link
-                      className="Cart__description"
-                      to={`/${product.category}/${product.itemId}`}
-                    >
-                      {product.name}
-                    </Link>
-                  </div>
-
-                  <div className="Cart__row">
-                    <div className="Cart__quantity-selector">
+                return (
+                  <div key={product.id} className="Cart__item">
+                    <div className="Cart__row">
                       <button
-                        className="Cart__modify-button"
-                        disabled={!canDecrement}
-                        onClick={() => deleteProductFromCart(product.id)}
+                        onClick={() => deleteProductFromCart(product.id, true)}
                       >
-                        <Icon size={32} type={decrementIcon} />
+                        <Icon size={16} type="close-disabled" />
                       </button>
 
-                      <span className="Cart__quantity">
-                        {product.quantity}
-                      </span>
+                      <Link to={`/${product.category}/${product.itemId}`}>
+                        <img
+                          className="Cart__image"
+                          src={`${BASE_URL}/${product.image}`}
+                          alt={product.name}
+                        />
+                      </Link>
 
-                      <button
-                        className="Cart__modify-button"
-                        disabled={!canIncrement}
-                        onClick={() => addProductToCart(product)}
+                      <Link
+                        className="Cart__description"
+                        to={`/${product.category}/${product.itemId}`}
                       >
-                        <Icon size={32} type={incrementIcon} />
-                      </button>
+                        {product.name}
+                      </Link>
                     </div>
 
-                    <p className="Cart__price">
-                      {itemPrice}
-                    </p>
+                    <div className="Cart__row">
+                      <div className="Cart__quantity-selector">
+                        <button
+                          className="Cart__modify-button"
+                          disabled={!canDecrement}
+                          onClick={() => deleteProductFromCart(product.id)}
+                        >
+                          <Icon size={32} type={decrementIcon} />
+                        </button>
+
+                        <span className="Cart__quantity">
+                          {product.quantity}
+                        </span>
+
+                        <button
+                          className="Cart__modify-button"
+                          disabled={!canIncrement}
+                          onClick={() => addProductToCart(product)}
+                        >
+                          <Icon size={32} type={incrementIcon} />
+                        </button>
+                      </div>
+
+                      <p className="Cart__price">
+                        {itemPrice}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+
+            <div className="Cart__checkout">
+              <p className="Cart__total-price">
+                {totalPrice}
+              </p>
+
+              <p className="Cart__total">
+                Total for {totalQuantity} items
+              </p>
+
+              <button
+                className="Cart__checkout-button"
+                onClick={checkoutHandler}
+              >
+                Checkout
+              </button>
+            </div>
           </div>
-
-          <div className="Cart__checkout">
-            <p className="Cart__total-price">
-              {totalPrice}
-            </p>
-
-            <p className="Cart__total">
-              Total for {totalQuantity} items
-            </p>
-
-            <button className="Cart__checkout-button">
-              Checkout
-            </button>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
+      <CSSTransition
+        in={modalActive}
+        timeout={400}
+        classNames="alert"
+        unmountOnExit
+      >
+        <Modal setActive={setModalActive}/>
+      </CSSTransition>
     </section>
   );
 };
