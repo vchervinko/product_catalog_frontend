@@ -1,6 +1,7 @@
 @import "../../styles/utils/variables";
 @import "../../styles/utils/mixins";
 @import "../../styles/utils/placeholders";
+@import "../../styles/utils/keyframes";
 
 .product {
   .decorative-line {
@@ -27,6 +28,12 @@
     object-fit: contain;
     object-position: center;
 
+    &-animated {
+      animation: fade-in $default-transition * 2 ease-in-out forwards;
+      opacity: 1;
+      transform: scale(1);
+    }
+
     @include onDesktop {
       width: 464px;
       height: 464px;
@@ -36,6 +43,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto;
 
       @include onDesktop {
         display: block;
@@ -77,10 +85,6 @@
 
       object-fit: contain;
       object-position: center;
-
-      &:last-child {
-        margin-right: 0;
-      }
     }
 
     &--item {
@@ -90,11 +94,15 @@
 
     &--photo {
       height: 50px;
+      width: 50px;
+      object-fit: contain;
+      object-position: center;
       transition: all 0.3s ease;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 
       @include onDesktop {
         height: 80px;
+        width: 80px;
       }
 
       &-button {
@@ -168,7 +176,6 @@
           filter: none;
         }
       }
-
     }
 
     &--color-button {
@@ -192,14 +199,7 @@
     }
   }
 
-  &__section {
-
-    &-actions {
-      margin-bottom: 32px;
-    }
-
-    &-techspechs {
-      margin-bottom: 56px;
-    }
+  &__section-actions {
+    margin-bottom: 32px;
   }
 }

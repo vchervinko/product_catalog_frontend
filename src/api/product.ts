@@ -41,23 +41,27 @@ export const getDiscountProducts = async (): Promise<Product[]> => {
 };
 
 export const getProductsCount = async (): Promise<number[]> => {
-  const phones = client.get<ProductResponse>('/phones');
-  const tablets = client.get<ProductResponse>('/tablets');
-  const accessories = client.get<ProductResponse>('/accessories');
+  const phones = client.get<number>(
+    '/products/count?category=phones',
+  );
+
+  const tablets = client.get<number>(
+    '/products/count?category=tablets',
+  );
+
+  const accessories = client.get<number>(
+    '/products/count?category=accessories',
+  );
 
   const [
-    phonesResponse,
-    tabletsResponse,
-    accessoriesResponse,
+    phonesCount,
+    tabletsCount,
+    accessoriesCount,
   ] = await Promise.all([
     phones,
     tablets,
     accessories,
   ]);
-
-  const phonesCount = phonesResponse.count;
-  const tabletsCount = tabletsResponse.count;
-  const accessoriesCount = accessoriesResponse.count;
 
   return [phonesCount, tabletsCount, accessoriesCount];
 };
@@ -65,13 +69,21 @@ export const getProductsCount = async (): Promise<number[]> => {
 export const getRecommendedProducts = async (
   price: number,
   fullPrice: number,
-  categoryId: number,
+  category: string,
 ): Promise<Product[]> => {
   const response = await client.get<Product[]>(
     '/products/recommended'
-      + `price=${price}`
+      + `?price=${price}`
       + `&fullPrice=${fullPrice}`
-      + `&categoryId=${categoryId}`,
+      + `&category=${category}`,
+  );
+
+  return response;
+};
+
+export const getProductByQuery = async (query: string): Promise<Product[]> => {
+  const response = await client.get<Product[]>(
+    `/products/search?query=${query}`,
   );
 
   return response;

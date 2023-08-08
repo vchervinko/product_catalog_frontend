@@ -14,7 +14,7 @@ export const ProductsContextProvider: FC<Props> = memo(({ children }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useLocalStorage('limit', 16);
-  const [sortBy, setSortBy] = useLocalStorage('sortBy', 'newest');
+  const [sortBy, setSortBy] = useState('newest');
   const [cart, setCart] = useLocalStorage<CartProduct[]>('cart', []);
   const [likedProducts, setLikedProducts] = useLocalStorage<Product[]>(
     'liked',

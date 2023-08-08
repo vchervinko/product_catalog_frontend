@@ -1,22 +1,18 @@
-@import "../../styles/utils/placeholders";
 @import "../../styles/utils/variables";
+@import "../../styles/utils/mixins";
+@import "../../styles/utils/placeholders";
 
-.Product {
-  &__description {
-    display: flex;
-    flex-direction: column;
-    gap: 56px;
-    margin-bottom: 56px;
+.ProductAbout {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
 
-    @include onTablet {
-      gap: 64px;
-      margin-bottom: 64px;
-    }
+  @include onTablet {
+    gap: 64px;
+  }
 
-    @include onDesktop {
-      flex-direction: row;
-      margin-bottom: 80px;
-    }
+  @include onDesktop {
+    flex-direction: row;
   }
 
   &__content {
@@ -29,15 +25,15 @@
     }
   }
 
+  &__about-info {
+    grid-column: 1 / 13;
+  }
+
   &__about-title {
     @extend %h3;
     padding-bottom: 16px;
     margin-bottom: 32px;
     border-bottom: 1px solid $gray-elements;
-  }
-
-  &__about-section {
-    grid-column: 1 / 13;
   }
 
   &__about-list {
@@ -65,11 +61,11 @@
     color: $gray-secondary;
   }
 
-  &__tech-specs {
+  &__specs-info {
     grid-column: 14 / 24;
   }
 
-  &__tech-specs-title {
+  &__specs-title {
     @extend %h3;
     padding-bottom: 16px;
     margin-bottom: 32px;
@@ -88,12 +84,12 @@
     justify-content: space-between;
   }
 
-  &__specs-title {
+  &__tech-specs-title {
     @extend %body-text;
     color: $gray-secondary;
   }
 
-  &__specs-value {
+  &__tech-specs-text {
     @extend %body-text;
     color: $gray-primary;
   }
