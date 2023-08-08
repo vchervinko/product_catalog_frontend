@@ -1,12 +1,11 @@
 /* eslint-disable max-len */
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
-import { findItemById } from '../../helpers/findItemById';
+// import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
+// import { findItemById } from '../../helpers/findItemById';
 import { colorCodes } from '../../helpers/constants/colorCodes';
 import { ProductInfo } from '../../types/Product';
-import { Icon } from '../Icon';
+// import { Icon } from '../Icon';
 import './Flex__Container.scss';
 import './ProductDetails.scss';
 
@@ -20,21 +19,15 @@ export const ProductDetails: FC<Props> = ({ product }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [animateImage, setAnimateImage] = useState(true);
 
-  const {
-    cart,
-    likedProducts,
-  } = useProductsContext();
+  // const {
+  //   addProductToCart,
+  //   toggleLikeProduct,
+  // } = useProductsContext();
 
-  const navigate = useNavigate();
+  // const hasItemInCart = Boolean(findItemById(cart, product.id));
+  // const isLiked = Boolean(findItemById(likedProducts, product.id));
 
-  const navigateToCart = () => {
-    navigate('/cart');
-  };
-
-  const hasItemInCart = Boolean(findItemById(cart, product.id));
-  const isLiked = Boolean(findItemById(likedProducts, product.id));
-
-  const likeButtonIcon = isLiked ? 'like-filled' : 'like';
+  // const likeButtonIcon = isLiked ? 'like-filled' : 'like';
 
   const handleCapacityClick = (capacity: string) => {
     setSelectedCapacity(capacity);
@@ -105,7 +98,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                 <span
                   className="product__details-selector--title product__details-selector--title-ID"
                 >
-                  ID:{product.id}
+                  ID:{product.itemId}
                 </span>
               </div>
               <ul className="product__details-selector--list">
@@ -168,12 +161,11 @@ export const ProductDetails: FC<Props> = ({ product }) => {
               </h2>
             </section>
 
-            <section className="Card__actions product__section-actions">
+            {/* <section className="Card__actions product__section-actions">
               {hasItemInCart
                 ? (
                   <button
                     className="Card__actions-button Card__actions-button--added"
-                    onClick={navigateToCart}
                   >
                     Added to cart
                   </button>
@@ -186,10 +178,12 @@ export const ProductDetails: FC<Props> = ({ product }) => {
                   </button>
                 )}
 
-              <button>
+              <button
+                className="Card__actions-button Card__actions-button--like"
+              >
                 <Icon size={40} type={likeButtonIcon} />
               </button>
-            </section>
+            </section> */}
 
             <section className="product__section-techspechs">
               <ul className="Card__list-specifications">
@@ -238,7 +232,7 @@ export const ProductDetails: FC<Props> = ({ product }) => {
           <span
             className="product__details-selector--title flex__container-ID"
           >
-            ID: {product.id}
+            ID: {product.itemId}
           </span>
         </div>
       </div>

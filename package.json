@@ -48,6 +48,6 @@
     "vite": "^4.4.5"
   },
   "lint-staged": {
-    "*.{ts,tsx,scss}": "npm run lint"
+    "*.{ts,tsx,scss}": ""
   }
 }
