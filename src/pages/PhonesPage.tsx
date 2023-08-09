@@ -71,7 +71,6 @@ const PhonesPage: FC = () => {
 
   return (
     <PageLayout title="Mobile phones" loadData={loadPhones} />
-
   );
 };
 

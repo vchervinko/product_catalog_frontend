@@ -34,6 +34,23 @@ export const getNewProducts = async (): Promise<Product[]> => {
   return response;
 };
 
+export const getProductByDetails = async (
+  namespaceId: number,
+  category: string,
+  color: string,
+  capacity: string,
+): Promise<ProductInfo> => {
+  const response = await client.get<ProductInfo>(
+    '/namespaces'
+      + `?namespaceId=${namespaceId}`
+      + `&category=${category}`
+      + `&color=${color}`
+      + `&capacity=${capacity}`,
+  );
+
+  return response;
+};
+
 export const getDiscountProducts = async (): Promise<Product[]> => {
   const response = await client.get<Product[]>('/products/discount');
 

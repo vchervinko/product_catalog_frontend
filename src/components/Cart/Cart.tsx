@@ -1,27 +1,26 @@
-import { FC, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
-import { useNavigate } from 'react-router';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { calculatePrice } from '../../helpers/calculatePrice';
 import { calculateQuantity } from '../../helpers/calculateQuantity';
 import { BASE_URL } from '../../helpers/fetchClient';
-import { Modal } from '../Modal/Modal';
+import { BackButton } from '../BackButton';
 import { Icon } from '../Icon';
-import './Cart.scss';
+import { Modal } from '../Modal/Modal';
 import './../../styles/modal.scss';
+import './Cart.scss';
 
 export const Cart: FC = () => {
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
   const {
     cart,
     addProductToCart,
     deleteProductFromCart,
     deleteAllProductsFromCart,
   } = useProductsContext();
-
-  const navigate = useNavigate();
-  const [modalActive, setModalActive] = useState(false);
 
   const totalPrice = cart.reduce((total, product) => (
     total + calculatePrice(product)
@@ -31,29 +30,25 @@ export const Cart: FC = () => {
 
   const hasItemsInCart = cart.length > 0;
 
-  const cartContainerClasses = classNames('Cart__container', {
-    blur: modalActive,
-  });
-
-  const checkoutHandler = () => {
-    setModalActive(true);
-
+  const checkout = () => {
+    setIsModalOpened(true);
     deleteAllProductsFromCart();
-  }
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+  };
 
   return (
     <section className="Cart">
-      <div className={cartContainerClasses}>
-        <button
-          className="Cart__breadcrumbs"
-          onClick={() => navigate(-1)}
-        >
-          <Icon type="arrow-left" size={16} />
-
-          <span className="Cart__breadcrumbs-text">
-            Back
-          </span>
-        </button>
+      <div
+        className={classNames('Cart__content', {
+          'Cart__content--blur': isModalOpened,
+        })}
+      >
+        <div className="Cart__go-back">
+          <BackButton />
+        </div>
 
         <h2 className="Cart__title">Cart</h2>
 
@@ -64,7 +59,7 @@ export const Cart: FC = () => {
         )}
 
         {hasItemsInCart && (
-          <div className="Cart__content">
+          <div className="Cart__products">
             <div className="Cart__list">
               {cart.map((product) => {
                 const itemPrice = calculatePrice(product);
@@ -143,7 +138,7 @@ export const Cart: FC = () => {
 
               <button
                 className="Cart__checkout-button"
-                onClick={checkoutHandler}
+                onClick={checkout}
               >
                 Checkout
               </button>
@@ -151,13 +146,14 @@ export const Cart: FC = () => {
           </div>
         )}
       </div>
+
       <CSSTransition
-        in={modalActive}
+        in={isModalOpened}
         timeout={400}
         classNames="alert"
         unmountOnExit
       >
-        <Modal setActive={setModalActive}/>
+        <Modal closeModal={closeModal}/>
       </CSSTransition>
     </section>
   );

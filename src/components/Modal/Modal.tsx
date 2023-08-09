@@ -1,42 +1,48 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router';
 import cart from '../../assets/icons/cart-checkout.svg';
-import close from '../../assets/icons/Close.svg';
-
+import { Icon } from '../Icon';
+import { MainButton } from '../MainButton';
 import './Modal.scss';
 
 interface Props {
-  setActive: (value: boolean) => void,
+  closeModal: () => void;
 }
 
-export const Modal: FC<Props> = ({ setActive }) => {
+export const Modal: FC<Props> = ({ closeModal }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="Modal">
       <div className="Modal__content">
-        <button onClick={() => setActive(false)}>
-          <img
-            className="Modal__close"
-            src={close}
-            alt="close"
-          />
+        <button
+          className="Modal__close-button"
+          onClick={closeModal}
+        >
+          <Icon type="close" size={16} />
         </button>
-        <div className="container">
-          <img
-            className="Modal__success"
-            src={cart}
-            alt="Thank You!"
-          />
-          <div className="Modal__title">
-            Thank You!
-          </div>
-          <div className="Modal__message">
-            Your order was successfully applied!
-          </div>
-          <div className="Modal__button">
-            <Link className="Modal__link" to ="/">Return Home</Link>
-          </div>
-        </div>
+
+        <img
+          className="Modal__success"
+          src={cart}
+          alt="Thank You!"
+        />
+
+        <h4 className="Modal__title">
+          Thank You!
+        </h4>
+
+        <p className="Modal__message">
+          Your order was successfully applied!
+        </p>
+
+        <p className="Modal__text">
+          We will contact you as soon as possible.
+        </p>
+
+        <MainButton onClick={() => navigate('/')}>
+          Return Home
+        </MainButton>
       </div>
     </div>
   );

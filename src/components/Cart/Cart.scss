@@ -3,15 +3,21 @@
 @import "../../styles/utils/placeholders";
 
 .Cart {
+  @include square(100%);
+  position: relative;
   padding: 25px 0 65px;
-
-  &__container {
-    width: 100%;
-    height: 100%;
-  }
 
   @include onDesktop {
     padding-bottom: 80px;
+  }
+
+  &__content {
+    @include square(100%);
+    transition: filter $default-transition ease-in-out;
+
+    &--blur {
+      filter: blur(20px);
+    }
   }
 
   &__go-back {
@@ -22,7 +28,7 @@
     }
   }
 
-  &__content {
+  &__products {
     display: block;
     padding-block: 16px;
 
@@ -191,8 +197,4 @@
     font-family: Mont-Regular, "Helvetica Neue", sans-serif; // Overriding
     color: $gray-secondary;
   }
-}
-
-.blur {
-  filter: blur(20px);
 }
