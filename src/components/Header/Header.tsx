@@ -9,6 +9,7 @@ import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 import { Navigation } from '../Navigation/Navigation';
 import './Header.scss';
+import { Search } from '../Search';
 
 export const Header: FC = () => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -39,6 +40,10 @@ export const Header: FC = () => {
           <div className="Header__nav">
             <Navigation />
           </div>
+        </div>
+
+        <div className="Header__search">
+          <Search />
         </div>
 
         <div className="Header__menu">

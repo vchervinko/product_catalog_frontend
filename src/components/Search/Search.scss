@@ -1,0 +1,57 @@
+@import "../../styles/utils/mixins";
+@import "../../styles/utils/variables";
+@import "../../styles/utils/placeholders";
+
+.Search {
+  display: none;
+
+  @include onDesktop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: max-content;
+    padding-inline: 24px;
+  }
+
+  &__input {
+    @extend %body-text;
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid $gray-elements;
+    height: 48px;
+    width: 300px;
+    transition: border-bottom $default-transition;
+    padding-left: 32px;
+
+    &:hover {
+      border-bottom: 1px solid $gray-secondary;
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $gray-primary;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    height: 16px;
+    margin: 8px;
+  }
+
+  &__dropdown {
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity $default-transition ease-in-out,
+      transform $default-transition ease-in-out;
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+}

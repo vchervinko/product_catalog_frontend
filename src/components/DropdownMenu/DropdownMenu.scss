@@ -1,0 +1,16 @@
+@import "../../styles/utils/variables";
+
+.dropdown {
+  position: absolute;
+  top: 7px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  border: 1px solid $gray-elements;
+  background-color: $white-color;
+}
+
+.dropdown__content {
+  display: block;
+}
