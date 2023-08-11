@@ -6,7 +6,6 @@
   display: none;
 
   @include onDesktop {
-    padding-inline: 8px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -19,8 +18,9 @@
   &__input {
     @extend %body-text;
     padding-left: 48px;
-    width: 350px;
-    height: 48px;
+    padding-right: 14px;
+    width: 300px;
+    height: $header-height-desktop;
     color: $gray-secondary;
     border: 1px solid $gray-elements;
     transition: border $default-transition ease-in-out,
@@ -38,11 +38,6 @@
     &:focus {
       color: $gray-primary;
       outline: none;
-      border: 1px solid $gray-secondary;
-    }
-
-    &:hover {
-      border: 1px solid $gray-icons-placeholders;
     }
   }
 

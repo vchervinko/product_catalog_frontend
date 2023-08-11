@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: $white-color;
-  border-block: 1px solid $gray-icons-placeholders;
+  border-block: 1px solid $gray-elements;
 
   @include onDesktop {
     height: $header-height-desktop;
@@ -57,7 +57,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: -1px 0 0 $gray-icons-placeholders;
+    box-shadow: -1px 0 0 $gray-elements;
 
     @include onTablet {
       display: none;
@@ -73,14 +73,14 @@
 
   &__menu-icon {
     @include square($header-icon-size);
-    background-image: url("/src/assets/icons/Menu.svg");
+    background-image: url("../../assets/icons/Menu.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     transition: background-image $default-transition ease-in-out;
 
     &--opened {
-      background-image: url("/src/assets/icons/Close.svg");
+      background-image: url("../../assets/icons/Close.svg");
     }
   }
 
