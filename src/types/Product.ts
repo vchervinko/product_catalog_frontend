@@ -20,7 +20,7 @@ Product,
 'id' | 'image' | 'category' | 'itemId'
 > {
   id: string;
-  namespaceId: number;
+  namespace: string;
   color: string;
   category: string;
   capacityAvailable: string[];

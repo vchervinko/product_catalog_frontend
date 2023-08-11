@@ -5,10 +5,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/scss';
-import thirdSlide from '../../assets/images/banner-accessories.png';
-import firstSlide from '../../assets/images/banner-phones.png';
-import secondSlide from '../../assets/images/banner-tablets.png';
+import thirdSlide from '../../assets/images/banner-accessories.webp';
+import firstSlide from '../../assets/images/banner-phones.webp';
+import secondSlide from '../../assets/images/banner-tablets.webp';
 import { Icon } from '../Icon';
 import './Slider.scss';
 
@@ -39,7 +38,7 @@ export const Slider: FC = () => (
         modules={[Autoplay, Pagination, Navigation]}
       >
         <SwiperSlide>
-          <Link to="/phones">
+          <Link to="/phones/apple-iphone-14-pro-512GB-spaceblack">
             <img
               className="Slider__image"
               src={firstSlide}
@@ -49,7 +48,7 @@ export const Slider: FC = () => (
         </SwiperSlide>
 
         <SwiperSlide>
-          <Link to="/tablets">
+          <Link to="/tablets/apple-ipad-mini-6th-gen-256gb-pink">
             <img
               className="Slider__image"
               src={secondSlide}
@@ -59,7 +58,7 @@ export const Slider: FC = () => (
         </SwiperSlide>
 
         <SwiperSlide>
-          <Link to="/accessories">
+          <Link to="/accessories/apple-watch-series-6-44mm-gold">
             <img
               className="Slider__image"
               src={thirdSlide}

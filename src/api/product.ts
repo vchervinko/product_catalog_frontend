@@ -13,40 +13,24 @@ export const getProducts = async (
   sortBy: 'newest' | 'highestPrice' | 'lowestPrice',
 ): Promise<ProductResponse> => {
   const response = await client.get<ProductResponse>(
-    `/${category}?page=${page}&limit=${limit}&sortBy=${sortBy}`,
+    '/products'
+      + `?category=${category}`
+      + `&page=${page}`
+      + `&limit=${limit}`
+      + `&sortBy=${sortBy}`,
   );
 
   return response;
 };
 
-export const getProductById = async (
-  id: string,
-  category: string,
-): Promise<ProductInfo> => {
-  const response = await client.get<ProductInfo>(`/${category}/${id}`);
+export const getProductById = async (id: string): Promise<ProductInfo> => {
+  const response = await client.get<ProductInfo>(`/products/${id}`);
 
   return response;
 };
 
 export const getNewProducts = async (): Promise<Product[]> => {
   const response = await client.get<Product[]>('/products/new');
-
-  return response;
-};
-
-export const getProductByDetails = async (
-  namespaceId: number,
-  category: string,
-  color: string,
-  capacity: string,
-): Promise<ProductInfo> => {
-  const response = await client.get<ProductInfo>(
-    '/namespaces'
-      + `?namespaceId=${namespaceId}`
-      + `&category=${category}`
-      + `&color=${color}`
-      + `&capacity=${capacity}`,
-  );
 
   return response;
 };

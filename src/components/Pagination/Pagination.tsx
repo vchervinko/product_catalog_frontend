@@ -15,11 +15,15 @@ interface Page {
 export const Pagination: FC = () => {
   const [pages, setPages] = useState<number[]>([]);
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { total, limit } = useProductsContext();
 
   const currentPage = Number(searchParams.get('page')) || 1;
   const lastPage = pages[pages.length - 1];
+
+  if (Number(currentPage) > lastPage) {
+    setSearchParams({ page: `${lastPage}` });
+  }
 
   useEffect(() => {
     setPages(getNumbers(total, limit));

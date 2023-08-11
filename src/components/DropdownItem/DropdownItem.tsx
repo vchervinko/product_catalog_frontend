@@ -1,51 +1,43 @@
-import React, { memo } from 'react';
-import { Product } from '../../types/Product';
-import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../helpers/fetchClient';
+import { Product } from '../../types/Product';
 import './DropdownItem.scss';
 
 interface Props {
-  item: Product;
-  clearQuery: () => void;
-  onSelected: (name: string) => void;
+  product: Product;
+  selectProduct: (productName: string) => void;
 }
 
-export const DropdownItem: React.FC<Props> = memo(({
-  item,
-  clearQuery,
-  onSelected,
+export const DropdownItem: FC<Props> = ({
+  product,
+  selectProduct,
 }) => {
+  const navigate = useNavigate();
+
+  const handleItemClick = () => {
+    selectProduct(product.name);
+    navigate(`/${product.category}/${product.itemId}`);
+  };
+
   return (
-    <div className="DropdownItem">
-      <Link
-        to={`/${item.category}/${item.itemId}`}
-        onClick={() => {
-          clearQuery();
-          onSelected(item.name);
-        }}
-      >
-        <img
-          className="DropdownItem__image"
-          src={`${BASE_URL}/${item.image}`}
-          alt={item.name}
-        />
-      </Link>
+    <button
+      className="DropdownItem"
+      onClick={handleItemClick}
+    >
+      <img
+        className="DropdownItem__image"
+        src={`${BASE_URL}/${product.image}`}
+        alt={product.name}
+      />
 
-      <Link
-        className="DropdownItem__description"
-        to={`/${item.category}/${item.itemId}`}
-        onClick={() => {
-          clearQuery();
-          onSelected(item.name);
-        }}
-      >
-        {item.name}
-      </Link>
-
-      <p className="DropdownItem__price">
-        {item.price}
+      <p className="DropdownItem__description">
+        {product.name}
       </p>
 
-    </div>
+      <span className="DropdownItem__price">
+        {product.price}
+      </span>
+    </button>
   );
-});
+};

@@ -28,15 +28,11 @@ export const Modal: FC<Props> = ({ closeModal }) => {
           alt="Thank You!"
         />
 
-        <h4 className="Modal__title">
-          Thank You!
-        </h4>
-
-        <p className="Modal__message">
+        <p className="Modal__title">
           Your order was successfully applied!
         </p>
 
-        <p className="Modal__text">
+        <p className="Modal__message">
           We will contact you as soon as possible.
         </p>
 

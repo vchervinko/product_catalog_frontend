@@ -1,31 +1,32 @@
-import React, { memo } from 'react';
-import './DropdownMenu.scss';
-import { DropdownItem } from '../DropdownItem';
+import React from 'react';
 import { Product } from '../../types/Product';
+import { DropdownItem } from '../DropdownItem';
+import './DropdownMenu.scss';
 
 interface Props {
   products: Product[];
-  clearQuery: () => void;
-  onSelected: (name: string) => void;
+  selectProduct: (productName: string) => void;
 }
 
-export const DropdownMenu: React.FC<Props> = memo(({
+export const DropdownMenu: React.FC<Props> = ({
   products,
-  clearQuery,
-  onSelected,
-}) => {
-  return (
-    <div className="dropdown" role="menu">
-      <div className="dropdown__content">
-        {products.map((item) => (
+  selectProduct,
+}) => (
+  <div className="DropdownMenu">
+    {products.length > 0
+      ? (
+        products.map((product) => (
           <DropdownItem
-            key={item.id}
-            item={item}
-            clearQuery={clearQuery}
-            onSelected={onSelected}
+            key={product.id}
+            product={product}
+            selectProduct={selectProduct}
           />
-        ))}
-      </div>
-    </div>
-  );
-});
+        ))
+      )
+      : (
+        <span className="DropdownMenu__empty-message">
+          No results found
+        </span>
+      )}
+  </div>
+);

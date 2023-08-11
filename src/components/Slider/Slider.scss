@@ -56,7 +56,7 @@
     object-fit: cover;
     object-position: center;
     cursor: pointer;
-    transition: transform $default-transition * 2 ease-in-out;
+    transition: transform $default-transition * 3 ease-in-out;
 
     &:hover {
       transform: scale(1.1);

@@ -1,57 +1,78 @@
-@import "../../styles/utils/mixins";
 @import "../../styles/utils/variables";
+@import "../../styles/utils/mixins";
 @import "../../styles/utils/placeholders";
 
 .Search {
   display: none;
 
   @include onDesktop {
-    position: relative;
+    padding-inline: 8px;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: end;
-    height: max-content;
-    padding-inline: 24px;
+  }
+
+  &__content {
+    position: relative;
   }
 
   &__input {
     @extend %body-text;
-    font-size: 13px;
-    border: none;
-    border-bottom: 1px solid $gray-elements;
+    padding-left: 48px;
+    width: 350px;
     height: 48px;
-    width: 300px;
-    transition: border-bottom $default-transition;
-    padding-left: 32px;
+    color: $gray-secondary;
+    border: 1px solid $gray-elements;
+    transition: border $default-transition ease-in-out,
+      color $default-transition ease-in-out;
 
-    &:hover {
-      border-bottom: 1px solid $gray-secondary;
+    &::placeholder {
+      color: $gray-icons-placeholders;
+      transition: color $default-transition ease-in-out;
+    }
+
+    &:focus::placeholder {
+      color: $gray-secondary;
     }
 
     &:focus {
+      color: $gray-primary;
       outline: none;
-      border-bottom: 1px solid $gray-primary;
+      border: 1px solid $gray-secondary;
+    }
+
+    &:hover {
+      border: 1px solid $gray-icons-placeholders;
     }
   }
 
-  &__image {
+  &__icon {
+    @include square(16px);
+    height: 100%;
     position: absolute;
-    height: 16px;
-    margin: 8px;
+    padding-inline: 24px;
+    background-image: url("../../assets/icons/Search.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
   }
 
   &__dropdown {
-    position: relative;
+    position: absolute;
+    top: 52px;
+    width: 100%;
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
     transform: translateY(-20px);
     transition: opacity $default-transition ease-in-out,
       transform $default-transition ease-in-out;
 
-    &--active {
+    &--opened {
       opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+      pointer-events: all;
+      transform: translateX(0);
+      transition: opacity $default-transition ease-in-out,
+        transform $default-transition ease-in-out;
     }
   }
 }

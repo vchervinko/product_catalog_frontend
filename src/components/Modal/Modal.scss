@@ -57,17 +57,6 @@
   }
 
   &__title {
-    @extend %h2;
-    position: relative;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-
-    @include onTablet {
-      margin-bottom: 14px;
-    }
-  }
-
-  &__message {
     @extend %h4;
     margin-bottom: 4px;
     color: $gray-primary;
@@ -77,7 +66,7 @@
     }
   }
 
-  &__text {
+  &__message {
     @extend %body-text;
     margin-bottom: 14px;
     color: $gray-primary;

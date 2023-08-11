@@ -41,10 +41,14 @@
   }
 
   &__search {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 32px;
+    display: none;
+
+    @include onTablet {
+      @include square(100%);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
   }
 
   &__menu {

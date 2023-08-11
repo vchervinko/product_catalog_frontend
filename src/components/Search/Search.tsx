@@ -1,103 +1,126 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable init-declarations */
-import React, { useCallback, useEffect, useState } from 'react';
-import './Search.scss';
-import { getProductByQuery } from '../../api/product';
-import { DropdownMenu } from '../DropdownMenu';
-import { Product } from '../../types/Product';
-import SearchImg from '../../assets/icons/Search.svg';
 import classNames from 'classnames';
-
-const debounce = <T extends (...args: never[]) => void>(
-  func: T,
-  delay: number,
-) => {
-  let timerId: number;
-
-  return (...args: Parameters<T>): void => {
-    clearTimeout(timerId);
-    timerId = setTimeout(func, delay, ...args);
-  };
-};
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { getProductByQuery } from '../../api/product';
+import { debounce } from '../../helpers/debounce';
+import { Product } from '../../types/Product';
+import { DropdownMenu } from '../DropdownMenu';
+import './Search.scss';
 
 export const Search: React.FC = () => {
   const [query, setQuery] = useState('');
   const [appliedQuery, setAppliedQuery] = useState('');
-  const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isSuggestionsVisible, setIsSuggestionsVisible] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const applyQuery = useCallback(debounce(setAppliedQuery, 500), []);
 
-  const handleQueryOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const searchQueryRef = useRef<HTMLDivElement>(null);
+
+  const loadProducts = useCallback(async () => {
+    try {
+      const newProducts = await getProductByQuery(appliedQuery);
+
+      setProducts(newProducts);
+      setIsSuggestionsVisible(true);
+    } catch {
+      setProducts([]);
+    }
+  }, [appliedQuery]);
+
+  useEffect(() => {
+    if (!appliedQuery.trim()) {
+      return;
+    }
+
+    loadProducts();
+
+    return () => {
+      setProducts([]);
+    };
+  }, [appliedQuery, loadProducts]);
+
+  useEffect(() => {
+    const handleDropdownClick = (event: MouseEvent) => {
+      if (
+        isSuggestionsVisible
+          && searchQueryRef.current
+          && !searchQueryRef.current.contains(event.target as Node)) {
+        setIsSuggestionsVisible(false);
+      }
+    };
+
+    document.addEventListener('click', handleDropdownClick);
+
+    return () => {
+      document.removeEventListener('click', handleDropdownClick);
+    };
+  }, [isSuggestionsVisible]);
+
+  const selectProduct = useCallback((productName: string) => {
+    setQuery(productName);
+    setIsSuggestionsVisible(false);
+  }, []);
+
+  const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
     setQuery(value);
     applyQuery(value);
-    setIsDropdownVisible(true);
+    setIsSuggestionsVisible(false);
   };
 
-  const clearQuery = () => {
-    setQuery('');
+  const handleQueryKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      loadProducts();
+    }
+
+    if (event.key === 'Escape') {
+      setIsSuggestionsVisible(false);
+    }
   };
 
-  const onSelected = () => {
-    setIsDropdownVisible(false);
+  const handleQueryFocus = () => {
+    if (!appliedQuery.trim()) {
+      return;
+    }
+
+    loadProducts();
   };
 
-  useEffect(() => {
-    const fetchVisibleProducts = async () => {
-      if (!appliedQuery) {
-        setVisibleProducts([]);
-
-        return;
-      }
-
-      try {
-        const products = await getProductByQuery(appliedQuery);
-        setVisibleProducts(products);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setVisibleProducts([]);
-      }
-    };
-
-    fetchVisibleProducts();
-  }, [appliedQuery]);
+  const isDropdownVisible = appliedQuery && isSuggestionsVisible;
 
   return (
-    <main className="Search">
-      <div>
-        <div>
-          <label>
-            <img
-              src={SearchImg}
-              alt="Search img"
-              className="Search__image"
-            />
+    <div ref={searchQueryRef} className="Search">
+      <div className="Search__content">
+        <label>
+          <i className="Search__icon" />
 
-            <input
-              type="text"
-              name="query"
-              placeholder="Search"
-              className="Search__input"
-              value={query}
-              onChange={handleQueryOnChange}
-            />
-          </label>
-        </div>
+          <input
+            className="Search__input"
+            type="text"
+            name="search"
+            placeholder="Search"
+            value={query}
+            onChange={handleQueryChange}
+            onKeyDown={handleQueryKeyDown}
+            onFocus={handleQueryFocus}
+          />
+        </label>
 
         <div
           className={classNames('Search__dropdown', {
-            'Search__dropdown--active': isDropdownVisible,
+            'Search__dropdown--opened': isDropdownVisible,
           })}
         >
           <DropdownMenu
-            products={visibleProducts}
-            clearQuery={clearQuery}
-            onSelected={onSelected}
+            products={products}
+            selectProduct={selectProduct}
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 };

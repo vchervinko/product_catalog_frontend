@@ -15,6 +15,8 @@ import './ProductLayout.scss';
 export const ProductLayout: FC = () => {
   const [product, setProduct] = useState<ProductInfo | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedCapacity, setSelectedCapacity] = useState('');
 
   const { pathname } = useLocation();
 
@@ -34,31 +36,41 @@ export const ProductLayout: FC = () => {
       clearError();
       setIsLoaded(false);
 
-      const [, category, id] = pathname.split('/');
-      const productFromServer = await getProductById(id, category);
+      const [,, id] = pathname.split('/');
+
+      const productFromServer = await getProductById(id);
 
       setProduct(productFromServer);
-
-      if (product) {
-        const recommendedProductsFromServer = await getRecommendedProducts(
-          product.price,
-          product.fullPrice,
-          product.category,
-        );
-
-        setRecommendedProducts(recommendedProductsFromServer);
-      }
+      setSelectedColor(productFromServer.color);
+      setSelectedCapacity(productFromServer.capacity);
     } catch (error: unknown) {
       setError(error as Error);
     } finally {
       setIsLoaded(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, product?.id, setIsLoaded, setError, clearError]);
+  }, [pathname, setIsLoaded, setError, clearError]);
 
   useEffect(() => {
     loadProduct();
   }, [loadProduct]);
+
+  const loadRecommendedProducts = useCallback(async () => {
+    if (!product) {
+      return;
+    }
+
+    const productsFromServer = await getRecommendedProducts(
+      product.price,
+      product.fullPrice,
+      product.category,
+    );
+
+    setRecommendedProducts(productsFromServer);
+  }, [product]);
+
+  useEffect(() => {
+    loadRecommendedProducts();
+  }, [loadRecommendedProducts]);
 
   if (!product) {
     return (
@@ -86,7 +98,13 @@ export const ProductLayout: FC = () => {
       </section>
 
       <section className="ProductLayout__details">
-        <ProductDetails product={product} />
+        <ProductDetails
+          product={product}
+          selectedColor={selectedColor}
+          selectedCapacity={selectedCapacity}
+          setSelectedColor={setSelectedColor}
+          setSelectedCapacity={setSelectedCapacity}
+        />
       </section>
 
       <section className="ProductLayout__about">

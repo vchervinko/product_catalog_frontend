@@ -14,7 +14,6 @@ export const ProductFilters: FC = () => {
   const [isLimitOpened, setIsLimitOpened] = useState(false);
 
   const {
-    total,
     limit: contextLimit,
     sortBy: contextSortBy,
     setLimit,
@@ -24,20 +23,15 @@ export const ProductFilters: FC = () => {
   const refSortBy = useRef<HTMLDivElement>(null);
   const refLimit = useRef<HTMLDivElement>(null);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const limit = searchParams.get('limit') || contextLimit;
-  const sortBy = searchParams.get('sortBy') || contextSortBy;
+  const parsedLimit = Number(searchParams.get('limit')) || contextLimit;
+  const parsedSortBy = searchParams.get('sortBy') || contextSortBy;
 
-  setLimit(Number(limit));
-  setSortBy(sortBy);
-
-  const currentPage = searchParams.get('page') || 1;
-  const lastPage = Math.ceil(total / Number(limit));
-
-  if (Number(currentPage) > lastPage) {
-    setSearchParams({ page: `${lastPage}` });
-  }
+  useEffect(() => {
+    setLimit(Number(parsedLimit));
+    setSortBy(parsedSortBy);
+  });
 
   const sortByOptions = getEnumKeys(SortByOptions);
 
@@ -53,15 +47,15 @@ export const ProductFilters: FC = () => {
     const handleDropdownClick = (event: MouseEvent) => {
       if (
         isSortByOpened
-        && refSortBy.current
-        && !refSortBy.current.contains(event.target as Node)) {
+          && refSortBy.current
+          && !refSortBy.current.contains(event.target as Node)) {
         setIsSortByOpened(false);
       }
 
       if (
         isLimitOpened
-        && refLimit.current
-        && !refLimit.current.contains(event.target as Node)) {
+          && refLimit.current
+          && !refLimit.current.contains(event.target as Node)) {
         setIsLimitOpened(false);
       }
     };
@@ -71,7 +65,7 @@ export const ProductFilters: FC = () => {
     return () => {
       document.removeEventListener('click', handleDropdownClick, true);
     };
-  }, [isLimitOpened, isSortByOpened, limit, sortBy, setLimit, setSortBy]);
+  }, [isLimitOpened, isSortByOpened, setLimit, setSortBy]);
 
   return (
     <section className="ProductFilters">
@@ -87,7 +81,9 @@ export const ProductFilters: FC = () => {
           onClick={toggleSortBy}
           onKeyDown={toggleSortBy}
         >
-          {sortByOptions.find((key) => SortByOptions[key] === sortBy)}
+          {sortByOptions.find((key) => (
+            SortByOptions[key] === contextSortBy
+          ))}
 
           <div className={classNames('ProductFilters__arrow', {
             'ProductFilters__arrow--opened': isSortByOpened,
@@ -130,7 +126,7 @@ export const ProductFilters: FC = () => {
           onClick={toggleLimit}
           onKeyDown={toggleLimit}
         >
-          {limit}
+          {contextLimit}
 
           <div className={classNames('ProductFilters__arrow', {
             'ProductFilters__arrow--opened': isLimitOpened,

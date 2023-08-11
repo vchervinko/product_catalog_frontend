@@ -3,6 +3,8 @@
 @import "../../styles/utils/placeholders";
 
 .ProductDetails {
+  display: block;
+
   &__title {
     @extend %h2;
     margin-bottom: 32px;
@@ -13,7 +15,6 @@
   }
 
   &__content {
-    @include square(100%);
     position: relative;
     display: block;
 
@@ -29,11 +30,14 @@
   }
 
   &__slider {
-    width: 100%;
-    grid-column: 3 / 13;
-    overflow: hidden;
+    @include square(100%);
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @include onTablet {
+      margin-bottom: 0;
       grid-column: 2 / 8;
     }
 
@@ -43,26 +47,26 @@
   }
 
   &__slide {
-    @include square(442px);
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  &__image {
-    @include square(100%);
+  &__main-image {
+    width: 100%;
+    max-height: 442px;
     display: block;
     object-fit: contain;
     object-position: center;
   }
 
   &__thumbs {
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    @include square(100%);
+    margin-bottom: 40px;
 
     @include onTablet {
       grid-column: 1 / 2;
+      grid-row: 1;
     }
 
     @include onDesktop {
@@ -71,7 +75,22 @@
   }
 
   &__thumb {
-    @include square(40px);
+    min-width: 80px;
+    max-height: 80px;
+  }
+
+  &__thumb-image {
+    width: 100%;
+    max-height: 80px;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    border: 1px solid $gray-elements;
+    transition: border-color $default-transition ease-in-out;
+
+    &--active {
+      border: 1px solid $gray-primary;
+    }
   }
 
   &__product-id {
@@ -84,8 +103,10 @@
   }
 
   &__info {
+    position: relative;
 
     @include onTablet {
+      position: static;
       max-width: 320px;
       grid-column: 8 / 13;
     }

@@ -1,43 +1,39 @@
 /* eslint-disable max-len */
 import classNames from 'classnames';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
+import 'swiper/css';
 import { Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { getProductByDetails } from '../../api/product';
 import { useProductsContext } from '../../contexts/ProductsContext/useProductsContext';
 import { capitalize } from '../../helpers/capitalize';
 import { colorCodes } from '../../helpers/constants/colorCodes';
 import { techSpecOptions } from '../../helpers/constants/techSpecOptions';
+import { BASE_URL } from '../../helpers/fetchClient';
 import { findItemById } from '../../helpers/findItemById';
 import { normalizeCapacity } from '../../helpers/normalizeCapacity';
 import { Product, ProductInfo } from '../../types/Product';
 import { Icon } from '../Icon';
 import './ProductDetails.scss';
-import 'swiper/scss/thumbs';
 
 interface Props {
   product: ProductInfo;
+  selectedColor: string;
+  selectedCapacity: string;
+  setSelectedColor: (color: string) => void;
+  setSelectedCapacity: (capacity: string) => void;
 }
 
-export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
-  const [product, setProduct] = useState<ProductInfo>(firstProduct);
-  const [selectedCapacity, setSelectedCapacity] = useState(product.capacity);
-  const [selectedColor, setSelectedColor] = useState(product.color);
+export const ProductDetails: FC<Props> = ({
+  product,
+  selectedColor,
+  selectedCapacity,
+  setSelectedColor,
+  setSelectedCapacity,
+}) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-  const preparedProduct: Product = {
-    id: product.itemId,
-    name: product.name,
-    fullPrice: product.fullPrice,
-    price: product.price,
-    image: product.images[0],
-    category: product.category,
-    capacity: product.capacity,
-    screen: product.screen,
-    ram: product.ram,
-    itemId: product.id,
-  };
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const {
     cart,
@@ -48,43 +44,50 @@ export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
 
   const navigate = useNavigate();
 
-  const loadProduct = useCallback(async () => {
-    try {
-      const newProduct = await getProductByDetails(
-        product.namespaceId,
-        product.category,
-        selectedColor,
-        selectedCapacity,
-      );
+  const preparedProduct: Product = useMemo(() => ({
+    id: product.itemId,
+    name: product.name,
+    fullPrice: product.fullPrice,
+    price: product.price,
+    image: product.images[0],
+    category: product.category,
+    capacity: product.capacity,
+    screen: product.screen,
+    ram: product.ram,
+    itemId: product.id,
+  }), [product]);
 
-      setProduct(newProduct);
-      navigate(
-        `/${newProduct.category}/${newProduct.id}`,
-        { replace: true },
-      );
+  const changeColor = (color: string) => {
+    setSelectedColor(color);
+    navigate(
+      `/${product.category}`
+      + `/${product.namespace}`
+      + `-${product.capacity}`
+      + `-${color}`,
+    );
+  };
 
-    } catch (error) {
-      console.error(error);
-    }
-  }, [
-    product.namespaceId,
-    product.category,
-    selectedColor,
-    selectedCapacity,
-    navigate,
-  ]);
+  const changeCapacity = (capacity: string) => {
+    setSelectedCapacity(capacity);
+    navigate(
+      `/${product.category}`
+      + `/${product.namespace}`
+      + `-${capacity}`
+      + `-${product.color}`,
+    );
+  };
 
   useEffect(() => {
-    loadProduct();
-  }, [loadProduct]);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-  const handleCapacityClick = (capacity: string) => {
-    setSelectedCapacity(capacity);
-  };
+    window.addEventListener('resize', handleResize);
 
-  const handleColorClick = (color: string) => {
-    setSelectedColor(color);
-  };
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const hasItemInCart = Boolean(findItemById(cart, product.itemId));
   const isLiked = Boolean(findItemById(likedProducts, product.itemId));
@@ -98,20 +101,17 @@ export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
       </h1>
 
       <section className="ProductDetails__content">
-        <span className="ProductDetails__product-id">
-          Id: {product.itemId}
-        </span>
-
         <Swiper
           className="ProductDetails__slider"
           modules={[Thumbs]}
           thumbs={{ swiper: thumbsSwiper }}
+          onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
         >
           {product.images.map((image) => (
             <SwiperSlide key={image} className="ProductDetails__slide">
               <img
-                className="ProductDetails__image"
-                src={`https://apple-catalog-api.onrender.com/${image}`}
+                className="ProductDetails__main-image"
+                src={`${BASE_URL}/${image}`}
                 alt={product.name}
               />
             </SwiperSlide>
@@ -120,17 +120,22 @@ export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
 
         <Swiper
           className="ProductDetails__thumbs"
+          spaceBetween={windowWidth < 640 ? 8 : 16}
           modules={[Thumbs]}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onSwiper={setThumbsSwiper as any}
-          watchSlidesProgress
-          slidesPerView={4}
+          onSwiper={setThumbsSwiper as never}
+          direction={windowWidth < 640 ? 'horizontal' : 'vertical'}
+          slidesPerView={product.images.length}
         >
-          {product.images.map((image) => (
-            <SwiperSlide key={image} className="ProductDetails__thumb">
+          {product.images.map((image, index) => (
+            <SwiperSlide
+              key={image}
+              className="ProductDetails__thumb"
+            >
               <img
-                className="ProductDetails__image"
-                src={`https://apple-catalog-api.onrender.com/${image}`}
+                className={classNames('ProductDetails__thumb-image', {
+                  'ProductDetails__thumb-image--active': index === activeSlide,
+                })}
+                src={`${BASE_URL}/${image}`}
                 alt={product.name}
               />
             </SwiperSlide>
@@ -138,6 +143,10 @@ export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
         </Swiper>
 
         <div className="ProductDetails__info">
+          <span className="ProductDetails__product-id">
+            Id: {product.itemId}
+          </span>
+
           <div className="ProductDetails__colors">
             <span className="ProductDetails__colors-title">
               Available colors
@@ -150,7 +159,7 @@ export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
                     className={classNames('ProductDetails__colors-button', {
                       'ProductDetails__colors-button--active': color === selectedColor,
                     })}
-                    onClick={() => handleColorClick(color)}
+                    onClick={() => changeColor(color)}
                   >
                     <div
                       className="ProductDetails__colors-color"
@@ -179,7 +188,7 @@ export const ProductDetails: FC<Props> = ({ product: firstProduct }) => {
                     className={classNames('ProductDetails__capacity-button', {
                       'ProductDetails__capacity-button--active': capacity === selectedCapacity,
                     })}
-                    onClick={() => handleCapacityClick(capacity)}
+                    onClick={() => changeCapacity(capacity)}
                   >
                     {normalizeCapacity(capacity)}
                   </button>
