@@ -1,7 +1,5 @@
 # Nice Gadgets Apple Store
 
-[DEMO LINK](https://apple-catalog-frontend.vercel.app/)
-
 [FIGMA MOCKUP](<https://www.figma.com/file/T5ttF21UnT6RRmCQQaZc6L/Phone-catalog-(V2)-Original?type=design&node-id=0-1&mode=design&t=NP3TpMmy0h9Usmnb-0>)
 
 Welcome to the Nice Gadgets Apple Store! This web application serves as a platform for showcasing and purchasing the latest and most innovative gadgets. Whether you're a tech enthusiast or simply looking for the coolest gadgets on the market, our platform has you covered.
