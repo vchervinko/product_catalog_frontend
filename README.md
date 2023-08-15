@@ -35,6 +35,7 @@ Our online store boasts a wide range of features designed to provide users with 
 - [React Router](https://reactrouter.com/)
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Sequelize](https://sequelize.org/)
 - [Sass (SCSS)](https://sass-lang.com/)
 - [SWC](https://swc.rs/)
